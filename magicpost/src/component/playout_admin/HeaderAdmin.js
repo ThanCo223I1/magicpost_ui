@@ -61,74 +61,82 @@ const HeaderAdmin = () => {
             <link href="https://file.hstatic.net/200000525917/file/jquery-script_a06dbb9a942a4a2c8e459410c8a19bc1.js"
                   rel="preload prefetch" as="script" type="text/javascript"/>
             <style dangerouslySetInnerHTML={{__html: ".grecaptcha-badge{visibility:hidden;}"}}/>
-            <header className='app-header navbar' style={{width: '100%', position: 'fixed', height:'100%', margin:'auto'}}>
-                <div className="row " style={{width: '100%', height: '100%'}}>
-                    <div className="col-2 " >
-                        <Link className='navbar-brand' to={''} style={{height:'20px', margin:'0px'}}>
-                            <div className='navbar-brand col-2' style={{width:'250px'}}>
-                                <img itemProp="logo"
-                                     src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
-                                     alt="magic post" style={{width:'250px'}}/>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className=" col-8">
-                        <nav className="main-nav-menu">
-                            <ul className="menu__list menu__list--top">
-                                <li className="menu__item--dropdown active">
-                                    <a href="/" title="Trang chủ" className="menu__link">
-                                        Trang chủ
-                                    </a>
-                                </li>
-                                <li className="menu__item--dropdown ">
-                                    <a href="magicpost/src/index#" title="Dịch vụ" className="menu__link">
-                                        Dịch vụ
-                                        <i className="fa fa-chevron-down" aria-hidden="true"/>
-                                    </a>
-                                </li>
-                                <li className="menu__item--dropdown ">
-                                    <a href="magicpost/src/index#" title="GIỚI THIỆU"
-                                       className="menu__link">
-                                        GIỚI THIỆU
-                                        <i className="fa fa-chevron-down" aria-hidden="true"/>
-                                    </a>
-                                </li>
-                                <li className="menu__item--dropdown ">
-                                    <a href="magicpost/src/index#" title="HỖ TRỢ" className="menu__link">
-                                        HỖ TRỢ
-                                        <i className="fa fa-chevron-down" aria-hidden="true"/>
-                                    </a>
-                                </li>
-                                <li className="menu__item--dropdown ">
-                                    <a href="https://ghn.vn/blogs/all" title="THÔNG TIN"
-                                       className="menu__link">
-                                        THÔNG TIN
-                                        <i className="fa fa-chevron-down" aria-hidden="true"/>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div className='col-2'>
-                        {/*<div className='col-6'>*/}
-                        {/*    <Link to={'/login'}*/}
-                        {/*          onclick="registerRedirect('https://sso.ghn.vn/register/');" rel="noopener"*/}
-                        {/*          className="btn-regis button">ĐĂNG KÝ/ ĐĂNG NHẬP</Link>*/}
-                        {/*</div>*/}
-                        <div className="box-search wpo-wrapper-search col-6" style={{position: 'relative'}}>
-                            <div className="box-search wpo-wrapper-search">
-                                <form action="/search" className="ultimate-search">
-                                    <div className="wpo-search-inner">
-                                        <input required name="code"
-                                               autoComplete="off" className=" glyphicon-search"
-                                               type="text" style={{width: '100%'}}
-                                               placeholder="Nhập mã đơn hàng bạn cần tra cứu..."/>
+            <header className="app-header navbar" style={{
+                position: 'fixed',
+                background: 'rgb(255, 255, 255)',
+                padding: '70px, 12px, 12px',
+                width: '100%',
+                zIndex: '1000'
+            }}>
+                <a href="magicpost/src/page#" className="navbar-brand col-2" style={{marginLeft: '0px',}}>
+                    <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
+                         style={{width: "100px", height: "auto"}} alt="<Magic Post>"
+                         className="navbar-brand-full"/>
+                    <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
+                         style={{width: "10px", height: "auto", marginLeft: '0px'}} alt="Magic Post"
+                         className="navbar-brand-minimized"/>
+                </a>
+                <button className="sidebar-minimizer mt-auto" type="button"/>
+                <div className="switch-shop">
+                    <div className="dropdown-custom">
+                        <div aria-haspopup="true" aria-expanded="false">
+                            <div className="switch-shop-header">
+                                <div className="switch-shop-selected">
+                                    <div className="switch-shop-img-text">
+                                        <div className="switch-shop-img">
+                                            <img width="10.31" height="18.34"
+                                                 src="/images/icon-ghn/icon-shop.png" alt="logo"/></div>
+                                        <div className="switch-shop-text module line-clamp-1"> 1708041 -
+                                            Vothan
+                                        </div>
                                     </div>
-                                </form>
+                                    <div><i className="fas fa-chevron-down"/></div>
+                                </div>
+                                <i className="fas fa-question-circle" id="tooltip-shop"
+                                   style={{marginLeft: '12px'}}/></div>
+                            <div className="dropdown-menu-custom switch-shop-list-item" aria-labelledby style={{
+                                position: 'absolute',
+                                top: '0px',
+                                left: '0px',
+                                opacity: 0,
+                                pointerEvents: 'none'
+                            }}>
+                                <div className="p-b-12 p-t-8 p-l-8 p-r-8 position-relative"><input
+                                    id="input-search-shop" placeholder="Tìm kiếm cửa hàng" type="text"
+                                    className="form-control" defaultValue/></div>
+                                <div className="group-shop owner">
+                                    <div>DS CỬA HÀNG BẠN LÀ CHỦ SỞ HỮU</div>
+                                    <a href="/store/create/shop">
+                                        <div><i className="fas fa-plus-circle"/></div>
+                                    </a></div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div className="width_25_percent m-auto position-relative">
+                    <div className="display-flex width_100_percent">
+                        <div>
+                            <button type="button" className="btn-search">
+                                <i className="fa fa-search"/></button>
+                        </div>
+                        <input placeholder="Nhập số điện thoại - Mã đơn hàng - Tên người nhận" type="text"
+                               className="form-control"
+                               style={{border: 'none', padding: '4px'}}/></div>
+                    <span
+                        className="fz-11 color-orange-primary text-i border-bottom-f26522 position-absolute pointer top-30-px left-27-px">Tìm kiếm nâng cao (Có xuất Excel)</span>
+                </div>
+                <ul className="ml-auto navbar-nav">
+                    <div className="m-r-20">
+                        <a className="btn-primary-page btn btn-header active" style={{marginRight: '0px'}}
+                           href="/order/create" aria-current="page">
+                            <i className="fas fa-pencil-alt"/> Lên đơn hàng</a>
+                    </div>
+                    <li className="d-md-down-none nav-item">
+                        <a aria-current="page" className="nav-link active" href="/order/create"><i
+                            className="fas fa-bell"/></a>
+                    </li>
+                </ul>
+                <div/>
             </header>
         </>
     )
