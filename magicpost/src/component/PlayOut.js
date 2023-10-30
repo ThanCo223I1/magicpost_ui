@@ -5,7 +5,7 @@ import Footer from "./Footer";
 function PlayOut (){
     return(
         <>
-            <Header></Header>
+            {/*<Header></Header>*/}
             <Outlet></Outlet>
             <Footer></Footer>
         </>

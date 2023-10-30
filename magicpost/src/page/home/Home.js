@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 function Home() {
     return (
         <div style={{marginTop: '100px'}}>
@@ -41,12 +43,8 @@ function Home() {
             <meta property="og:url" content="https://ghn.vn"/>
             <meta property="og:site_name" content="GHN.VN Giao Hàng Nhanh"/>
             <meta name="facebook-domain-verification" content="5za1m3hxi4bqjq22z1vkjo26hyjub2"/>
-            {/* SEO META DESCRIPTION */}
             <meta name="description"
                   content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>
-            {/* END SEO META DESCRIPTION */}
-            {/* SEO PAGI */}
-            {/* END SEO PAGI */}
             <link
                 href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap&subset=vietnamese"
                 as="style" type="text/css" rel="preload"/>
@@ -61,7 +59,6 @@ function Home() {
                   type="text/css" as="style"/>
             <link href="https://file.hstatic.net/200000525917/file/jquery-script_a06dbb9a942a4a2c8e459410c8a19bc1.js"
                   rel="preload prefetch" as="script" type="text/javascript"/>
-            {/* AppsFlyer */}
             <style dangerouslySetInnerHTML={{__html: ".grecaptcha-badge{visibility:hidden;}"}}/>
             <noscript>&lt;img height='1' width='1' style='display:none'
                 src='https://www.facebook.com/tr?id=1149251642334426&amp;amp;ev=PageView&amp;amp;noscript=1'/&gt;</noscript>
@@ -234,7 +231,7 @@ function Home() {
                             <div className="header-row">
                                 <div className="header-left">
                                     <div className="box-button-mb visible-sm visible-xs">
-                                        <a href="magicpost/src#menu-sidebar" className="mb-menu-btn" id="trigger">
+                                        <a href="magicpost/src/index#menu-sidebar" className="mb-menu-btn" id="trigger">
                                             <span className="icon-bar"/>
                                             <span className="icon-bar"/>
                                             <span className="icon-bar"/>
@@ -272,19 +269,19 @@ function Home() {
                                                 </a>
                                             </li>
                                             <li className="menu__item--dropdown ">
-                                                <a href="magicpost/src#" title="Dịch vụ" className="menu__link">
+                                                <a href="magicpost/src/index#" title="Dịch vụ" className="menu__link">
                                                     Dịch vụ
                                                     <i className="fa fa-chevron-down" aria-hidden="true"/>
                                                 </a>
                                             </li>
                                             <li className="menu__item--dropdown ">
-                                                <a href="magicpost/src#" title="GIỚI THIỆU" className="menu__link">
+                                                <a href="magicpost/src/index#" title="GIỚI THIỆU" className="menu__link">
                                                     GIỚI THIỆU
                                                     <i className="fa fa-chevron-down" aria-hidden="true"/>
                                                 </a>
                                             </li>
                                             <li className="menu__item--dropdown ">
-                                                <a href="magicpost/src#" title="HỖ TRỢ" className="menu__link">
+                                                <a href="magicpost/src/index#" title="HỖ TRỢ" className="menu__link">
                                                     HỖ TRỢ
                                                     <i className="fa fa-chevron-down" aria-hidden="true"/>
                                                 </a>
@@ -301,9 +298,9 @@ function Home() {
                                 </div>
                                 <div className="header-right">
                                     <div className="box-register">
-                                        <a href="javascript:void(0);"
+                                        <Link to={'/login'}
                                            onclick="registerRedirect('https://sso.ghn.vn/register/');" rel="noopener"
-                                           className="btn-regis button">ĐĂNG KÝ/ ĐĂNG NHẬP</a>
+                                           className="btn-regis button">ĐĂNG KÝ/ ĐĂNG NHẬP</Link>
                                     </div>
                                     <div className="box-search wpo-wrapper-search">
                                         <form action="/search" className="ultimate-search">

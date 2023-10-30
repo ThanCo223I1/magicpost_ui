@@ -46,14 +46,14 @@ function Login() {
                                                 </div>
                                                 <div className="pt-1 mb-4">
                                                     <button className="btn btn-dark btn-lg btn-block"
-                                                            type="button">Đăng Nhập
+                                                            type="button" style={{backgroundColor:'#ff6219'}}>Đăng Nhập
                                                     </button>
                                                 </div>
-                                                <a className="small text-muted" href="magicpost/src#!">Quên mật khẩu</a>
+                                                <a className="small text-muted" href="magicpost/src/index#!">Quên mật khẩu</a>
                                                 <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>
                                                     <Link to={'/register'} style={{color: '#393f81'}}>Đăng kí tài khoản</Link></p>
-                                                <a href="magicpost/src#!" className="small text-muted">Điều khoản sử dụng.</a>
-                                                <a href="magicpost/src#!" className="small text-muted">Chính sách bảo mật</a>
+                                                <a href="magicpost/src/index#!" className="small text-muted">Điều khoản sử dụng.</a>
+                                                <a href="magicpost/src/index#!" className="small text-muted">Chính sách bảo mật</a>
                                             </form>
                                         </div>
                                     </div>
