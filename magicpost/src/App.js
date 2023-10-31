@@ -9,6 +9,7 @@ import LayoutAdmin from "./component/playout_admin/LayoutAdmin";
 import HomeAdmin from "./page/admin/HomeAdmin";
 import TransantionPointAdmin from "./component/playout_admin/TransantionPointAdmin";
 import ConsolidationPoint from "./component/playout_admin/ConsolidationPoint";
+import LayoutTransantionLeader from "./component/leader/LayoutTransantionLeader";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
                     <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                     <Route path={"con"} element={<ConsolidationPoint/>}></Route>
                 </Route>
+            </Route>
+            <Route>
+                <Route path={'leader'} element={<LayoutTransantionLeader/>}></Route>
             </Route>
         </Routes>
     </>

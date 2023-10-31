@@ -3,16 +3,6 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
 
 const TransantionPointAdmin = () => {
-    const [consolidationPoint, setConsolidationPoint] = useState([]);
-    useEffect(() => {
-        axios.get("http://localhost:8080/account/consolidation")
-            .then(r => {
-                setConsolidationPoint(r.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
     return (
         <>
             {/* form */}
@@ -22,7 +12,7 @@ const TransantionPointAdmin = () => {
                 password: '',
                 name: '',
                 phone: '',
-                nameTran: '',
+                nameCon: '',
                 address: '',
                 idCon: '',
             }}
@@ -49,30 +39,23 @@ const TransantionPointAdmin = () => {
                         errors.phone = 'Vui lòng nhập số điện thoại';
                     }
 
-                    if (!values.nameTran) {
-                        errors.nameTran = 'Vui lòng nhập tên điểm giao dịch';
+                    if (!values.nameCon) {
+                        errors.nameCon = 'Vui lòng nhập tên điểm tập kết';
                     }
 
                     if (!values.address) {
                         errors.address = 'Vui lòng nhập địa chỉ';
                     }
 
-                    if (!values.idCon) {
-                        errors.idCon = 'Vui lòng chọn điểm tập kết';
-                    }
-
                     return errors;
                 }}
-                onSubmit={(values, {setSubmitting}) => {
+                onSubmit={(values, {setSubmitting, resetForm}) => {
                     const create = {
-                        consolidationPoint: {
-                            id: values.idCon,
-                        },
                         account: {
                             username: values.username,
                             password: values.password,
                             role:{
-                                id:4
+                                id:2
                             },
                             status:{
                                 id:1
@@ -82,17 +65,18 @@ const TransantionPointAdmin = () => {
                             name: values.name,
                             phoneNumber: values.phone,
                             role: {
-                                id: 4
+                                id: 5
                             }
                         },
-                        transactionPoint: {
-                            name: values.nameTran,
+                        consolidationPoint: {
+                            name: values.nameCon,
                             address: values.address
                         }
                     }
-                    axios.post("http://localhost:8080/account/transaction/create",create)
+                    axios.post("http://localhost:8080/account/consolidation/create",create)
                         .then(r=>{
                             alert("ok")
+                            resetForm();
                         })
                         .catch(err=>{
                             console.log(err)
@@ -108,7 +92,7 @@ const TransantionPointAdmin = () => {
                         <div className="col-2"></div>
                         <div className="col-8">
                             <li className='color-orange-primary'>
-                                Tài khoản trưởng điểm giao dịch
+                                Tài khoản trưởng điểm tập kết
                             </li>
                             <br/>
                             <div className="row g-3">
@@ -166,22 +150,22 @@ const TransantionPointAdmin = () => {
                                 <div className='col-12'>
                                     <br/>
                                     <li className='color-orange-primary'>
-                                        Thông tin điểm giao dịch
+                                        Thông tin điểm tập kết
                                     </li>
                                     <br/>
                                 </div>
                                 <div className="col-6">
-                                    <p style={{marginLeft: "11px"}}>Tên điểm giao dịch</p>
+                                    <p style={{marginLeft: "11px"}}>Tên điểm tập kết</p>
 
                                     <Field
                                         type="text"
                                         className="form-control"
                                         id="inputEmail4"
-                                        placeholder="Tên điểm giao dịch"
+                                        placeholder="Tên điểm tập kết"
                                         required=""
-                                        name="nameTran"
+                                        name="nameCon"
                                     />
-                                    <ErrorMessage name="nameTran" component="div" className="error-message"/>
+                                    <ErrorMessage name="nameCon" component="div" className="error-message"/>
                                 </div>
                                 <div className="col-6">
                                     <p style={{marginLeft: "11px"}}>Địa chỉ</p>
@@ -196,25 +180,6 @@ const TransantionPointAdmin = () => {
                                     />
                                     <ErrorMessage name="address" component="div" className="error-message"/>
                                 </div>
-                                <div className="col-6">
-                                    <p style={{marginLeft: "11px"}}>Điểm tập kết</p>
-
-                                    <Field
-                                        name="idCon"
-                                        as="select"
-                                        className="form-control"
-                                    >
-                                        <option value="" disabled></option>
-                                        {consolidationPoint.map((c) => (
-                                            <option key={c.id} value={c.id}>
-                                                {c.name}
-                                            </option>
-                                        ))}
-                                    </Field>
-                                    <ErrorMessage name="idCon" component="div" className="error-message"/>
-                                </div>
-
-
                                 <ErrorMessage name="status" component="div"/>
                                 <div className="col-12 d-grid">
                                     <br/>

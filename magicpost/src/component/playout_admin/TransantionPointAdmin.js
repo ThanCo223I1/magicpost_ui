@@ -63,7 +63,7 @@ const TransantionPointAdmin = () => {
 
                     return errors;
                 }}
-                onSubmit={(values, {setSubmitting}) => {
+                onSubmit={(values, {setSubmitting, resetForm}) => {
                     const create = {
                         consolidationPoint: {
                             id: values.idCon,
@@ -72,7 +72,7 @@ const TransantionPointAdmin = () => {
                             username: values.username,
                             password: values.password,
                             role:{
-                                id:4
+                                id:2
                             },
                             status:{
                                 id:1
@@ -93,6 +93,7 @@ const TransantionPointAdmin = () => {
                     axios.post("http://localhost:8080/account/transaction/create",create)
                         .then(r=>{
                             alert("ok")
+                            resetForm();
                         })
                         .catch(err=>{
                             console.log(err)
