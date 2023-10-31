@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 function Home() {
     return (
-        <div style={{marginTop: '100px'}}>
+        <div style={{marginTop: '0px'}}>
             <title>Giao Hàng Nhanh: Vận Chuyển Siêu Nhanh, Giá Siêu Tốt – GHN.VN Giao Hàng Nhanh</title>
             <meta name="description"
                   content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>

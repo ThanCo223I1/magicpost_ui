@@ -2,6 +2,7 @@ import '../../static/css/main.5a7f7282.chunk.css'
 import '../../static/css/19.d911c1cb.chunk.css'
 import '../../resources/raw/main.3e229f12.chunk.css'
 import '../../w3css/4/w3.css'
+import {Link} from "react-router-dom";
 
 function Order() {
     return (
@@ -62,17 +63,18 @@ function Order() {
                         background: 'rgb(255, 255, 255)',
                         padding: '70px, 12px, 12px',
                         width: '100%',
-                        zIndex: '1000'}}>
+                        zIndex: '1000'
+                    }}>
                         <a href="magicpost/src/page#" className="navbar-brand col-2" style={{marginLeft: '0px',}}>
                             <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
                                  style={{width: "100px", height: "auto"}} alt="<Magic Post>"
                                  className="navbar-brand-full"/>
                             <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
-                                 style={{width: "10px", height: "auto",marginLeft: '0px'}} alt="Magic Post"
+                                 style={{width: "10px", height: "auto", marginLeft: '0px'}} alt="Magic Post"
                                  className="navbar-brand-minimized"/>
                         </a>
                         <button className="sidebar-minimizer mt-auto" type="button"/>
-                        <div className="switch-shop"  >
+                        <div className="switch-shop">
                             <div className="dropdown-custom">
                                 <div aria-haspopup="true" aria-expanded="false">
                                     <div className="switch-shop-header">
@@ -136,161 +138,58 @@ function Order() {
 
                     {/*Thanh ben trai*/}
                     <div className='row'>
-                        <div className='col-2' style={{position: 'fixed', zIndex: '1000', marginTop:'64px'}}>
-                            <div className="sidebar ">
-                                <div>
-                                    <div style={{width: '200px'}}>
-                                        <div className="user-info">
-                                            <div className="avatar avatar-logo">
-                                                <img src="/static/media/user.c57d53db.svg" alt="logo"/></div>
-                                            <div className="name-user"><a href="magicpost/src/page#">
-                                                <div style={{fontWeight: 600}}>Trung</div>
-                                            </a>
-                                                <a href="magicpost/src/page#">
-                                                <div style={{fontWeight: 600, color: 'rgb(255, 199, 0)'}}>Chủ cửa
-                                                    hàng <i
-                                                        className="fas fa-user-tie"/></div>
-                                            </a><a href="/coin">
-                                                <div><i className="fas fa-coins" style={{color: 'rgb(255, 199, 0)'}}/> 0
-                                                    xu
-                                                </div>
-                                            </a></div>
-                                        </div>
-                                        <div className="ekyc-client sss">
-                                            <div className="width_100_percent flex-center">
-                                                <svg width={50} height={50} viewBox="0 0 50 50" fill="none">
-                                                    <g clipPath="url(#clip0_1291_2773)">
-                                                        <g filter="url(#filter0_d_1291_2773)">
-                                                            <path fillRule="evenodd" clipRule="evenodd"
-                                                                  d="M41.526 8.72561C42.7082 9.42615 43.4147 10.7145 43.4147 12.0887V25.2846C43.4147 30.9877 40.8989 35.8943 36.2676 39.2229L26.5345 46.2184C25.1397 47.2209 23.2604 47.221 21.8655 46.2184L12.1321 39.2229C7.50109 35.8943 4.98535 30.9877 4.98535 25.2846V12.0887C4.98535 10.7145 5.69184 9.42615 6.87402 8.72561C19.7569 1.09146 28.6428 1.09146 41.526 8.72561Z"
-                                                                  fill="#FFE4D8"/>
-                                                        </g>
-                                                        <path fillRule="evenodd" clipRule="evenodd"
-                                                              d="M40.3311 13.8646C40.3311 12.4612 39.5973 11.1491 38.371 10.4665C27.8869 4.63101 20.5134 4.63088 10.0294 10.4665C8.80315 11.1491 8.06934 12.4611 8.06934 13.8646V25.2845C8.06934 29.9944 10.1073 33.9698 13.932 36.7187L21.8657 42.4207C23.2606 43.4232 25.1398 43.4232 26.5347 42.4207L34.4681 36.7187C38.2928 33.9696 40.3312 29.9946 40.3312 25.2844L40.3311 13.8646Z"
-                                                              fill="#F26522"/>
-                                                        <path fillRule="evenodd" clipRule="evenodd"
-                                                              d="M18.8184 21.7712H21.3762V16.3814C21.3762 14.8309 22.6494 13.5578 24.1999 13.5578C25.7504 13.5578 27.0235 14.831 27.0235 16.3814V21.7712H29.5814V16.3814C29.5814 13.4191 27.1622 11 24.1999 11C21.2375 11 18.8184 13.4191 18.8184 16.3814V21.7712Z"
-                                                              fill="#FFF2D8"/>
-                                                        <path fillRule="evenodd" clipRule="evenodd"
-                                                              d="M17.9889 19.2134H30.411C31.33 19.2134 32.082 19.9653 32.082 20.8844V30.9925C32.082 31.9116 31.33 32.6636 30.411 32.6636H17.9889C17.0699 32.6636 16.3179 31.9116 16.3179 30.9925V20.8844C16.3179 19.9654 17.0699 19.2134 17.9889 19.2134Z"
-                                                              fill="#FFF2D8"/>
-                                                        <path fillRule="evenodd" clipRule="evenodd"
-                                                              d="M25.1422 26.6066V28.1535C25.1422 28.6718 24.718 29.0959 24.1997 29.0959C23.6814 29.0959 23.2573 28.6719 23.2573 28.1535V26.6065C22.6114 26.2671 22.1709 25.5899 22.1709 24.8096C22.1709 23.6891 23.0793 22.7808 24.1997 22.7808C25.3202 22.7808 26.2286 23.6891 26.2286 24.8096C26.2286 25.5899 25.788 26.2672 25.1422 26.6066Z"
-                                                              fill="#002043"/>
-                                                        <path
-                                                            d="M34.2144 39.3975L40.5759 34.943L48 45.5457L43.3344 45.6524L41.6384 50.0001L34.2144 39.3975Z"
-                                                            fill="#8A5A11"/>
-                                                        <path
-                                                            d="M35.478 39.3975L29.1164 34.943L21.6924 45.5457L26.358 45.6524L28.054 50.0001L35.478 39.3975Z"
-                                                            fill="#8A5A11"/>
-                                                        <g opacity="0.6" style={{mixBlendMode: 'multiply'}}>
-                                                            <path fillRule="evenodd" clipRule="evenodd"
-                                                                  d="M31.5944 44.9433L30.6669 44.1729C30.4702 44.0095 30.2184 43.9277 29.9632 43.9443L27.3229 44.1156C26.8424 44.1468 26.4079 43.8311 26.2891 43.3645L25.6361 40.8005C25.5889 40.6149 25.4897 40.4481 25.3521 40.3187L29.1162 34.9429L35.4778 39.3973L31.5944 44.9433Z"
-                                                                  fill="#8A5A11"/>
-                                                        </g>
-                                                        <g opacity="0.6" style={{mixBlendMode: 'multiply'}}>
-                                                            <path fillRule="evenodd" clipRule="evenodd"
-                                                                  d="M44.0791 39.9459L43.6737 40.202C43.4575 40.3386 43.3019 40.5528 43.2388 40.8006L42.5858 43.3646C42.467 43.8313 42.0325 44.147 41.552 44.1158L38.9117 43.9444C38.6565 43.9279 38.4047 44.0097 38.208 44.1731L37.7973 44.5142L34.2144 39.3973L40.5759 34.9429L44.0791 39.9459Z"
-                                                                  fill="#8A5A11"/>
-                                                        </g>
-                                                        <path
-                                                            d="M33.9965 22.5307C34.3669 22.2231 34.904 22.2231 35.2744 22.5307L37.3097 24.2213C37.5064 24.3847 37.7582 24.4665 38.0134 24.4499L40.6537 24.2786C41.1342 24.2474 41.5687 24.5631 41.6875 25.0297L42.3405 27.5937C42.4036 27.8415 42.5592 28.0558 42.7754 28.1923L45.0122 29.6056C45.4192 29.8629 45.5852 30.3736 45.4071 30.821L44.4282 33.2791C44.3336 33.5167 44.3336 33.7815 44.4282 34.0191L45.4071 36.4772C45.5852 36.9245 45.4192 37.4353 45.0122 37.6925L42.7754 39.1058C42.5592 39.2424 42.4036 39.4566 42.3405 39.7044L41.6875 42.2685C41.5687 42.7351 41.1342 43.0508 40.6537 43.0196L38.0134 42.8482C37.7582 42.8317 37.5064 42.9135 37.3097 43.0769L35.2744 44.7675C34.904 45.0751 34.3669 45.0751 33.9965 44.7675L31.9611 43.0769C31.7644 42.9135 31.5126 42.8317 31.2574 42.8482L28.6171 43.0196C28.1366 43.0508 27.7021 42.7351 27.5833 42.2685L26.9304 39.7044C26.8673 39.4566 26.7116 39.2424 26.4954 39.1058L24.2587 37.6925C23.8516 37.4353 23.6856 36.9245 23.8638 36.4772L24.8426 34.0191C24.9372 33.7815 24.9372 33.5167 24.8426 33.2791L23.8638 30.821C23.6856 30.3736 23.8516 29.8629 24.2587 29.6056L26.4954 28.1923C26.7116 28.0558 26.8673 27.8415 26.9304 27.5937L27.5833 25.0297C27.7021 24.5631 28.1366 24.2474 28.6171 24.2786L31.2574 24.4499C31.5126 24.4665 31.7644 24.3847 31.9611 24.2213L33.9965 22.5307Z"
-                                                            fill="#CD9642"/>
-                                                        <circle cx="34.6352" cy="33.6489" r="7.76606" fill="white"/>
-                                                        <circle cx="34.6353" cy="33.649" r="6.47172" fill="#FFE380"/>
-                                                        <path
-                                                            d="M30.4614 34.0575L32.8874 36.4835C33.3336 36.9297 34.0765 36.8561 34.4265 36.331L38.1345 30.769"
-                                                            stroke="#002043" strokeWidth={2} strokeLinecap="round"/>
-                                                        <path
-                                                            d="M42 5L44.1836 6.69839C45.6452 7.83513 46.5 9.58296 46.5 11.4345V15"
-                                                            stroke="#FFE4D8" strokeWidth={2} strokeLinecap="round"/>
-                                                        <path
-                                                            d="M2 31.5V31.5C2.65553 34.4499 4.06227 37.1803 6.08377 39.4264L7.5 41"
-                                                            stroke="#FFE4D8" strokeWidth={2} strokeLinecap="round"/>
-                                                        <circle cx="1.5" cy="27.5" r="1.5" fill="#FFE4D8"/>
-                                                    </g>
-                                                    <defs>
-                                                        <filter id="filter0_d_1291_2773" x="-11.0146" y={-13}
-                                                                width="72.4292" height="77.9702"
-                                                                filterUnits="userSpaceOnUse"
-                                                                colorInterpolationFilters="sRGB">
-                                                            <feFlood floodOpacity={0} result="BackgroundImageFix"/>
-                                                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                                                           result="hardAlpha"/>
-                                                            <feMorphology radius={1} operator="dilate" in="SourceAlpha"
-                                                                          result="effect1_dropShadow_1291_2773"/>
-                                                            <feOffset dx={1} dy={1}/>
-                                                            <feGaussianBlur stdDeviation={8}/>
-                                                            <feComposite in2="hardAlpha" operator="out"/>
-                                                            <feColorMatrix type="matrix"
-                                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
-                                                            <feBlend mode="multiply" in2="BackgroundImageFix"
-                                                                     result="effect1_dropShadow_1291_2773"/>
-                                                            <feBlend mode="normal" in="SourceGraphic"
-                                                                     in2="effect1_dropShadow_1291_2773" result="shape"/>
-                                                        </filter>
-                                                        <clipPath id="clip0_1291_2773">
-                                                            <rect width={50} height={50} fill="white"/>
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </div>
-                                            <div className="m-t-12">
-                                                <div className="fz-16">Xác thực tài khoản</div>
-                                                <div className="fz-14">Xác thực để tận hưởng các quyền lợi đặc biệt từ
-                                                    GHN
-                                                    nhé shop ơi!
-                                                </div>
-                                            </div>
-                                            <button className="btn-verify-ekyc m-t-12">Xác thực ngay</button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className='col-2' style={{position: 'fixed', zIndex: '1000', marginTop: '64px'}}>
+                            <div style={{padding: 0, color: '#fff', background: '#00467f', height: '770px'}}>
                                 <div className="sidebar-menu color-white">
-                                    <div className="menu-body"
-                                         style={{height: 'calc(((100vh - 84px) - 117px) - 308px)'}}><a
-                                        href="/ops-live">
-                                        <div className="item-menu"><i className=" p-r-8 undefined fas fa-chalkboard"/>
-                                            <span
-                                                className="text-block">Báo cáo - Live</span></div>
-                                    </a><a aria-current="page" className="active" href="/magicpost/src/page/home/Order">
-                                        <div className="item-menu actived"><i
-                                            className=" p-r-8 fz-21 fas fa-clipboard-list"/> <span
-                                            className="text-block">Quản lý đơn hàng</span>
-                                        </div>
-                                    </a><a href="/import">
-                                        <div className="item-menu"><i className=" p-r-8 fz-18 fas fa-file-import"/>
-                                            <span
-                                                className="text-block">Lên đơn Excel</span></div>
-                                    </a><a href="/store">
-                                        <div className="item-menu"><i className=" p-r-8 fz-18 fas fa-store"/> <span
-                                            className="text-block">Quản lý cửa hàng</span></div>
-                                    </a><a href="/cod">
-                                        <div className="item-menu"><i className=" p-r-8 fz-17 fas fa-money-check"/>
-                                            <span
-                                                className="text-block">COD &amp; đối soát</span></div>
-                                    </a><a href="/ticket">
-                                        <div className="item-menu"><i
-                                            className=" p-r-8 fz-18 fas fa-exclamation-triangle"/>
-                                            <span className="text-block">Khiếu nại</span></div>
-                                    </a><a href="/group-permission">
-                                        <div className="item-menu"><i className=" p-r-8 fz-18 fas fa-user-cog"/> <span
-                                            className="text-block">Phân quyền</span></div>
-                                    </a><a href="/waybill">
-                                        <div className="item-menu"><i className=" p-r-8 fz-21 fas fa-print"/> <span
-                                            className="text-block">Vận đơn &amp; tiện ích</span></div>
-                                    </a></div>
-                                    <div><a href="/logout">
-                                        <div className="item-menu logout"><i
-                                            className=" p-r-8 fz-20 fas fa-sign-out-alt"/>
-                                            <span className="text-block">Đăng xuất</span></div>
-                                    </a>
-                                        <div className="text-center fz-8 p-b-8">Phiên bản 4.0.7</div>
-                                        <div className="gov"><a href="http://online.gov.vn/Home/WebDetails/80894"
-                                                                rel="noopener noreferrer" target="_blak"><img
-                                            src="/images/ghn/gov.svg" className="img-gov" alt="logo" title="title"/></a>
-                                        </div>
+                                    <div className="menu-body">
+                                        <Link aria-current="page" className="active">
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-21 fas fa-clipboard-list"/>
+                                                <span className="text-block">Quản lý đơn hàng</span>
+                                            </div>
+                                        </Link>
+                                        <Link aria-current="page" className="active">
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-18 fas fa-file-import"/>
+                                                <span className="text-block">Lên đơn Excel</span>
+                                            </div>
+                                        </Link>
+                                        <Link aria-current="page" className="active">
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-18 fas fa-store"/>
+                                                <span className="text-block">Quản lý cửa hàng</span>
+                                            </div>
+                                        </Link>
+                                        <Link>
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-17 fas fa-money-check"/>
+                                                <span className="text-block">COD &amp; đối soát</span></div>
+                                        </Link>
+                                        <Link>
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-18 fas fa-exclamation-triangle"/>
+                                                <span className="text-block">Khiếu nại</span>
+                                            </div>
+                                        </Link>
+                                        <Link href="/group-permission">
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-18 fas fa-user-cog"/>
+                                                <span className="text-block">Phân quyền</span>
+                                            </div>
+                                        </Link>
+                                        <Link>
+                                            <div className="item-menu actived">
+                                                <i className=" p-r-8 fz-21 fas fa-print"/>
+                                                <span className="text-block">Vận đơn &amp; tiện ích</span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <Link>
+                                            <div className="item-menu actived logout">
+                                                <i className=" p-r-8 fz-20 fas fa-sign-out-alt"/>
+                                                <span className="text-block">Đăng xuất</span></div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +228,8 @@ function Order() {
                                             <div className="create-form-left mt-15 step-rel">
                                                 <div className="step-static row">
                                                     <div className='col-2'></div>
-                                                    <div className="row col-10" style={{width: '100%', marginLeft: '0px', marginTop: '60px'}}>
+                                                    <div className="row col-10"
+                                                         style={{width: '100%', marginLeft: '0px', marginTop: '60px'}}>
                                                         <div className="col-md-4 offset-md-2">
                                                             <div className="sender-info">
                                                                 <div className="info-titile"> | Bên gửi <a
@@ -376,7 +276,8 @@ function Order() {
                                                                         className="rw-widget-input rw-widget-picker rw-widget-container">
                                                                         <div
                                                                             className="rw-input rw-dropdown-list-input">
-                                                                            <input className="rw-dropdown-list-autofill rw-detect-autofill rw-sr"/><span
+                                                                            <input
+                                                                                className="rw-dropdown-list-autofill rw-detect-autofill rw-sr"/><span
                                                                             className="rw-placeholder">Chọn ca lấy hàng</span>
                                                                         </div>
                                                                         <span className="rw-select"><button

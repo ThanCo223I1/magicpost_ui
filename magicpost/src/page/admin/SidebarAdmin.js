@@ -21,7 +21,7 @@ function SidebarAdmin() {
                             <li className="mm-active">
                                 <Link className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
-                                        <img src="/template_admin/img/menu-icon/9.svg" alt=""/>
+                                        <img src="/template_admin/img/menu-icon/9   .svg" alt=""/>
                                     </div>
                                     <div className="nav_title">
                                         <span>Điểm Tập Kết </span>
