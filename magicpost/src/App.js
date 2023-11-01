@@ -14,30 +14,32 @@ import CreateEmployeeTran from "./component/leader/CreateEmployeeTran";
 
 
 function App() {
-  return (
-    <>
-        <Routes>
-            <Route path={'/'} element={<PlayOut/>}>
-                <Route path={''} element={<Home/>}></Route>
-                <Route path={'/login'} element={<Login/>}></Route>
-                <Route path={"/register"} element={<Register/>}></Route>
-                <Route path={"/order"} element={<Order/>}></Route>
-            </Route>
-            <Route>
-                <Route path={'admin'} element={<LayoutAdmin/>}>
-                    <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
-                    <Route path={"con"} element={<ConsolidationPoint/>}></Route>
+    const account = JSON.parse(localStorage.getItem("account"))
+
+    return (
+        <>
+            <Routes>
+                <Route path={'/'} element={<PlayOut/>}>
+                    <Route path={''} element={<Home/>}></Route>
+                    <Route path={'/login'} element={<Login/>}></Route>
+                    <Route path={"/register"} element={<Register/>}></Route>
                 </Route>
-            </Route>
-            <Route>
-                <Route path={'leader'} element={<LayoutLeader/>}>
-                    <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
-                    <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
-                </Route>
-            </Route>
-        </Routes>
-    </>
-  );
+                {account && <Route>
+                    <Route path={"/order"} element={<Order/>}></Route>
+                    <Route path={'admin'} element={<LayoutAdmin/>}>
+                        <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
+                        <Route path={"con"} element={<ConsolidationPoint/>}></Route>
+                    </Route>
+                </Route>}
+                {account && <Route>
+                    <Route path={'leader'} element={<LayoutLeader/>}>
+                        <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
+                        <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
+                    </Route>
+                </Route>}
+            </Routes>
+        </>
+    );
 }
 
 export default App;
