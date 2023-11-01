@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
 
-const TransantionPointAdmin = () => {
-    const [consolidationPoint, setConsolidationPoint] = useState([]);
+const CreateEmployeeCon = () => {
+    const account = JSON.parse(localStorage.getItem("account"))
+    const leader = account.leaderDTO;
+    const [point, setPoint] = useState({});
     useEffect(() => {
-        axios.get("http://localhost:8080/account/consolidation")
+        axios.get("http://localhost:8080/account/consolidation/leader/" + leader.id)
             .then(r => {
-                setConsolidationPoint(r.data)
+                setPoint(r.data)
             })
             .catch(err => {
                 console.log(err)
@@ -22,9 +24,7 @@ const TransantionPointAdmin = () => {
                 password: '',
                 name: '',
                 phone: '',
-                nameTran: '',
                 address: '',
-                idCon: '',
             }}
                 validate={values => {
                     const errors = {};
@@ -49,55 +49,45 @@ const TransantionPointAdmin = () => {
                         errors.phone = 'Vui lòng nhập số điện thoại';
                     }
 
-                    if (!values.nameTran) {
-                        errors.nameTran = 'Vui lòng nhập tên điểm giao dịch';
-                    }
-
                     if (!values.address) {
                         errors.address = 'Vui lòng nhập địa chỉ';
-                    }
-
-                    if (!values.idCon) {
-                        errors.idCon = 'Vui lòng chọn điểm tập kết';
                     }
 
                     return errors;
                 }}
                 onSubmit={(values, {setSubmitting, resetForm}) => {
                     const create = {
-                        consolidationPoint: {
-                            id: values.idCon,
-                        },
                         account: {
                             username: values.username,
                             password: values.password,
-                            role:{
-                                id:2
+                            role: {
+                                id: 3
                             },
-                            status:{
-                                id:1
+                            status: {
+                                id: 1
                             }
                         },
-                        leader: {
+                        employee: {
                             name: values.name,
                             phoneNumber: values.phone,
+                            address: values.address,
                             role: {
-                                id: 4
+                                id: 5
                             }
                         },
-                        transactionPoint: {
-                            name: values.nameTran,
-                            address: values.address
-                        }
+                        id: point.id
                     }
-                    axios.post("http://localhost:8080/account/transaction/create",create)
-                        .then(r=>{
-                            alert("ok")
-                            resetForm();
-                        })
-                        .catch(err=>{
-                            console.log(err)
-                        })
+                    console.log(create)
+                    axios.post("http://localhost:8080/account/employee/createCon", create, {
+                        headers: {
+                            'Authorization': 'Bearer ' + account.token,
+                        },
+                    }).then(r => {
+                        alert("ok")
+                        resetForm();
+                    }).catch(err => {
+                        console.log(err)
+                    })
 
 
                     setSubmitting(false);
@@ -109,7 +99,7 @@ const TransantionPointAdmin = () => {
                         <div className="col-2"></div>
                         <div className="col-8">
                             <li className='color-orange-primary'>
-                                Tạo tài khoản trưởng điểm giao dịch
+                                Tạo tài khoản nhân viên điểm tập kết
                             </li>
                             <br/>
                             <div className="row g-3">
@@ -139,13 +129,13 @@ const TransantionPointAdmin = () => {
 
 
                                 <div className="col-6">
-                                    <p style={{marginLeft: "11px"}}>Tên quản lý</p>
+                                    <p style={{marginLeft: "11px"}}>Tên nhân viên</p>
 
                                     <Field
                                         type="text"
                                         className="form-control"
                                         id="inputEmail4"
-                                        placeholder="Tên quản lý"
+                                        placeholder="Tên nhân viên"
                                         required=""
                                         name="name"
                                     />
@@ -164,26 +154,6 @@ const TransantionPointAdmin = () => {
                                     />
                                     <ErrorMessage name="phone" component="div" className="error-message"/>
                                 </div>
-                                <div className='col-12'>
-                                    <br/>
-                                    <li className='color-orange-primary'>
-                                        Thông tin điểm giao dịch
-                                    </li>
-                                    <br/>
-                                </div>
-                                <div className="col-6">
-                                    <p style={{marginLeft: "11px"}}>Tên điểm giao dịch</p>
-
-                                    <Field
-                                        type="text"
-                                        className="form-control"
-                                        id="inputEmail4"
-                                        placeholder="Tên điểm giao dịch"
-                                        required=""
-                                        name="nameTran"
-                                    />
-                                    <ErrorMessage name="nameTran" component="div" className="error-message"/>
-                                </div>
                                 <div className="col-6">
                                     <p style={{marginLeft: "11px"}}>Địa chỉ</p>
 
@@ -197,25 +167,6 @@ const TransantionPointAdmin = () => {
                                     />
                                     <ErrorMessage name="address" component="div" className="error-message"/>
                                 </div>
-                                <div className="col-6">
-                                    <p style={{marginLeft: "11px"}}>Điểm tập kết</p>
-
-                                    <Field
-                                        name="idCon"
-                                        as="select"
-                                        className="form-control"
-                                    >
-                                        <option value="" disabled></option>
-                                        {consolidationPoint.map((c) => (
-                                            <option key={c.id} value={c.id}>
-                                                {c.name}
-                                            </option>
-                                        ))}
-                                    </Field>
-                                    <ErrorMessage name="idCon" component="div" className="error-message"/>
-                                </div>
-
-
                                 <ErrorMessage name="status" component="div"/>
                                 <div className="col-12 d-grid">
                                     <br/>
@@ -234,4 +185,4 @@ const TransantionPointAdmin = () => {
     );
 };
 
-export default TransantionPointAdmin;
+export default CreateEmployeeCon;

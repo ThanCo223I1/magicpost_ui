@@ -92,7 +92,7 @@ const TransantionPointAdmin = () => {
                         <div className="col-2"></div>
                         <div className="col-8">
                             <li className='color-orange-primary'>
-                                Tài khoản trưởng điểm tập kết
+                                Tạo tài khoản trưởng điểm tập kết
                             </li>
                             <br/>
                             <div className="row g-3">

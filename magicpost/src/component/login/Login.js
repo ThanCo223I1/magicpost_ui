@@ -38,7 +38,7 @@ function Login() {
                                                     axios.post("http://localhost:8080/login", account)
                                                         .then(r => {
                                                             let roleID = +r.data.role.id;
-                                                            localStorage.setItem("account", r.data);
+                                                            localStorage.setItem("account", JSON.stringify(r.data));
                                                             if (roleID === 1) {
                                                                 navigate("/admin");
                                                             } else if (roleID === 2) {
