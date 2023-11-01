@@ -24,20 +24,6 @@ const LayoutTransantionLeader = () => {
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
                                     </div>
-                                    <Dropdown>
-                                        <Dropdown.Toggle className="btn-primary-page btn btn-header active"
-                                                         id="dropdown-basic">
-                                            <p>&nbsp; Điểm Tập Kết &nbsp;</p>
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item>
-                                                <Link to={"/admin/con"}>Tạo Điểm Tập Kết</Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
                                 </div>
 
 

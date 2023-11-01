@@ -1,8 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import axios from "axios";
 
 function Login() {
+    const navigate = useNavigate();
     return (
         <>
             <div>
@@ -29,16 +30,26 @@ function Login() {
                                                     username: '',
                                                     password: ''
                                                 }}
-                                                onSubmit={(values, { setSubmitting, resetForm }) => {
-                                                    const account ={
-                                                        username:values.username,
-                                                        password:values.password
+                                                onSubmit={(values, {setSubmitting, resetForm}) => {
+                                                    const account = {
+                                                        username: values.username,
+                                                        password: values.password
                                                     }
-                                                    axios.post("http://localhost:8080/login",account)
-                                                        .then(r=>{
-                                                            console.log(r)
+                                                    axios.post("http://localhost:8080/login", account)
+                                                        .then(r => {
+                                                            let roleID = +r.data.role.id;
+                                                            localStorage.setItem("account", r.data);
+                                                            if (roleID === 1) {
+                                                                navigate("/admin");
+                                                            } else if (roleID === 2) {
+                                                                navigate('/leader');
+                                                            } else if (roleID === 3) {
+                                                                navigate('/emplyee');
+                                                            }else {
+                                                                alert("Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập")
+                                                            }
                                                         })
-                                                        .catch(err=>{
+                                                        .catch(err => {
                                                             console.log(err)
                                                         })
 
@@ -46,25 +57,40 @@ function Login() {
                                                     resetForm();
                                                 }}
                                             >
-                                                {({ isSubmitting }) => (
+                                                {({isSubmitting}) => (
                                                     <Form>
                                                         <div className="d-flex align-items-center mb-3 pb-1">
-                                                            <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }} />
-                                                            <span className="h1 fw-bold mb-0" style={{ textAlign: 'center' }}>Đăng Nhập</span>
+                                                            <i className="fas fa-cubes fa-2x me-3"
+                                                               style={{color: '#ff6219'}}/>
+                                                            <span className="h1 fw-bold mb-0"
+                                                                  style={{textAlign: 'center'}}>Đăng Nhập</span>
                                                         </div>
-                                                        <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px', color: 'rgb(255, 99, 57)' }}>Chào ngày mới! Cùng chốt đơn!</h5>
+                                                        <h5 className="fw-normal mb-3 pb-3" style={{
+                                                            letterSpacing: '1px',
+                                                            color: 'rgb(255, 99, 57)'
+                                                        }}>Chào ngày mới! Cùng chốt đơn!</h5>
                                                         <div className="form-outline mb-4">
-                                                            <label className="form-label" htmlFor="username">Tài khoản</label>
-                                                            <Field type="text" id="username" name="username" className="form-control form-control-lg" placeholder="Nhập số điện thoại/Email" />
+                                                            <label className="form-label" htmlFor="username">Tài
+                                                                khoản</label>
+                                                            <Field type="text" id="username" name="username"
+                                                                   className="form-control form-control-lg"
+                                                                   placeholder="Nhập số điện thoại/Email"/>
                                                         </div>
                                                         <div className="form-outline mb-4">
-                                                            <label className="form-label" htmlFor="password">Mật khẩu</label>
-                                                            <Field type="password" id="password" name="password" className="form-control form-control-lg" placeholder="Nhập mật khẩu" />
+                                                            <label className="form-label" htmlFor="password">Mật
+                                                                khẩu</label>
+                                                            <Field type="password" id="password" name="password"
+                                                                   className="form-control form-control-lg"
+                                                                   placeholder="Nhập mật khẩu"/>
                                                         </div>
                                                         <div className="pt-1 mb-4">
-                                                            <button className="btn btn-dark btn-lg btn-block" type="submit" disabled={isSubmitting} style={{ backgroundColor: '#ff6219' }}>Đăng Nhập</button>
+                                                            <button className="btn btn-dark btn-lg btn-block"
+                                                                    type="submit" disabled={isSubmitting}
+                                                                    style={{backgroundColor: '#ff6219'}}>Đăng Nhập
+                                                            </button>
                                                         </div>
-                                                        <a className="small text-muted" href="magicpost/src/index#!">Quên mật khẩu</a>
+                                                        <a className="small text-muted" href="magicpost/src/index#!">Quên
+                                                            mật khẩu</a>
                                                     </Form>
                                                 )}
                                             </Formik>
