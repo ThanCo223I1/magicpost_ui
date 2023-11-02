@@ -12,6 +12,7 @@
     "bootstrap": "^5.3.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
+    "firebase": "^10.3.1",
     "formik": "^2.4.3",
     "jquery": "^3.7.1",
     "jwt-decode": "^3.1.2",
