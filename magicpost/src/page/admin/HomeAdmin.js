@@ -8,7 +8,6 @@ function HomeAdmin(){
             <link rel="stylesheet" href="/template_admin/vendors/themefy_icon/themify-icons.css"/>
             <div className="wrapper" >
                 <div className="home-flex">
-                    <SidebarAdmin/>
                     <div className="home-flex-content">
                         <Outlet/>
                     </div>

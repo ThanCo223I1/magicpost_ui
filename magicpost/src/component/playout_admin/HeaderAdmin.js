@@ -132,8 +132,10 @@ const HeaderAdmin = () => {
                             <i className="fas fa-pencil-alt"/> Lên đơn hàng</a>
                     </div>
                     <li className="d-md-down-none nav-item">
-                        <a aria-current="page" className="nav-link active" href="/order/create"><i
-                            className="fas fa-bell"/></a>
+                        <Link to={'/login'} onClick={()=>{
+                            localStorage.setItem("account",null);
+                        }} aria-current="page" className="nav-link active"> Đăng xuất<i
+                            className="fas fa-bell"/></Link>
                     </li>
                 </ul>
                 <div/>
