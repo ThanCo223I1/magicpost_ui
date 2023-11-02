@@ -11,6 +11,7 @@ import ConsolidationPoint from "./component/playout_admin/ConsolidationPoint";
 import LayoutLeader from "./component/leader/LayoutLeader";
 import CreateEmployeeCon from "./component/leader/CreateEmployeeCon";
 import CreateEmployeeTran from "./component/leader/CreateEmployeeTran";
+import TransantionPointManager from "./component/playout_admin/transantionPoint/TransantionPointManager";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                     <Route path={"/order"} element={<Order/>}></Route>
                     <Route path={'admin'} element={<LayoutAdmin/>}>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
+                        <Route path={"managerTran"} element={<TransantionPointManager/>}></Route>
                         <Route path={"con"} element={<ConsolidationPoint/>}></Route>
                     </Route>
                 </Route>}

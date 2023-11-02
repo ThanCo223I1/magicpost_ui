@@ -3,6 +3,8 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
 
 const TransantionPointAdmin = () => {
+    const account = JSON.parse(localStorage.getItem("account"))
+
     return (
         <>
             {/* form */}
@@ -73,7 +75,11 @@ const TransantionPointAdmin = () => {
                             address: values.address
                         }
                     }
-                    axios.post("http://localhost:8080/account/consolidation/create",create)
+                    axios.post("http://localhost:8080/account/consolidation/create",create ,{
+                        headers: {
+                            'Authorization': 'Bearer ' + account.token,
+                        },
+                    })
                         .then(r=>{
                             alert("ok")
                             resetForm();
@@ -184,7 +190,7 @@ const TransantionPointAdmin = () => {
                                 <div className="col-12 d-grid">
                                     <br/>
                                     <button type="submit" className="btn btn-primary">
-                                        Register
+                                        Đồng Ý
                                     </button>
                                 </div>
                             </div>

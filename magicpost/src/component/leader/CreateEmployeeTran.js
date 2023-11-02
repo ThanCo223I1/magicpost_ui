@@ -7,7 +7,11 @@ const CreateEmployeeCon = () => {
     const leader = account.leaderDTO;
     const [point, setPoint] = useState({});
     useEffect(() => {
-        axios.get("http://localhost:8080/account/transaction/leader/" + leader.id)
+        axios.get("http://localhost:8080/account/transaction/leader/" + leader.id ,{
+            headers: {
+                'Authorization': 'Bearer ' + account.token,
+            },
+        })
             .then(r => {
                 setPoint(r.data)
             })
@@ -171,7 +175,7 @@ const CreateEmployeeCon = () => {
                                 <div className="col-12 d-grid">
                                     <br/>
                                     <button type="submit" className="btn btn-primary">
-                                        Register
+                                        Đồng Ý
                                     </button>
                                 </div>
                             </div>
