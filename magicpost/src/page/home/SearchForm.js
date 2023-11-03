@@ -111,7 +111,6 @@ const SearchForm = () => {
                         <p> Trạng thái đơn hàng : {order.status.nameStatus}</p>
                         <p> Ngày gửi hàng : {order.createOrder}</p>
                         <p> Điểm gửi hàng : {order.transactionPoint.address}</p>
-                        <p> Nhân viện nhận : {order.employee.name}</p>
                         <p> Người gửi : {order.nameSender}</p>
                         <p> SĐT người gửi : {order.phoneSender}</p>
                         <p> Người nhận : {order.nameReceiver}</p>
