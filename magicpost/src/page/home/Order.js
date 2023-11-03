@@ -21,7 +21,7 @@ function Order() {
         addressReceiver: '',
         width: '',
         height: '',
-        weight: 0,
+        weight: '',
     };
     const [orders, setOrder] = useState(initialData);
     const [successMessage, setSuccessMessage] = useState('');
