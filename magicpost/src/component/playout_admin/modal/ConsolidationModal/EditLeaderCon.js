@@ -61,7 +61,7 @@ export default function EditLeaderCon(props) {
             },
             leader: {
                 name: leader.name,
-                phoneNumber: leader.c,
+                phoneNumber: leader.phoneNumber,
                 role: {
                     id: 4
                 }
