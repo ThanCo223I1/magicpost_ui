@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const CreateEmployeeCon = () => {
     const account = JSON.parse(localStorage.getItem("account"))
     const leader = account.leaderDTO;
     const [point, setPoint] = useState({});
     useEffect(() => {
-        axios.get("http://localhost:8080/account/consolidation/leader/" + leader.id ,{
+        axios.get("http://localhost:8080/account/consolidation/leader/" + leader.id, {
             headers: {
                 'Authorization': 'Bearer ' + account.token,
             },
@@ -87,13 +88,19 @@ const CreateEmployeeCon = () => {
                             'Authorization': 'Bearer ' + account.token,
                         },
                     }).then(r => {
-                        alert("ok")
+                        if (r.data == "account already exists") {
+                            Swal.fire('Tài khoản đã tồn tại!')
+                        } else {
+                            Swal.fire(
+                                'Thanh công!',
+                                '',
+                                'success'
+                            )
+                        }
                         resetForm();
                     }).catch(err => {
                         console.log(err)
                     })
-
-
                     setSubmitting(false);
                 }}
             >
