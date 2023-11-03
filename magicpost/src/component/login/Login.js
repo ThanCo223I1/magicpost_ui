@@ -44,7 +44,7 @@ function Login() {
                                                             } else if (roleID === 2) {
                                                                 navigate('/leader');
                                                             } else if (roleID === 3) {
-                                                                navigate('/emplyee');
+                                                                navigate('/employee');
                                                             }else {
                                                                 alert("Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập")
                                                             }

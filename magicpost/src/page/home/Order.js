@@ -25,12 +25,13 @@ function Order() {
     };
     const [orders, setOrder] = useState(initialData);
     const [successMessage, setSuccessMessage] = useState('');
+    const accountLogin=JSON.parse(localStorage.getItem("account"));
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setOrder({ ...orders, [name]: value });
     };
     const submit = () => {
-        axios.post('http://localhost:8080/orders/createOrder', orders)
+        axios.post('http://localhost:8080/orders/createOrder/'+accountLogin.employeeDTO.id, orders)
             .then((response) => {
                 setSuccessMessage('Đơn hàng đã được tạo thành công.');
                 console.log('API Response:', response.data);

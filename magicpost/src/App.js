@@ -25,7 +25,7 @@ function App() {
                     <Route path={"/register"} element={<Register/>}></Route>
                 </Route>
                 {account && <Route>
-                    <Route path={"/order"} element={<Order/>}></Route>
+                    <Route path={"order"} element={<Order/>}></Route>
                     <Route path={'admin'} element={<LayoutAdmin/>}>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                         <Route path={"con"} element={<ConsolidationPoint/>}></Route>
@@ -36,6 +36,7 @@ function App() {
                         <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
                         <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
                     </Route>
+                    <Route path={'employee'} element={<Order></Order>}></Route>
                 </Route>}
             </Routes>
         </>
