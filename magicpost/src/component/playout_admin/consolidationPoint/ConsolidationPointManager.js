@@ -15,6 +15,8 @@ import {Link} from "react-router-dom";
 import EditNameTran from "../modal/TransantionModal/EditNameTran";
 import EditLeaderTran from "../modal/TransantionModal/EditLeaderTran";
 import Swal from "sweetalert2";
+import EditNameCon from "../modal/ConsolidationModal/EditNameCon";
+import EditLeaderCon from "../modal/ConsolidationModal/EditLeaderCon";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,18 +38,19 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
         border: 0,
     },
 }));
-const TransantionPointManager = () => {
+const ConsolidationPointManager = () => {
     const account = JSON.parse(localStorage.getItem('account'));
 
     const [rows, setRows] = useState([]);
     useEffect(() => {
         axios
-            .get('http://localhost:8080/account/transaction', {
+            .get('http://localhost:8080/account/consolidation', {
                 headers: {
                     Authorization: 'Bearer ' + account.token,
                 },
             })
             .then((r) => {
+                console.log(r)
                 setRows(r.data);
             });
     }, []);
@@ -75,7 +78,7 @@ const TransantionPointManager = () => {
             confirmButtonText: 'Đồng ý'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.get("http://localhost:8080/account/transaction/save/" + id + '/' + 2, {
+                axios.get("http://localhost:8080/account/consolidation/save/" + id + '/' + 2, {
                     headers: {
                         Authorization: 'Bearer ' + account.token,
                     },
@@ -136,10 +139,10 @@ const TransantionPointManager = () => {
 
                                                         <Dropdown.Menu>
                                                             <Dropdown.Item>
-                                                                <EditNameTran data={row}></EditNameTran>
+                                                                <EditNameCon data={row}></EditNameCon>
                                                             </Dropdown.Item>
                                                             <Dropdown.Item>
-                                                                <EditLeaderTran data={row}></EditLeaderTran>
+                                                                <EditLeaderCon data={row}></EditLeaderCon>
                                                             </Dropdown.Item>
                                                             <Dropdown.Item onClick={()=>button(row.id)}>
                                                                 Đóng Điểm Giao Dịch
@@ -165,4 +168,4 @@ const TransantionPointManager = () => {
     );
 };
 
-export default TransantionPointManager;
+export default ConsolidationPointManager;

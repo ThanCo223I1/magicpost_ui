@@ -27,10 +27,10 @@ const LayoutAdmin = () => {
                                             <Dropdown.Item>
                                                 <Link to={"/admin/tran"}>Tạo Điểm Giao Dịch</Link></Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/managerTran"}>Quản Lý Điểm Giao Dịch</Link>
+                                                <Link to={"/admin/managerTran"}>Điểm Giao Dịch Đang Hoạt Động</Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/tran"}>Quản Lý Trưởng Điểm Giao Dịch</Link>
+                                                <Link to={"/admin/managerTran/block"}>Điểm Giao Dịch Ngừng Hoạt Động</Link>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -50,8 +50,12 @@ const LayoutAdmin = () => {
                                             <Dropdown.Item>
                                                 <Link to={"/admin/con"}>Tạo Điểm Tập Kết</Link>
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/managerCon"}>Điểm Tập Kết Đang Hoạt Động</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/managerCon/block"}>Điểm Tập Kết Ngừng Hoạt Động</Link>
+                                            </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>

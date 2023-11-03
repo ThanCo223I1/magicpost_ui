@@ -36,13 +36,13 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
         border: 0,
     },
 }));
-const TransantionPointManager = () => {
+const ConsolidationPointManager = () => {
     const account = JSON.parse(localStorage.getItem('account'));
 
     const [rows, setRows] = useState([]);
     useEffect(() => {
         axios
-            .get('http://localhost:8080/account/transaction', {
+            .get('http://localhost:8080/account/consolidation/block', {
                 headers: {
                     Authorization: 'Bearer ' + account.token,
                 },
@@ -63,9 +63,10 @@ const TransantionPointManager = () => {
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+
     const button = (id) => {
         Swal.fire({
-            title: 'Bạn có muốn đóng lại điểm?',
+            title: 'Bạn có muốn mở lại điểm?',
             text: "",
             icon: 'warning',
             showCancelButton: true,
@@ -75,7 +76,7 @@ const TransantionPointManager = () => {
             confirmButtonText: 'Đồng ý'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.get("http://localhost:8080/account/transaction/save/" + id + '/' + 2, {
+                axios.get("http://localhost:8080/account/consolidation/save/" + id + '/' + 1, {
                     headers: {
                         Authorization: 'Bearer ' + account.token,
                     },
@@ -83,7 +84,7 @@ const TransantionPointManager = () => {
                     .then(r => {
 
                         Swal.fire(
-                            'Đóng lại điểm thành công!',
+                            'Mở lại điểm thành công!',
                             '',
                             'Đồng ý')
                         window.location.reload();
@@ -98,7 +99,6 @@ const TransantionPointManager = () => {
         })
 
     };
-
     return (
         <>
             <div className="row">
@@ -114,13 +114,13 @@ const TransantionPointManager = () => {
                                     <StyledTableCell align="left">Tên Trưởng Điểm</StyledTableCell>
                                     <StyledTableCell align="left">Số Điện Thoại</StyledTableCell>
                                     <StyledTableCell align="left">Số Nhân Viên</StyledTableCell>
-                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left">Trạng Thái</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {currentRows.map((row) => (
                                     <StyledTableRow key={row.id}>
-                                        {row.status === 1 && (
+                                        {row.status === 2 && (
                                             <>
                                                 <StyledTableCell></StyledTableCell>
                                                 <StyledTableCell>{row.name}</StyledTableCell>
@@ -129,23 +129,12 @@ const TransantionPointManager = () => {
                                                 <StyledTableCell align="left">{row.leader.phoneNumber}</StyledTableCell>
                                                 <StyledTableCell align="left">{row.employee.length}</StyledTableCell>
                                                 <StyledTableCell align="left">
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle className="btn-primary-page active" id="dropdown-basic">
-                                                            <p> Sửa Đổi</p>
-                                                        </Dropdown.Toggle>
 
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item>
-                                                                <EditNameTran data={row}></EditNameTran>
-                                                            </Dropdown.Item>
-                                                            <Dropdown.Item>
-                                                                <EditLeaderTran data={row}></EditLeaderTran>
-                                                            </Dropdown.Item>
-                                                            <Dropdown.Item onClick={()=>button(row.id)}>
-                                                                Đóng Điểm Giao Dịch
-                                                            </Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
+                                                    <Dropdown.Toggle className="btn-primary-page active"
+                                                                     id="dropdown-basic" onClick={()=>button(row.id)}>
+                                                        <p> Đang đóng</p>
+                                                    </Dropdown.Toggle>
+
                                                 </StyledTableCell>
                                             </>
                                         )}
@@ -165,4 +154,4 @@ const TransantionPointManager = () => {
     );
 };
 
-export default TransantionPointManager;
+export default ConsolidationPointManager;
