@@ -132,23 +132,23 @@ function OrderPending() {
     return (
         <>
             <div className="container distanceBody">
-                <h4 className='text-center pb-20 mt-20 headerInBody'>List Orders Pending</h4>
+                <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đang xử lý (Pending)</h4>
 
                 <table className="table">
                     <thead>
                     <tr>
-                        <th className={"col-1"}>ID Order</th>
-                        <th className={"col-1"}>Date</th>
-                        <th className={"col-1"}>Name Sender</th>
-                        <th className={"col-1"}>Phone Sender</th>
-                        <th className={"col-1"}>Address Sender</th>
-                        <th className={"col-1"}>Name Receiver</th>
-                        <th className={"col-1"}>Phone Receiver</th>
-                        <th className={"col-1"}>Address Receiver</th>
-                        <th className={"col-1"}>Type</th>
-                        <th className={"col-1"}>Weight</th>
-                        <th className={"col-1"}>Status</th>
-                        <th className={"col-1"}>Action</th>
+                        <th className={"col-1"}>Mã đơn hàng</th>
+                        <th className={"col-1"}>Ngày tạo</th>
+                        <th className={"col-1"}>Người gửi</th>
+                        <th className={"col-1"}>SĐT người gửi</th>
+                        <th className={"col-1"}>Địa chỉ người gửi</th>
+                        <th className={"col-1"}>Người nhận</th>
+                        <th className={"col-1"}>SĐT người nhận</th>
+                        <th className={"col-1"}>Địa chỉ người nhận</th>
+                        <th className={"col-1"}>Loại hàng</th>
+                        <th className={"col-1"}>Cân nặng</th>
+                        <th className={"col-1"}>Trạng thái</th>
+                        <th className={"col-1"}>Hoạt động</th>
                     </tr>
                     </thead>
                     <tbody>

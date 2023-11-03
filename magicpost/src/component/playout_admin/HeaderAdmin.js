@@ -1,208 +1,145 @@
+import {Link} from "react-router-dom";
+
 const HeaderAdmin = () => {
     return (
         <>
-            <head>
-                <meta charSet="utf-8"/>
-                <title>Management Admin</title>
-                <link rel="icon" href="/template_admin/img/mini_logo.png" type="image/png"/>
-                <link rel="stylesheet" href="/template_admin/css/bootstrap1.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/themefy_icon/themify-icons.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/niceselect/css/nice-select.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/owl_carousel/css/owl.carousel.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/gijgo/gijgo.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/font_awesome/css/all.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/tagsinput/tagsinput.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/datepicker/date-picker.css"/>
-                <link rel="stylesheet" href="/vendors/vectormap-home/vectormap-2.0.2.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/scroll/scrollable.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/datatable/css/jquery.dataTables.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/datatable/css/responsive.dataTables.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/datatable/css/buttons.dataTables.min.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/text_editor/summernote-bs4.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/morris/morris.css"/>
-                <link rel="stylesheet" href="/template_admin/vendors/material_icon/material-icons.css"/>
-                <link rel="stylesheet" href="/template_admin/css/metisMenu.css"/>
-                <link rel="stylesheet" href="/template_admin/css/style1.css"/>
-                <link rel="stylesheet" href="/template_admin/css/colors/default.css" id="colorSkinCSS"/>
-            </head>
-            <body className="crm_body_bg">
-                <nav className="sidebar">
-                    <div className="logo d-flex justify-content-between">
-                        <a className="large_logo" href="index.html">
-                            <img src="../template_admin/img/logo.png" alt=""/>
-                        </a>
-                        <a className="small_logo" href="index.html">
-                            <img src="../template_admin/img/mini_logo.png" alt=""/>
-                        </a>
-                        <div className="sidebar_close_icon d-lg-none">
-                            <i className="ti-close"/>
+
+            <title></title>
+            <meta name="description"
+                  content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>
+            <link rel="canonical" href="https://ghn.vn"/>
+            <link rel="alternate" href="https://ghn.vn" hrefLang="vi-vn"/>
+            <meta name="keywords" content="GHN.VN Giao Hàng Nhanh"/>
+            <meta name="google-verification" content="GooGhywoiu9839t543j0s7543uw1"/>
+            <meta name="robots" content="index,follow,noodp"/>
+            <meta httpEquiv="x-dns-prefetch-control" content="on"/>
+            <link rel="dns-prefetch" href="https://ghn.vn"/>
+            <link rel="dns-prefetch" href="//hstatic.net"/>
+            <link rel="dns-prefetch" href="//theme.hstatic.net/"/>
+            <link rel="dns-prefetch" href="//file.hstatic.net/"/>
+            <meta name="facebook-domain-verification" content="ct67ncn3vrskp7teqc6oo0bbysp3ca"/>
+            <meta name="google-site-verification" content="ycUVH0YSGJ-1w5Qh5TOixQI4oVVjeuy7-h5vTVw3ulo"/>
+            <link rel="preload" as="image" href="//theme.hstatic.net/200000472237/1001083717/14/logo.png?v=550"
+                  type="image/png"/>
+            <link rel="preload" as="image"
+                  href="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
+                  type="image/jpg" media="(max-width: 767px)"/>
+            <link rel="preload" as="image"
+                  href="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
+                  type="image/jpg" media="(min-width: 768px)"/>
+            <link rel="preload" as="image"
+                  href="//file.hstatic.net/200000472237/file/767x970_62bbb912688f4c2cb00be5d10142ee0d_grande.png"
+                  type="image/jpg" media="(max-width: 767px)"/>
+            <link rel="preload" as="image"
+                  href="https://file.hstatic.net/200000472237/file/1920x700_ae8664dce1cf4fbc90e34490898e7a1c.png"
+                  type="image/jpg" media="(min-width: 768px)"/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:title" content="Giao Hàng Nhanh: Vận Chuyển Siêu Nhanh, Giá Siêu Tốt"/>
+            <meta property="og:image"
+                  content="http://theme.hstatic.net/200000472237/1001083717/14/share_fb_home.png?v=550"/>
+            <meta property="og:image:secure_url"
+                  content="https://theme.hstatic.net/200000472237/1001083717/14/share_fb_home.png?v=550"/>
+            <meta property="og:description"
+                  content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>
+            <meta property="og:url" content="https://ghn.vn"/>
+            <meta property="og:site_name" content="GHN.VN Giao Hàng Nhanh"/>
+            <meta name="facebook-domain-verification" content="5za1m3hxi4bqjq22z1vkjo26hyjub2"/>
+            <meta name="description"
+                  content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>
+            <link
+                href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap&subset=vietnamese"
+                as="style" type="text/css" rel="preload"/>
+            <link
+                href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap&subset=vietnamese"
+                as="style" type="text/css" rel="stylesheet"/>
+            <link rel="preload stylesheet" href="//theme.hstatic.net/200000472237/1001083717/14/plugins.css?v=550"
+                  type="text/css" as="style"/>
+            <link rel="stylesheet" as="style"
+                  data-href="//theme.hstatic.net/200000472237/1001083717/14/render-library.css?v=550"/>
+            <link rel="preload stylesheet" href="//theme.hstatic.net/200000472237/1001083717/14/styles.css?v=550"
+                  type="text/css" as="style"/>
+            <link href="https://file.hstatic.net/200000525917/file/jquery-script_a06dbb9a942a4a2c8e459410c8a19bc1.js"
+                  rel="preload prefetch" as="script" type="text/javascript"/>
+            <style dangerouslySetInnerHTML={{__html: ".grecaptcha-badge{visibility:hidden;}"}}/>
+            <header className="app-header navbar" style={{
+                position: 'fixed',
+                background: 'rgb(255, 255, 255)',
+                padding: '70px, 12px, 12px',
+                width: '100%',
+                zIndex: '1000'
+            }}>
+                <a href="magicpost/src/page#" className="navbar-brand col-2" style={{marginLeft: '0px',}}>
+                    <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
+                         style={{width: "100px", height: "auto"}} alt="<Magic Post>"
+                         className="navbar-brand-full"/>
+                    <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
+                         style={{width: "10px", height: "auto", marginLeft: '0px'}} alt="Magic Post"
+                         className="navbar-brand-minimized"/>
+                </a>
+                <button className="sidebar-minimizer mt-auto" type="button"/>
+                <div className="switch-shop">
+                    <div className="dropdown-custom">
+                        <div aria-haspopup="true" aria-expanded="false">
+                            <div className="switch-shop-header">
+                                <div className="switch-shop-selected">
+                                    <div className="switch-shop-img-text">
+                                        <div className="switch-shop-img">
+                                            <img width="10.31" height="18.34"
+                                                 src="/images/icon-ghn/icon-shop.png" alt="logo"/></div>
+                                        <div className="switch-shop-text module line-clamp-1"> 1708041 -
+                                            Vothan
+                                        </div>
+                                    </div>
+                                    <div><i className="fas fa-chevron-down"/></div>
+                                </div>
+                                <i className="fas fa-question-circle" id="tooltip-shop"
+                                   style={{marginLeft: '12px'}}/></div>
+                            <div className="dropdown-menu-custom switch-shop-list-item" aria-labelledby style={{
+                                position: 'absolute',
+                                top: '0px',
+                                left: '0px',
+                                opacity: 0,
+                                pointerEvents: 'none'
+                            }}>
+                                <div className="p-b-12 p-t-8 p-l-8 p-r-8 position-relative"><input
+                                    id="input-search-shop" placeholder="Tìm kiếm cửa hàng" type="text"
+                                    className="form-control" defaultValue/></div>
+                                <div className="group-shop owner">
+                                    <div>DS CỬA HÀNG BẠN LÀ CHỦ SỞ HỮU</div>
+                                    <a href="/store/create/shop">
+                                        <div><i className="fas fa-plus-circle"/></div>
+                                    </a></div>
+                            </div>
                         </div>
                     </div>
-                    <ul id="sidebar_menu">
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/dashboard.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>User Management </span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="index_2.html">Default</a>
-                                </li>
-                                <li>
-                                    <a href="index_3.html">Dark Sidebar</a>
-                                </li>
-                                <li>
-                                    <a href="index.html">Light Sidebar</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/2.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Application </span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="editor.html">editor</a>
-                                </li>
-                                <li>
-                                    <a href="mail_box.html">Mail Box</a>
-                                </li>
-                                <li>
-                                    <a href="chat.html">Chat</a>
-                                </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/4.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Admins</span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="admin_list.html">Admin List</a>
-                                </li>
-                                <li>
-                                    <a href="add_new_admin.html">Add New Admin</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/11.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Role &amp; Permissions</span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="module_setting.html">Module Setting</a>
-                                </li>
-                                <li>
-                                    <a href="role_permissions.html">Role &amp; Permissions</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/5.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Users</span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="user_list.html">Users List</a>
-                                </li>
-                                <li>
-                                    <a href="add_new_user.html">Add New User</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a href="invoice.html" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/7.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Invoice</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="">
-                            <a href="Board.html" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/9.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Board</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/13.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Products</span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="Products.html">Products</a>
-                                </li>
-                                <li>
-                                    <a href="Product_Details.html">Product Details</a>
-                                </li>
-                                <li>
-                                    <a href="Cart.html">Cart</a>
-                                </li>
-                                <li>
-                                    <a href="Checkout.html">Checkout</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="">
-                            <a className="has-arrow" href="magicpost/src/component/playout_admin#" aria-expanded="false">
-                                <div className="nav_icon_small">
-                                    <img src="../template_admin/img/menu-icon/14.svg" alt=""/>
-                                </div>
-                                <div className="nav_title">
-                                    <span>Icons</span>
-                                </div>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="Fontawesome_Icon.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="themefy_icon.html">themefy icon</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </body>
+                </div>
+                <div className="width_25_percent m-auto position-relative">
+                    <div className="display-flex width_100_percent">
+                        <div>
+                            <button type="button" className="btn-search">
+                                <i className="fa fa-search"/></button>
+                        </div>
+                        <input placeholder="Nhập số điện thoại - Mã đơn hàng - Tên người nhận" type="text"
+                               className="form-control"
+                               style={{border: 'none', padding: '4px'}}/></div>
+                    <span
+                        className="fz-11 color-orange-primary text-i border-bottom-f26522 position-absolute pointer top-30-px left-27-px">Tìm kiếm nâng cao (Có xuất Excel)</span>
+                </div>
+                <ul className="ml-auto navbar-nav">
+                    <div className="m-r-20">
+                        <a className="btn-primary-page btn btn-header active" style={{marginRight: '0px'}}
+                           href="/order/create" aria-current="page">
+                            <i className="fas fa-pencil-alt"/> Lên đơn hàng</a>
+                    </div>
+                    <li className="d-md-down-none nav-item">
+                        <Link to={'/login'} onClick={()=>{
+                            localStorage.setItem("account",null);
+                        }} aria-current="page" className="nav-link active"> Đăng xuất<i
+                            className="fas fa-bell"/></Link>
+                    </li>
+                </ul>
+                <div/>
+            </header>
         </>
     )
 }
