@@ -197,7 +197,7 @@ function Order() {
                     {/*Thanh ben trai*/}
                     <div className='row'>
                         <div className='col-2'
-                             style={{zIndex: '1000', marginTop: '64px', textAlign: 'center'}}>
+                             style={{marginTop: '64px', textAlign: 'center'}}>
                             <div style={{padding: 0, color: '#fff', background: '#00467f', height: '770px'}}>
                                 <div className="sidebar-menu color-white">
                                     <div className="menu-body">

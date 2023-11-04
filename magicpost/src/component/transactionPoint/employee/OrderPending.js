@@ -4,6 +4,7 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
+import {Button, Modal} from "react-bootstrap";
 
 function OrderPending() {
     const [orders, setOrders] = useState([]);
@@ -11,14 +12,10 @@ function OrderPending() {
     const [consolidationPoint_transactionPoint_IdAccount, setConsolidationPoint_transactionPoint_IdAccount] = useState([]);
     const {id} = useParams();
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const openModal = () => {
-        setModalIsOpen(true);
-    }
-    const closeModal = () => {
-        setSelectedConsolidationPoint(null);
-        setModalIsOpen(false);
-    };
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     // da sua
     const [pageNumber, setPageNumber] = useState(0); // Trang hiện tại
     const ordersPerPage = 10; // Số vendor hiển thị trên mỗi trang
@@ -82,13 +79,13 @@ function OrderPending() {
                         {
                             order.order.consolidationPoint === null &&
                             <button style={{marginTop: "4px"}}
-                                    className="btn btn-info buttonShadow"
+                                    className="btn btn-outline-info buttonShadow"
                                     onClick={() => {
-                                        openModal();
+                                        handleShow();
                                         setOrderDetail(order)
                                     }}
                             >
-                                Send to..
+                                Send to
                             </button>
                         }
                     </td>
@@ -171,61 +168,42 @@ function OrderPending() {
                 />
 
                 <div>
-                    {modalIsOpen && (
-                        <div role="dialog">
-                            <div className="fade modal-backdrop in"/>
-                            <div
-                                role="dialog"
-                                tabIndex={-1}
-                                className="fade modal-donate in modal"
-                                style={{display: 'block'}}
+                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModal} onHide={handleClose}>
+                        <Modal.Header>
+                            <Modal.Title>Information</Modal.Title>
+                            <span aria-hidden="true" className="fa fa-remove"
+                                  style={{color: "black", borderRadius: "50%"}}></span>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Order number <span
+                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span> sent to:</p>
+                            <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
+                                <option value="select"
+                                        disabled={selectedConsolidationPoint === "select"}>Choose
+                                    consolidation point
+                                </option>
+                                <option value={consolidationPoint_transactionPoint_IdAccount.id}>
+                                    {consolidationPoint_transactionPoint_IdAccount.id} - {consolidationPoint_transactionPoint_IdAccount.name}
+                                </option>
+                            </select>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button
+                                className="btn btn-info buttonShadow"
+                                style={{color:"white"}}
+                                onClick={() => {
+                                    sendTo_OtherConsolidationPoint();
+                                    handleClose();
+                                }}
+                                disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
                             >
-                                <div className="modal-dialog">
-                                    <div className="modal-content" role="document">
-                                        <div className="modal-header">
-                                            <button type="button" className="close" onClick={closeModal}>
-                                                <span aria-hidden="true">×</span>
-                                                <span className="sr-only">Close</span>
-                                            </button>
-                                            <h4 className="modal-title">
-                                                <span>Send Order</span>
-                                            </h4>
-                                        </div>
-                                        <div className="modal-body">
-                                            {/* Nội dung modal */}
-                                            <p>Order number <span
-                                                style={{fontWeight: "bold"}}>{orderDetail.order.id}</span> sent to:</p>
-                                            <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
-                                                <option value="select"
-                                                        disabled={selectedConsolidationPoint === "select"}>Choose
-                                                    consolidation point
-                                                </option>
-                                                <option value={consolidationPoint_transactionPoint_IdAccount.id}>
-                                                    {consolidationPoint_transactionPoint_IdAccount.id} - {consolidationPoint_transactionPoint_IdAccount.name}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button
-                                                className="btn btn-info buttonShadow"
-                                                onClick={() => {
-                                                    sendTo_OtherConsolidationPoint();
-                                                    closeModal();
-                                                }}
-                                                disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
-                                            >
-                                                Send
-                                            </button>
-                                            <button type="button" className="btn btn-default buttonShadow"
-                                                    onClick={closeModal}>
-                                                <span>Close</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                                Send
+                            </button>
+                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         </>

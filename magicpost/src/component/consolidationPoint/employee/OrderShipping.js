@@ -155,7 +155,7 @@ function OrderShipping() {
 
     return (
         <>
-            <div className="distanceBody">
+            <div className="container distanceBody">
                 <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đi (Shipping)</h4>
 
                 <table className="table">

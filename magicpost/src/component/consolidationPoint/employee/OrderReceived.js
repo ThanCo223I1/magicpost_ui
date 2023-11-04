@@ -4,6 +4,7 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
+import {Button, Modal} from 'react-bootstrap';
 
 function OrderReceived() {
     const [orders, setOrders] = useState([]);
@@ -11,17 +12,14 @@ function OrderReceived() {
     const [consolidationPointNotInAccount, setConsolidationPointNotInAccount] = useState([]);
     let {id} = useParams();
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const openModal = () => {
-        setModalIsOpen(true);
-    }
-    const closeModal = () => {
-        setSelectedConsolidationPoint(null);
-        setModalIsOpen(false);
-    };
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     // da sua
     const [pageNumber, setPageNumber] = useState(0); // Trang hiện tại
-    const ordersPerPage = 2; // Số vendor hiển thị trên mỗi trang
+    const ordersPerPage = 10; // Số vendor hiển thị trên mỗi trang
     const pagesVisited = pageNumber * ordersPerPage;
     // end
 
@@ -82,19 +80,20 @@ function OrderReceived() {
                         <p className={statusColor}>{order.order.status.nameStatus}</p>}</td>
                     <td>
                         <button
-                            className="btn btn-success buttonShadow"
+                            className="btn btn-outline-warning buttonShadow"
                             onClick={() => handleClick(order.order?.id, "Shipping")}
                         >
                             Shipping
                         </button>
                         <button style={{marginTop: "4px"}}
-                                className="btn btn-info buttonShadow"
+                                className="btn btn-outline-info buttonShadow"
+                                data-toggle="modal" data-target="#exampleModalCenter"
                                 onClick={() => {
-                                    openModal();
-                                    setOrderDetail(order)
+                                    handleShow();
+                                    setOrderDetail(order);
                                 }}
                         >
-                            Send to..
+                            Send to
                         </button>
                     </td>
                 </tr>
@@ -187,9 +186,10 @@ function OrderReceived() {
         }
     }
 
+
     return (
         <>
-            <div className="distanceBody col-10">
+            <div className="container distanceBody">
                 <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đợi duyệt (Received)</h4>
 
                 <table className="table">
@@ -229,63 +229,44 @@ function OrderReceived() {
                 />
 
                 <div>
-                    {modalIsOpen && (
-                        <div role="dialog">
-                            <div className="fade modal-backdrop in"/>
-                            <div
-                                role="dialog"
-                                tabIndex={-1}
-                                className="fade modal-donate in modal"
-                                style={{display: 'block'}}
+                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModal} onHide={handleClose}>
+                        <Modal.Header>
+                            <Modal.Title>Information</Modal.Title>
+                            <span aria-hidden="true" className="fa fa-remove"
+                                  style={{color: "black", borderRadius: "50%"}}></span>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Order number <span
+                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span> sent to:</p>
+                            <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
+                                <option value="select"
+                                        disabled={selectedConsolidationPoint === "select"}>Choose
+                                    consolidation point
+                                </option>
+                                {consolidationPointNotInAccount.map((cp) => (
+                                    <option key={cp.id} value={cp.id}>
+                                        {cp.id} - {cp.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button
+                                className="btn btn-info buttonShadow"
+                                style={{color:"white"}}
+                                onClick={() => {
+                                    sendTo_OtherConsolidationPoint();
+                                    handleClose();
+                                }}
+                                disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
                             >
-                                <div className="modal-dialog">
-                                    <div className="modal-content" role="document">
-                                        <div className="modal-header">
-                                            <button type="button" className="close" onClick={closeModal}>
-                                                <span aria-hidden="true">×</span>
-                                                <span className="sr-only">Close</span>
-                                            </button>
-                                            <h4 className="modal-title">
-                                                <span>Send Order</span>
-                                            </h4>
-                                        </div>
-                                        <div className="modal-body">
-                                            {/* Nội dung modal */}
-                                            <p>Order number <span
-                                                style={{fontWeight: "bold"}}>{orderDetail.order.id}</span> sent to:</p>
-                                            <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
-                                                <option value="select"
-                                                        disabled={selectedConsolidationPoint === "select"}>Choose
-                                                    consolidation point
-                                                </option>
-                                                {consolidationPointNotInAccount.map((cp) => (
-                                                    <option key={cp.id} value={cp.id}>
-                                                        {cp.id} - {cp.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button
-                                                className="btn btn-info buttonShadow"
-                                                onClick={() => {
-                                                    sendTo_OtherConsolidationPoint();
-                                                    closeModal();
-                                                }}
-                                                disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
-                                            >
-                                                Send
-                                            </button>
-                                            <button type="button" className="btn btn-default buttonShadow"
-                                                    onClick={closeModal}>
-                                                <span>Close</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                                Send
+                            </button>
+                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         </>
