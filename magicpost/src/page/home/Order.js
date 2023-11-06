@@ -204,13 +204,13 @@ function Order() {
                                         <Link aria-current="page" className="active" to={`transactionPoint/orderPending/${accountLogin.id}`}>
                                             <div className="item-menu actived" style={{borderRadius: '30px'}}>
                                                 <i className=" p-r-8 fz-18 fas fa-store"/>
-                                                <span className="text-block">Đơn hàng đi - NV giao dịch</span>
+                                                <span className="text-block">Đơn hàng đang xử lý - NV giao dịch</span>
                                             </div>
                                         </Link>
                                         <Link aria-current="page" className="active" to={`transactionPoint/orderShipping/${accountLogin.id}`}>
                                             <div className="item-menu actived" style={{borderRadius: '30px'}}>
                                                 <i className=" p-r-8 fz-17 fas fa-money-check"/>
-                                                <span className="text-block">Đơn hàng đang xử lý - NV giao dịch</span></div>
+                                                <span className="text-block">Đơn hàng duyệt giao khách - NV giao dịch</span></div>
                                         </Link>
                                         <Link aria-current="page" className="active" to={`consolidationPoint/orderReceived/${accountLogin.id}`}>
                                             <div className="item-menu actived" style={{borderRadius: '30px'}}>
@@ -221,7 +221,7 @@ function Order() {
                                         <Link aria-current="page" className="active" to={`consolidationPoint/orderShipping/${accountLogin.id}`}>
                                             <div className="item-menu actived" style={{borderRadius: '30px'}}>
                                                 <i className=" p-r-8 fz-18 fas fa-file-import"/>
-                                                <span className="text-block">Đơn hàng đi - NV tập kết</span>
+                                                <span className="text-block">Đơn hàng duyệt giao khách - NV tập kết</span>
                                             </div>
                                         </Link>
                                     </div>

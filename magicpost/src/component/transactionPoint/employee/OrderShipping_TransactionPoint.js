@@ -4,6 +4,7 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
+import {Button, Modal} from "react-bootstrap";
 
 function OrderShipping_TransactionPoint() {
     const [orders, setOrders] = useState([]);
@@ -15,6 +16,10 @@ function OrderShipping_TransactionPoint() {
     const ordersPerPage = 10; // Số vendor hiển thị trên mỗi trang
     const pagesVisited = pageNumber * ordersPerPage;
     // end
+
+    const [showModalDetail, setShowModalDetail] = useState(false);
+    const handleCloseDetail = () => setShowModalDetail(false);
+    const handleShowDetail = () => setShowModalDetail(true);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/orders/transactionPoint/account/` + id)
@@ -34,28 +39,32 @@ function OrderShipping_TransactionPoint() {
                 (order.order.status.id === 6 || order.order.status.id === 3 || order.order.status.id === 4) &&
                 <tr key={order.order.id}>
                     <td>{order.order.id}</td>
-                    <td>{order.order.createOrder == null ? <p className="text-danger">Not update</p> :
+                    <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
-                    <td>{order.order.nameSender == null ? <p className="text-danger">Not update</p> :
+                    <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.nameSender}</p>}</td>
-                    <td>{order.order.phoneSender == null ? <p className="text-danger">Not update</p> :
+                    <td>{order.order.phoneSender == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.phoneSender}</p>}</td>
-                    <td>{order.order.addressSender == null ? <p className="text-danger">Not update</p> :
-                        <p>{order.order.addressSender.slice(0, 13)}{order.order.addressSender.length > 13 && "..."}</p>}</td>
-                    <td>{order.order.nameReceiver == null ? <p className="text-danger">Not update</p> :
-                        <p>{order.order.nameReceiver}</p>}</td>
-                    <td>{order.order.phoneReceiver == null ? <p className="text-danger">Not update</p> :
-                        <p>{order.order.phoneReceiver}</p>}</td>
-                    <td>{order.order.addressReceiver == null ? <p className="text-danger">Not update</p> :
-                        <p>{order.order.addressReceiver.slice(0, 13)}{order.order.addressReceiver.length > 13 && "..."}</p>}</td>
                     <td>{order.typeList && order.typeList.map((item) => (
                         <tr key={item.id}>
                             <td><p>{item.name}</p></td>
                         </tr>
                     ))
                     }</td>
-                    <td>{order.order.weight == null ? <p className="text-danger">Not update</p> :
-                        <p>{order.order.weight}</p>}</td>
+                    <td>{order.order.addressReceiver == null ? <p className="text-danger">Không</p> :
+                        <p>{order.order.addressReceiver.slice(0, 16)}{order.order.addressReceiver.length > 16 && "..."}</p>}</td>
+                    <td>{order.order.consolidationPoints.length === 0 ? <p className="text-danger">Không</p> :
+                        <p>{order.order.consolidationPoints[order.order.consolidationPoints.length - 1].name}</p>}</td>
+                    <td>
+                        <button className="btn btn-default buttonShadow"
+                                onClick={() => {
+                                    handleShowDetail();
+                                    setOrderDetail(order)
+                                }}
+                        >
+                            Chi tiết
+                        </button>
+                    </td>
                     <td>{order.order.status == null ? <p className="text-danger">Not update</p> :
                         <p className={statusColor}>{order.order.status.nameStatus}</p>}</td>
                     <td>
@@ -161,18 +170,16 @@ function OrderShipping_TransactionPoint() {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th className={"col-1"}>Mã đơn hàng</th>
-                        <th className={"col-1"}>Ngày tạo</th>
-                        <th className={"col-1"}>Người gửi</th>
-                        <th className={"col-1"}>SĐT người gửi</th>
-                        <th className={"col-1"}>Địa chỉ người gửi</th>
-                        <th className={"col-1"}>Người nhận</th>
-                        <th className={"col-1"}>SĐT người nhận</th>
-                        <th className={"col-1"}>Địa chỉ người nhận</th>
-                        <th className={"col-1"}>Loại hàng</th>
-                        <th className={"col-1"}>Cân nặng</th>
-                        <th className={"col-1"}>Trạng thái</th>
-                        <th className={"col-1"}>Hoạt động</th>
+                        <th>Mã đơn</th>
+                        <th>Ngày tạo</th>
+                        <th>Người gửi</th>
+                        <th>SĐT người gửi</th>
+                        <th>Loại hàng</th>
+                        <th>Địa chỉ nhận</th>
+                        <th>Điểm đang giữ đơn</th>
+                        <th>Xem chi tiết</th>
+                        <th>Trạng thái</th>
+                        <th>Hoạt động</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -193,6 +200,152 @@ function OrderShipping_TransactionPoint() {
                     pageLinkClassName={"pagination__link--number"}
                     pageClassName={"pagination__item"}
                 />
+            </div>
+
+            <div>
+                <Modal className="container" style={{left: "12%", top: "5%"}} show={showModalDetail}
+                       onHide={handleCloseDetail}>
+                    <Modal.Header>
+                        <Modal.Title>Thông tin đơn hàng số <span
+                            style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></Modal.Title>
+                        <span aria-hidden="true" className="fa fa-remove"
+                              style={{color: "black", borderRadius: "50%"}}></span>
+                    </Modal.Header>
+                    <Modal.Body style={{ maxHeight: "500px", overflow: 'auto' }}>
+                        <div>
+                            <th style={{ textDecoration: "underline" }}>Nơi tạo:</th>
+                            <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
+                        </div>
+                        <div>
+                            <th style={{ textDecoration: "underline" }}>Ngày tạo:</th>
+                            <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
+                                <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
+                        </div>
+                        <div>
+                            <th style={{ textDecoration: "underline" }}>Trạng thái:</th>
+                            <td><p>{orderDetail.order?.status.nameStatus}</p></td>
+                        </div>
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                            <div>
+                                <th style={{ textDecoration: "underline" }}>Hàng hoá</th>
+                                <td>
+                                    <tr>
+                                        <th>Ảnh:</th>
+                                        <td>{orderDetail.order?.image == null ?
+                                            <p className="text-danger">Không</p> :
+                                            <img src={orderDetail.order?.image} height="100px" width="100px"/>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loại hàng:</th>
+                                        <td>{orderDetail.typeList && orderDetail.typeList.map((item) => (
+                                            <tr key={item.id}>
+                                                <td><p>{item.name}</p></td>
+                                            </tr>
+                                        ))
+                                        }</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Độ dài:</th>
+                                        <td>{orderDetail.order?.width == null ?
+                                            <p className="text-danger">Không</p> :
+                                            <p>{orderDetail.order?.width}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chiều rộng:</th>
+                                        <td>{orderDetail.order?.height == null ?
+                                            <p className="text-danger">Không</p> :
+                                            <p>{orderDetail.order?.height}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cân nặng:</th>
+                                        <td>{orderDetail.order?.weight == null ?
+                                            <p className="text-danger">Không</p> :
+                                            <p>{orderDetail.order?.weight}kg</p>}</td>
+                                    </tr>
+                                </td>
+                            </div>
+
+                            <div>
+                                <th style={{ textDecoration: "underline" }}>Người gửi</th>
+                                <td>
+                                    <tr>
+                                        <th>Tên:</th>
+                                        <td>
+                                            {orderDetail.order?.nameSender == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.nameSender}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Số điện thoại:</th>
+                                        <td>
+                                            {orderDetail.order?.phoneSender == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.phoneSender}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Địa chỉ:</th>
+                                        <td>
+                                            {orderDetail.order?.addressSender == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.addressSender}</p>}</td>
+                                    </tr>
+                                </td>
+                            </div>
+
+                            <div>
+                                <th style={{ textDecoration: "underline" }}>Người nhận</th>
+                                <td>
+                                    <tr>
+                                        <th>Tên:</th>
+                                        <td>
+                                            {orderDetail.order?.nameReceiver == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.nameReceiver}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Số điện thoại:</th>
+                                        <td>
+                                            {orderDetail.order?.phoneReceiver == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.phoneReceiver}</p>}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Địa chỉ:</th>
+                                        <td>
+                                            {orderDetail.order?.addressReceiver == null ?
+                                                <p className="text-danger">Không</p> :
+                                                <p>{orderDetail.order?.addressReceiver}</p>}</td>
+                                    </tr>
+                                </td>
+                            </div>
+                        </div>
+                        <div>
+                            <th style={{ textDecoration: "underline" }}>Các điểm tập kết đã đi qua:</th>
+                            <td>
+                                {orderDetail.order?.consolidationPoints.length === 0 ?
+                                    <p className="text-danger">Không</p> :
+                                    orderDetail.order?.consolidationPoints.map((item => (
+                                        <span>-> {item.name} </span>
+                                    )))
+                                }
+                            </td>
+                        </div>
+                        <div>
+                            <th style={{ textDecoration: "underline" }}>Điểm tập kết đích:</th>
+                            <td>
+                                {(orderDetail.order?.status.id === 6 || orderDetail.order?.status.id === 3 || orderDetail.order?.status.id === 4) && orderDetail.order?.consolidationPoints.length !== 0 ?
+                                    <span>{orderDetail.order?.consolidationPoints[orderDetail.order?.consolidationPoints.length-1].name}</span> :
+                                    <p className="text-danger">Chưa tới</p>
+                                }
+                            </td>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button className="btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
+                            Đóng
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </>
     )
