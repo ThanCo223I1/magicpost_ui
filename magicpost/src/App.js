@@ -4,8 +4,9 @@ import PlayOut from "./component/PlayOut";
 import Home from "./page/home/Home";
 import Login from "./component/login/Login";
 import Register from "./component/login/Register";
-import Order from "./page/home/Order";
+import Orders from "./page/home/Orders";
 import LayoutAdmin from "./component/playout_admin/LayoutAdmin";
+import LayOutEmployee from "./page/employee/LayoutEmployee";
 import TransantionPointAdmin from "./component/playout_admin/transantionPoint/TransantionPointAdmin";
 import ConsolidationPoint from "./component/playout_admin/consolidationPoint/ConsolidationPoint";
 import LayoutLeader from "./component/leader/LayoutLeader";
@@ -30,7 +31,7 @@ function App() {
                     {/*<Route path={"/register"} element={<Register/>}></Route>*/}
                 </Route>
                 {account && <Route>
-                    <Route path={"order"} element={<Order/>}></Route>
+                    {/*<Route path={"order"} element={<Order/>}></Route>*/}
                     <Route path={'admin'} element={<LayoutAdmin/>}>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                         <Route path={"managerTran"} element={<TransantionPointManager/>}></Route>
@@ -45,7 +46,9 @@ function App() {
                         <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
                         <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
                     </Route>
-                    <Route path={'employee'} element={<Order></Order>}></Route>
+                    <Route path={'employee'} element={<LayOutEmployee/>}>
+                        <Route path={"orders"} element={<Orders/>}></Route>
+                    </Route>
                 </Route>}
             </Routes>
         </>
