@@ -17,9 +17,9 @@ import ConsolidationPointManager from "./component/playout_admin/consolidationPo
 import ConsolidationPointManagerBlock
     from "./component/playout_admin/consolidationPoint/ConsolidationPointManagerBlock";
 
-import OrderReceived from "./component/consolidationPoint/employee/OrderReceived";
-import OrderShipping from "./component/consolidationPoint/employee/OrderShipping";
-import OrderPending from "./component/transactionPoint/employee/OrderPending";
+import OrderReceived_ConsolidationPoint from "./component/consolidationPoint/employee/OrderReceived_ConsolidationPoint";
+import OrderShipping_ConsolidationPoint from "./component/consolidationPoint/employee/OrderShipping_ConsolidationPoint";
+import OrderPending_TransactionPoint from "./component/transactionPoint/employee/OrderPending_TransactionPoint";
 import OrderShipping_TransactionPoint from "./component/transactionPoint/employee/OrderShipping_TransactionPoint";
 
 function App() {
@@ -50,9 +50,9 @@ function App() {
                         <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
                     </Route>
                     <Route path={'employee'} element={<Order></Order>}>
-                        <Route path={'consolidationPoint/orderReceived/:id'} element={<OrderReceived/>}></Route>
-                        <Route path={'consolidationPoint/orderShipping/:id'} element={<OrderShipping/>}></Route>
-                        <Route path={'transactionPoint/orderPending/:id'} element={<OrderPending/>}></Route>
+                        <Route path={'consolidationPoint/orderReceived/:id'} element={<OrderReceived_ConsolidationPoint/>}></Route>
+                        <Route path={'consolidationPoint/orderShipping/:id'} element={<OrderShipping_ConsolidationPoint/>}></Route>
+                        <Route path={'transactionPoint/orderPending/:id'} element={<OrderPending_TransactionPoint/>}></Route>
                         <Route path={'transactionPoint/orderShipping/:id'}
                                element={<OrderShipping_TransactionPoint/>}></Route>
                     </Route>

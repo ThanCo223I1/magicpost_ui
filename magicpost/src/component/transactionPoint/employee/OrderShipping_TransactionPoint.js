@@ -34,7 +34,9 @@ function OrderShipping_TransactionPoint() {
     const displayOrders = orders
         .slice(pagesVisited, pagesVisited + ordersPerPage)
         .map((order) => {
-            const statusColor = order.order.status.nameStatus === "Shipping" ? "backgroundColorStatusShipping" : order.order.status.nameStatus === "Complete" ? "backgroundColorStatusComplete" : order.order.status.nameStatus === "Cancel" ? "backgroundColorStatusCanceled" : "";
+            const statusColor = order.order.status.id === 6 ? "backgroundColorStatusShipping" : order.order.status.id === 3 ? "backgroundColorStatusComplete" : order.order.status.id === 4 ? "backgroundColorStatusCanceled" : "";
+            const statusName = order.order.status.id === 3 ? "Thành công" : order.order.status.id === 4 ? "Huỷ" :
+                order.order.status.id === 5 ? "Đang giải quyết" : order.order.status.id === 6 ? "Đang giao hàng" : "";
             return (
                 (order.order.status.id === 6 || order.order.status.id === 3 || order.order.status.id === 4) &&
                 <tr key={order.order.id}>
@@ -66,7 +68,7 @@ function OrderShipping_TransactionPoint() {
                         </button>
                     </td>
                     <td>{order.order.status == null ? <p className="text-danger">Not update</p> :
-                        <p className={statusColor}>{order.order.status.nameStatus}</p>}</td>
+                        <p className={statusColor}>{statusName}</p>}</td>
                     <td>
                         {order.order.status.id === 6 && (
                             <>
@@ -74,13 +76,13 @@ function OrderShipping_TransactionPoint() {
                                     className="btn btn-success buttonShadow"
                                     onClick={() => handleClick(order.order?.id, "Complete")}
                                 >
-                                    Complete
+                                    Hoàn thành
                                 </button>
                                 <button style={{marginTop: "4px"}}
                                         className="btn btn-danger buttonShadow"
                                         onClick={() => handleClick(order.order?.id, "Cancel")}
                                 >
-                                    Cancel
+                                    Huỷ đơn
                                 </button>
                             </>
                         )}
@@ -165,7 +167,7 @@ function OrderShipping_TransactionPoint() {
     return (
         <>
             <div className="container distanceBody">
-                <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đi (Shipping)</h4>
+                <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đi</h4>
 
                 <table className="table">
                     <thead>
@@ -223,7 +225,8 @@ function OrderShipping_TransactionPoint() {
                         </div>
                         <div>
                             <th style={{ textDecoration: "underline" }}>Trạng thái:</th>
-                            <td><p>{orderDetail.order?.status.nameStatus}</p></td>
+                            <td><p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
+                                orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p></td>
                         </div>
                         <div style={{display: "flex", justifyContent: "space-between"}}>
                             <div>
