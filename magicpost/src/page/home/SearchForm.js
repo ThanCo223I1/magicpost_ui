@@ -10,6 +10,7 @@ import TableBody from "@mui/material/TableBody";
 import {styled} from "@mui/material/styles";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import Swal from "sweetalert2";
+import {map} from "react-bootstrap/ElementChildren";
 
 const SearchForm = () => {
     const [order, setOrder] = useState(null);
@@ -117,6 +118,12 @@ const SearchForm = () => {
                         <p> SĐT người nhận : {order.phoneReceiver}</p>
                     </div>
                     <div className="col-6">
+                        {order.status.id !== 3&&(<>
+                            <p> Các kho đã đi qua : {order.consolidationPoints.map((c)=>(
+                                <span>  {order.consolidationPoints[order.consolidationPoints.length-1].address==c.address?<span> {c.address} </span> : <span>{c.address} ;</span> }  </span>
+                            ))}</p>
+                        <p> Đơn của bạn đang ở kho : {order.consolidationPoints[order.consolidationPoints.length-1].address} </p>
+                        </>)}
                         <p> Ảnh đơn hàng : <img src={order.image} alt="Ảnh đơn hàng"></img></p>
                     </div>
 
