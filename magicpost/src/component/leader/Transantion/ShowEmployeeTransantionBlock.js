@@ -1,20 +1,18 @@
-import * as React from 'react';
-import {styled} from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {Pagination} from "@mui/material";
+import React, {useEffect, useState} from 'react';
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableBody from "@mui/material/TableBody";
 import {Dropdown} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import EditNameTran from "../modal/TransantionModal/EditNameTran";
-import EditLeaderTran from "../modal/TransantionModal/EditLeaderTran";
+import EditNameTran from "../../playout_admin/modal/TransantionModal/EditNameTran";
+import EditLeaderTran from "../../playout_admin/modal/TransantionModal/EditLeaderTran";
+import {Pagination} from "@mui/material";
+import axios from "axios";
 import Swal from "sweetalert2";
+import {styled} from "@mui/material/styles";
+import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,21 +34,25 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
         border: 0,
     },
 }));
-const TransantionPointManager = () => {
-    const account = JSON.parse(localStorage.getItem('account'));
 
+const ShowEmployeeTransantionBlock = () => {
+    const account = JSON.parse(localStorage.getItem('account'));
     const [rows, setRows] = useState([]);
+    const leader = account.leaderDTO;
     useEffect(() => {
-        axios
-            .get('http://localhost:8080/account/transaction', {
-                headers: {
-                    Authorization: 'Bearer ' + account.token,
-                },
+        axios.get("http://localhost:8080/account/transaction/leader/" + leader.id ,{
+            headers: {
+                'Authorization': 'Bearer ' + account.token,
+            },
+        })
+            .then(r => {
+                setRows(r.data.employeeBlock)
             })
-            .then((r) => {
-                setRows(r.data);
-            });
-    }, []);
+            .catch(err => {
+                console.log(err)
+            })
+    }, [])
+
 
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
@@ -62,11 +64,11 @@ const TransantionPointManager = () => {
 
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    let currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
-
+    const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
     const button = (id) => {
+        console.log(id)
         Swal.fire({
-            title: 'Bạn có muốn đóng lại điểm?',
+            title: 'Bạn có muốn mở lại tài khoản?',
             text: "",
             icon: 'warning',
             showCancelButton: true,
@@ -76,7 +78,8 @@ const TransantionPointManager = () => {
             confirmButtonText: 'Đồng ý'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.get("http://localhost:8080/account/transaction/save/" + id + '/' + 2, {
+
+                axios.get("http://localhost:8080/account/employee/" + id + '/' + 1, {
                     headers: {
                         Authorization: 'Bearer ' + account.token,
                     },
@@ -84,7 +87,7 @@ const TransantionPointManager = () => {
                     .then(r => {
 
                         Swal.fire(
-                            'Đóng lại điểm thành công!',
+                            'Mở thành công!',
                             '',
                             'Đồng ý')
                         window.location.reload();
@@ -99,7 +102,6 @@ const TransantionPointManager = () => {
         })
 
     };
-
     return (
         <>
             <div className="row">
@@ -110,46 +112,26 @@ const TransantionPointManager = () => {
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell></StyledTableCell>
-                                    <StyledTableCell>Tên Điểm Giao Dịch</StyledTableCell>
+                                    <StyledTableCell>Tên Nhân Viên</StyledTableCell>
                                     <StyledTableCell align="left">Địa Chỉ</StyledTableCell>
-                                    <StyledTableCell align="left">Tên Trưởng Điểm</StyledTableCell>
                                     <StyledTableCell align="left">Số Điện Thoại</StyledTableCell>
-                                    <StyledTableCell align="left">Số Nhân Viên</StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {currentRows.map((row) => (
                                     <StyledTableRow key={row.id}>
-                                        {row.status === 1 && (
-                                            <>
+                                        {row.idStatusAccount === 2 && (   <>
                                                 <StyledTableCell></StyledTableCell>
                                                 <StyledTableCell>{row.name}</StyledTableCell>
                                                 <StyledTableCell align="left">{row.address}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.leader.name}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.leader.phoneNumber}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.employee.length}</StyledTableCell>
+                                                <StyledTableCell align="left">{row.phoneNumber}</StyledTableCell>
                                                 <StyledTableCell align="left">
-                                                    <Dropdown>
-                                                        <Dropdown.Toggle className="btn-primary-page active" id="dropdown-basic">
-                                                            <p> Sửa Đổi</p>
-                                                        </Dropdown.Toggle>
-
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item>
-                                                                <EditNameTran data={row}></EditNameTran>
-                                                            </Dropdown.Item>
-                                                            <Dropdown.Item>
-                                                                <EditLeaderTran data={row}></EditLeaderTran>
-                                                            </Dropdown.Item>
-                                                            <Dropdown.Item onClick={()=>button(row.id)}>
-                                                                Đóng Điểm Giao Dịch
-                                                            </Dropdown.Item>
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
+                                                   <button   className="btn-regis button" onClick={()=>button(row.idAccount)}>
+                                                       Mở Tài Khoản </button>
                                                 </StyledTableCell>
                                             </>
-                                        )}
+                                            )}
 
                                     </StyledTableRow>
                                 ))}
@@ -163,8 +145,10 @@ const TransantionPointManager = () => {
                     />
                 </div>
             </div>
+
+
         </>
     );
 };
 
-export default TransantionPointManager;
+export default ShowEmployeeTransantionBlock;
