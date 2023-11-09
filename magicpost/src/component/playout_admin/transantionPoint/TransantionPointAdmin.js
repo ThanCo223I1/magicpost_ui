@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
 
-const TransantionPointAdmin = () => {
+const TransandsfdftionPointAdmin = () => {
     const account = JSON.parse(localStorage.getItem("account"))
 
     const [consolidationPoint, setConsolidationPoint] = useState([]);
@@ -244,4 +244,4 @@ const TransantionPointAdmin = () => {
     );
 };
 
-export default TransantionPointAdmin;
+export default TransandsfdftionPointAdmin;

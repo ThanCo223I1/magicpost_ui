@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-
+import {Dropdown} from "react-bootstrap";
 const MenuConsolidationPoint = () => {
     return (
         <>
@@ -20,8 +20,23 @@ const MenuConsolidationPoint = () => {
                                     <div className="nav_icon_small">
                                     </div>
                                 </div>
+                                <Dropdown>
+                                    <Dropdown.Toggle className="btn-primary-page btn btn-header active"
+                                                     id="dropdown-basic">
+                                        <p> Điểm Giao Dịch </p>
+                                    </Dropdown.Toggle>
 
-
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>
+                                            <Link to={"/admin/tran"}>Tạo Điểm Giao Dịch</Link></Dropdown.Item>
+                                        <Dropdown.Item>
+                                            <Link to={"/admin/managerTran"}>Điểm Giao Dịch Đang Hoạt Động</Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item>
+                                            <Link to={"/admin/managerTran/block"}>Điểm Giao Dịch Ngừng Hoạt Động</Link>
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
                         </ul>
                     </div>

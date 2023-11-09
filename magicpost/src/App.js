@@ -28,10 +28,8 @@ function App() {
                 <Route path={'/'} element={<PlayOut/>}>
                     <Route path={''} element={<Home/>}></Route>
                     <Route path={'/login'} element={<Login/>}></Route>
-                    {/*<Route path={"/register"} element={<Register/>}></Route>*/}
                 </Route>
                 {account && <Route>
-                    {/*<Route path={"order"} element={<Order/>}></Route>*/}
                     <Route path={'admin'} element={<LayoutAdmin/>}>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                         <Route path={"managerTran"} element={<TransantionPointManager/>}></Route>
