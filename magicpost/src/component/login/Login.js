@@ -4,6 +4,7 @@ import axios from "axios";
 
 function Login() {
     const navigate = useNavigate();
+
     return (
         <>
             <div>
@@ -48,13 +49,15 @@ function Login() {
                                                             }else {
                                                                 alert("Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập")
                                                             }
+
                                                         })
                                                         .catch(err => {
                                                             console.log(err)
                                                         })
-
                                                     setSubmitting(false);
                                                     resetForm();
+
+
                                                 }}
                                             >
                                                 {({isSubmitting}) => (
