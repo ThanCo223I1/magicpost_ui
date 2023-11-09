@@ -12,52 +12,58 @@ function LayoutEmployee() {
     useEffect(() => {
         if (account != null)
             axios.get(`http://localhost:8080/consolidationPoint/account/` + account.id)
-            .then(function (res) {
-                setConsolidationPoint(res.data)
-            })
-            .catch(function (err) {
-                console.log(err);
-            })
+                .then(function (res) {
+                    setConsolidationPoint(res.data)
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
     }, []);
 
     useEffect(() => {
         if (account != null)
             axios.get(`http://localhost:8080/transactionPoint/account/` + account.id)
-            .then(function (res) {
-                setTransactionPoint(res.data)
-            })
-            .catch(function (err) {
-                console.log(err);
-            })
+                .then(function (res) {
+                    setTransactionPoint(res.data)
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
     }, []);
 
     return (
         <>
             <HeaderEmployee></HeaderEmployee>
-            <div style={{position: 'fixed', marginTop: '68px'}} className="warpper">
-                <div style={{width: "240px"}}>
-                    <div style={{padding: 0, color: '#fff', background: 'honeydew', height: '770px'}}>
-                        <ul id="" style={{zIndex: '1020'}}>
+            <div className="wrapper" style={{display: "flex", maxHeight: "100%", minHeight: "100vh"}}>
+                <div className="col-2" style={{width: "240px", padding: 0, boxShadow: "4px 0 10px rgba(0,0,0,0.05)"}}>
+                    <div style={{padding: 0, color: '#fff', background: 'lavender', height: "100%"}}>
+                        <ul id="" style={{fontSize: "16px"}}>
                             {
                                 consolidationPoint && (
                                     <>
                                         <li className="mm-active">
-                                            <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                                <div className="nav_icon_small">
-                                                    <Link to={`consolidationPoint/orderReceived/${account.id}`}>NV tập kết -
+                                            <Link to={`consolidationPoint/orderReceived/${account.id}`}
+                                                  style={{textAlign: "center"}}>
+                                                <div className="has-arrow" aria-expanded="false">
+                                                    <div className="nav_icon_small">
+                                                        NV tập kết -
                                                         Đơn
-                                                        chờ</Link>
+                                                        chờ
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </li>
                                         <li className="mm-active">
-                                            <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                                <div className="nav_icon_small">
-                                                    <Link to={`consolidationPoint/orderShipping/${account.id}`}>NV tập kết -
+                                            <Link to={`consolidationPoint/orderShipping/${account.id}`}
+                                                  style={{textAlign: "center"}}>
+                                                <div className="has-arrow" aria-expanded="false">
+                                                    <div className="nav_icon_small">
+                                                        NV tập kết -
                                                         Đơn đi
-                                                        hàng</Link>
+                                                        hàng
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </li>
                                     </>
                                 )
@@ -66,23 +72,29 @@ function LayoutEmployee() {
                             {
                                 transactionPoint && (
                                     <>
-                                        <li className="mm-active">
-                                            <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                                <div className="nav_icon_small">
-                                                    <Link to={`transactionPoint/orderPending/${account.id}`}>NV giao dịch -
+                                        <li className="mm-active li-active">
+                                            <Link to={`transactionPoint/orderPending/${account.id}`}
+                                                  style={{textAlign: "center"}}>
+                                                <div className="has-arrow" aria-expanded="false">
+                                                    <div className="nav_icon_small">
+                                                        NV giao dịch -
                                                         Đơn
-                                                        chờ</Link>
+                                                        chờ
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </li>
-                                        <li className="mm-active">
-                                            <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                                <div className="nav_icon_small">
-                                                    <Link to={`transactionPoint/orderShipping/${account.id}`}>NV giao dịch -
+                                        <li className="mm-active li-active">
+                                            <Link to={`transactionPoint/orderShipping/${account.id}`}
+                                                  style={{textAlign: "center"}}>
+                                                <div className="has-arrow" aria-expanded="false">
+                                                    <div className="nav_icon_small">
+                                                        NV giao dịch -
                                                         Đơn đi
-                                                        hàng</Link>
+                                                        hàng
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </li>
                                     </>
                                 )
@@ -91,14 +103,10 @@ function LayoutEmployee() {
                     </div>
                 </div>
 
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <div style={{marginLeft: "250px"}}>
-                <Outlet>
-
-                </Outlet>
+                <div className="col-10">
+                    <Outlet>
+                    </Outlet>
+                </div>
             </div>
             <FooterEmployee></FooterEmployee>
         </>

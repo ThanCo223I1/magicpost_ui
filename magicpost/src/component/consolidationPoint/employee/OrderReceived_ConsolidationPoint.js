@@ -103,7 +103,7 @@ function OrderReceived_ConsolidationPoint() {
                         >
                             Nhận đơn
                         </button>
-                        <button style={{marginTop: "4px"}}
+                        <button style={{marginLeft: "4px"}}
                                 className="btn btn-outline-info buttonShadow"
                                 data-toggle="modal" data-target="#exampleModalCenter"
                                 onClick={() => {
@@ -207,7 +207,7 @@ function OrderReceived_ConsolidationPoint() {
 
     return (
         <>
-            <div className="container distanceBody">
+            <div className="distanceBody">
                 <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đợi duyệt</h4>
 
                 <table className="table">
@@ -318,16 +318,16 @@ function OrderReceived_ConsolidationPoint() {
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
                             <span aria-hidden="true" className="fa fa-remove"
                                   style={{color: "black", borderRadius: "50%"}}></span>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
                                     <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>
                                 <td>
                                     <p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
@@ -335,7 +335,7 @@ function OrderReceived_ConsolidationPoint() {
                                 </td>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Hàng hoá</th>
                                     <td>
                                         <tr>
@@ -374,7 +374,7 @@ function OrderReceived_ConsolidationPoint() {
                                     </td>
                                 </div>
 
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Người gửi</th>
                                     <td>
                                         <tr>
@@ -401,7 +401,7 @@ function OrderReceived_ConsolidationPoint() {
                                     </td>
                                 </div>
 
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Người nhận</th>
                                     <td>
                                         <tr>
@@ -428,7 +428,7 @@ function OrderReceived_ConsolidationPoint() {
                                     </td>
                                 </div>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Các điểm tập kết đã đi qua:</th>
                                 <td>
                                     {orderDetail.order?.consolidationPoints.length === 0 ?
@@ -439,7 +439,7 @@ function OrderReceived_ConsolidationPoint() {
                                     }
                                 </td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Điểm tập kết đích:</th>
                                 <td>
                                     {(orderDetail.order?.status.id === 6 || orderDetail.order?.status.id === 3) && orderDetail.order?.consolidationPoints.length !== 0 ?
@@ -448,7 +448,7 @@ function OrderReceived_ConsolidationPoint() {
                                     }
                                 </td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Thời gian kết thúc đơn:</th>
                                 <td>{orderDetail.order?.endOrder == null ?
                                     <p className="text-danger">Chưa kết thúc</p> :
