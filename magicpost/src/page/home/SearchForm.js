@@ -56,7 +56,7 @@ const SearchForm = () => {
         setSubmitting(false);
     };
     return (
-        <>{console.log(order)}
+        <>
             <Formik
                 initialValues={initialValues}
                 validate={validateForm}

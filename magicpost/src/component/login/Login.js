@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 function Login() {
     const navigate = useNavigate();
+
     return (
         <>
             <div>
@@ -66,6 +67,7 @@ function Login() {
                                                                     }
                                                                 });
                                                             }
+
                                                         })
                                                         .catch(err => {
                                                             Swal.fire({
@@ -86,9 +88,10 @@ function Login() {
                                                                 }
                                                             });
                                                         })
-
                                                     setSubmitting(false);
                                                     resetForm();
+
+
                                                 }}
                                             >
                                                 {({isSubmitting}) => (

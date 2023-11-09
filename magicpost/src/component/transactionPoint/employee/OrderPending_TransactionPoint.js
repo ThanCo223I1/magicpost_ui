@@ -4,7 +4,7 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Modal, Box} from '@mui/material';
 
 function OrderPending_TransactionPoint() {
     const [orders, setOrders] = useState([]);
@@ -55,7 +55,7 @@ function OrderPending_TransactionPoint() {
             return (
                 order.order.status.id === 5 &&
                 <tr key={order.order.id}>
-                    <td>{order.order.id}</td>
+                    <td style={{textAlign:"center"}}>{order.order.id}</td>
                     <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
                     <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
@@ -145,7 +145,7 @@ function OrderPending_TransactionPoint() {
         const updateStatus_Order = orders.find((order) => order.order.id === orderId).order;
         let newStatusId = updateStatus_Order.status.id;
         let newNameStatus = updateStatus_Order.status.nameStatus;
-        console.log(newStatusId)
+
         if (action === "Cancel") {
             newStatusId = 4;
             newNameStatus = "Cancel";
@@ -153,7 +153,8 @@ function OrderPending_TransactionPoint() {
 
         updateStatus_Order.status.id = newStatusId;
         updateStatus_Order.status.nameStatus = newNameStatus;
-        console.log(updateStatus_Order.status)
+        let newEndOrder = new Date();
+        updateStatus_Order.endOrder = newEndOrder.toISOString();
 
         axios.post(`http://localhost:8080/orders/save`, updateStatus_Order)
             .then((res) => {
@@ -214,14 +215,24 @@ function OrderPending_TransactionPoint() {
                 />
 
                 <div>
-                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModal} onHide={handleClose}>
-                        <Modal.Header>
-                            <Modal.Title>Chuyển đơn hàng</Modal.Title>
-                            <span aria-hidden="true" className="fa fa-remove"
-                                  style={{color: "black", borderRadius: "50%"}}></span>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>Đơn hàng số <span
+                    <Modal
+                        open={showModal}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 400,
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            p: 4
+                        }}>
+                            <h2 id="modal-title">Chuyển đơn hàng</h2>
+                            <p id="modal-description">Đơn hàng số <span
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span> gửi tới:</p>
                             <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
                                 <option value="select"
@@ -230,10 +241,8 @@ function OrderPending_TransactionPoint() {
                                 <option value={consolidationPoint_transactionPoint_IdAccount.id}>
                                     {consolidationPoint_transactionPoint_IdAccount.id} - {consolidationPoint_transactionPoint_IdAccount.name}
                                 </option>
-                            </select>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button
+                            </select><br/><br/>
+                            <Button
                                 className="btn btn-info buttonShadow"
                                 style={{color: "white"}}
                                 onClick={() => {
@@ -243,41 +252,56 @@ function OrderPending_TransactionPoint() {
                                 disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
                             >
                                 Gửi
-                            </button>
-                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleClose}>
+                            </Button>
+                            <Button className="btn btn-danger buttonShadow" style={{marginLeft: "1%"}} variant="info"
+                                    onClick={handleClose}>
                                 Đóng
                             </Button>
-                        </Modal.Footer>
+                        </Box>
                     </Modal>
                 </div>
 
                 <div>
-                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModalDetail}
-                           onHide={handleCloseDetail}>
-                        <Modal.Header>
-                            <Modal.Title>Thông tin đơn hàng số <span
-                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></Modal.Title>
-                            <span aria-hidden="true" className="fa fa-remove"
-                                  style={{color: "black", borderRadius: "50%"}}></span>
-                        </Modal.Header>
-                        <Modal.Body style={{ maxHeight: "500px", overflow: 'auto' }}>
-                            <div>
-                                <th style={{ textDecoration: "underline" }}>Nơi tạo:</th>
+                    <Modal
+                        open={showModalDetail}
+                        onClose={handleCloseDetail}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '60%',
+                                bgcolor: 'background.paper',
+                                boxShadow: 24,
+                                p: 4,
+                                maxHeight: '90vh',
+                                overflowY: 'auto',
+                            }}>
+                            <h2 id="modal-title">Thông tin đơn hàng số <span
+                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
+                            <div id="modal-description">
+                                <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Ngày tạo:</th>
+                                <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
                                     <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Trạng thái:</th>
-                                <td><p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
-                                    orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p></td>
+                                <th style={{textDecoration: "underline"}}>Trạng thái:</th>
+                                <td>
+                                    <p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
+                                        orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p>
+                                </td>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Hàng hoá</th>
+                                    <th style={{textDecoration: "underline"}}>Hàng hoá</th>
                                     <td>
                                         <tr>
                                             <th>Ảnh:</th>
@@ -316,7 +340,7 @@ function OrderPending_TransactionPoint() {
                                 </div>
 
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Người gửi</th>
+                                    <th style={{textDecoration: "underline"}}>Người gửi</th>
                                     <td>
                                         <tr>
                                             <th>Tên:</th>
@@ -343,7 +367,7 @@ function OrderPending_TransactionPoint() {
                                 </div>
 
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Người nhận</th>
+                                    <th style={{textDecoration: "underline"}}>Người nhận</th>
                                     <td>
                                         <tr>
                                             <th>Tên:</th>
@@ -370,7 +394,7 @@ function OrderPending_TransactionPoint() {
                                 </div>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Các điểm tập kết đã đi qua:</th>
+                                <th style={{textDecoration: "underline"}}>Các điểm tập kết đã đi qua:</th>
                                 <td>
                                     {orderDetail.order?.consolidationPoints.length === 0 ?
                                         <p className="text-danger">Không</p> :
@@ -381,20 +405,25 @@ function OrderPending_TransactionPoint() {
                                 </td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Điểm tập kết đích:</th>
+                                <th style={{textDecoration: "underline"}}>Điểm tập kết đích:</th>
                                 <td>
                                     {(orderDetail.order?.status.id === 6 || orderDetail.order?.status.id === 3) && orderDetail.order?.consolidationPoints.length !== 0 ?
-                                        <p>{orderDetail.order?.consolidationPoints[orderDetail.order?.consolidationPoints.length-1].name}</p> :
+                                        <p>{orderDetail.order?.consolidationPoints[orderDetail.order?.consolidationPoints.length - 1].name}</p> :
                                         <p className="text-danger">Chưa tới</p>
                                     }
                                 </td>
                             </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
+                            <div>
+                                <th style={{textDecoration: "underline"}}>Thời gian kết thúc đơn:</th>
+                                <td>{orderDetail.order?.endOrder == null ?
+                                    <p className="text-danger">Chưa kết thúc</p> :
+                                    <p>{format(new Date(orderDetail.order?.endOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
+                            </div>
+                            <br/>
+                            <Button className="btn btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
                                 Đóng
                             </Button>
-                        </Modal.Footer>
+                        </Box>
                     </Modal>
                 </div>
             </div>
