@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-const TransantionPointAdmin = () => {
+const ConsolidationPointAdmin = () => {
     const account = JSON.parse(localStorage.getItem("account"))
 
     return (
@@ -81,11 +82,18 @@ const TransantionPointAdmin = () => {
                         },
                     })
                         .then(r=>{
-                            alert("ok")
+                            Swal.fire({
+                                title: "Tạo điểm tập kết thành công!",
+                                icon: "success"
+                            });
                             resetForm();
                         })
                         .catch(err=>{
-                            console.log(err)
+                            Swal.fire({
+                                icon: "error",
+                                title: "Tạo điểm tập kết không thành công",
+                                text: "Vui lòng kiểm tra lại!",
+                            });
                         })
 
 
@@ -204,4 +212,4 @@ const TransantionPointAdmin = () => {
     );
 };
 
-export default TransantionPointAdmin;
+export default ConsolidationPointAdmin;

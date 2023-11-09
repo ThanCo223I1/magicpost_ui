@@ -21,9 +21,15 @@ const MenuConsolidationPoint = () => {
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
                                     </div>
+                                    <Link to={"/leader/showEmployeeCon"}>Tài khoản nhân viên</Link>
                                 </div>
-
-
+                            </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Link to={"/leader/showEmployeeConBlock"}>Tài khoản bị khoá</Link>
+                                </div>
                             </li>
                         </ul>
                     </div>
