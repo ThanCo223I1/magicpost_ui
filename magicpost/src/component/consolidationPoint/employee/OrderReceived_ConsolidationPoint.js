@@ -4,7 +4,7 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
-import {Button, Modal} from 'react-bootstrap';
+import {Button, Modal, Box} from '@mui/material';
 
 function OrderReceived_ConsolidationPoint() {
     const [orders, setOrders] = useState([]);
@@ -65,9 +65,9 @@ function OrderReceived_ConsolidationPoint() {
             const statusName = order.order.status.id === 3 ? "Thành công" : order.order.status.id === 4 ? "Huỷ" :
                 order.order.status.id === 5 ? "Đang giải quyết" : order.order.status.id === 6 ? "Đang giao hàng" : "";
             return (
-                (order.order.status.id === 5 && order.order.consolidationPoints[order.order.consolidationPoints.length - 1].name === consolidationPointInAccount.name) &&
+                (order.order.status.id === 5 && order.order.consolidationPoints[order.order.consolidationPoints.length - 1].id === consolidationPointInAccount.id) &&
                 <tr key={order.order.id}>
-                    <td>{order.order.id}</td>
+                    <td style={{textAlign:"center"}}>{order.order.id}</td>
                     <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
                     <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
@@ -186,7 +186,6 @@ function OrderReceived_ConsolidationPoint() {
             consolidationPoint.id = selectedConsolidationPointLong;
             orderDetail.order.consolidationPoints.push(consolidationPoint);
 
-
             axios.post(`http://localhost:8080/orders/save`, orderDetail.order)
                 .then(function (res) {
                     setSelectedConsolidationPoint(null);
@@ -205,7 +204,6 @@ function OrderReceived_ConsolidationPoint() {
                 });
         }
     }
-
 
     return (
         <>
@@ -247,14 +245,24 @@ function OrderReceived_ConsolidationPoint() {
                 />
 
                 <div>
-                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModal} onHide={handleClose}>
-                        <Modal.Header>
-                            <Modal.Title>Information</Modal.Title>
-                            <span aria-hidden="true" className="fa fa-remove"
-                                  style={{color: "black", borderRadius: "50%"}}></span>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>Order number <span
+                    <Modal
+                        open={showModal}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 400,
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            p: 4
+                        }}>
+                            <h2 id="modal-title">Chuyển đơn hàng</h2>
+                            <p id="modal-description">Order number <span
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span> sent to:</p>
                             <select onChange={(e) => setSelectedConsolidationPoint(e.target.value)}>
                                 <option value="select"
@@ -266,10 +274,8 @@ function OrderReceived_ConsolidationPoint() {
                                         {cp.id} - {cp.name}
                                     </option>
                                 ))}
-                            </select>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <button
+                            </select><br/><br/>
+                            <Button
                                 className="btn btn-info buttonShadow"
                                 style={{color: "white"}}
                                 onClick={() => {
@@ -279,24 +285,39 @@ function OrderReceived_ConsolidationPoint() {
                                 disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
                             >
                                 Gửi
-                            </button>
-                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleClose}>
+                            </Button>
+                            <Button className="btn btn-danger buttonShadow" style={{marginLeft: "1%"}} variant="info"
+                                    onClick={handleClose}>
                                 Đóng
                             </Button>
-                        </Modal.Footer>
+                        </Box>
                     </Modal>
                 </div>
 
                 <div>
-                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModalDetail}
-                           onHide={handleCloseDetail}>
-                        <Modal.Header>
-                            <Modal.Title>Thông tin đơn hàng số <span
-                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></Modal.Title>
+                    <Modal
+                        open={showModalDetail}
+                        onClose={handleCloseDetail}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '60%',
+                                bgcolor: 'background.paper',
+                                boxShadow: 24,
+                                p: 4,
+                                maxHeight: '90vh',
+                                overflowY: 'auto',
+                            }}>
+                            <h2 id="modal-title">Thông tin đơn hàng số <span
+                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
                             <span aria-hidden="true" className="fa fa-remove"
                                   style={{color: "black", borderRadius: "50%"}}></span>
-                        </Modal.Header>
-                        <Modal.Body style={{maxHeight: "500px", overflow: 'auto'}}>
                             <div>
                                 <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
@@ -308,8 +329,10 @@ function OrderReceived_ConsolidationPoint() {
                             </div>
                             <div>
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>
-                                <td><p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
-                                    orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p></td>
+                                <td>
+                                    <p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
+                                        orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p>
+                                </td>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <div>
@@ -425,12 +448,17 @@ function OrderReceived_ConsolidationPoint() {
                                     }
                                 </td>
                             </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
+                            <div>
+                                <th style={{textDecoration: "underline"}}>Thời gian kết thúc đơn:</th>
+                                <td>{orderDetail.order?.endOrder == null ?
+                                    <p className="text-danger">Chưa kết thúc</p> :
+                                    <p>{format(new Date(orderDetail.order?.endOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
+                            </div>
+                            <br/>
+                            <Button className="btn btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
                                 Đóng
                             </Button>
-                        </Modal.Footer>
+                        </Box>
                     </Modal>
                 </div>
             </div>

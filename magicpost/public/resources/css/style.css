@@ -9989,3 +9989,25 @@ ul {
   font-weight: bold;
   cursor: default;
 }
+
+.switch-shop-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-orange-primary);
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.switch-shop-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.pagination__link, .pagination__link--number{
+  cursor: pointer;
+}

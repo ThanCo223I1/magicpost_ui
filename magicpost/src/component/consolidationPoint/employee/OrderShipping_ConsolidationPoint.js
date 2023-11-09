@@ -4,11 +4,12 @@ import {useParams} from "react-router";
 import ReactPaginate from "react-paginate";
 import {format} from "date-fns";
 import Swal from "sweetalert2";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Modal, Box} from '@mui/material';
 
 function OrderShipping_ConsolidationPoint() {
     const [orders, setOrders] = useState([]);
     const [orderDetail, setOrderDetail] = useState({});
+    const [consolidationPointInAccount, setConsolidationPointInAccount] = useState({});
     const {id} = useParams();
 
     const [showModalDetail, setShowModalDetail] = useState(false);
@@ -31,6 +32,17 @@ function OrderShipping_ConsolidationPoint() {
             })
     }, []);
 
+    useEffect(() => {
+        axios.get(`http://localhost:8080/consolidationPoint/account/` + id)
+            .then(function (res) {
+                setConsolidationPointInAccount(res.data)
+                console.log(res.data)
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+    }, [id]);
+
     const displayOrders = orders
         .slice(pagesVisited, pagesVisited + ordersPerPage)
         .map((order) => {
@@ -38,9 +50,10 @@ function OrderShipping_ConsolidationPoint() {
             const statusName = order.order.status.id === 3 ? "Thành công" : order.order.status.id === 4 ? "Huỷ" :
                 order.order.status.id === 5 ? "Đang giải quyết" : order.order.status.id === 6 ? "Đang giao hàng" : "";
             return (
-                (order.order.status.id === 6 || order.order.status.id === 3 || order.order.status.id === 4) &&
+                ((order.order.status.id === 6 || order.order.status.id === 3 || order.order.status.id === 4) &&
+                (order.order.consolidationPoints[order.order.consolidationPoints.length - 1].id === consolidationPointInAccount.id)) &&
                 <tr key={order.order.id}>
-                    <td>{order.order.id}</td>
+                    <td style={{textAlign:"center"}}>{order.order.id}</td>
                     <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
                     <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
@@ -103,6 +116,7 @@ function OrderShipping_ConsolidationPoint() {
             if (order.order.id === orderId) {
                 let newStatusId = order.order.status.id;
                 let newStatusName = order.order.status.nameStatus;
+                let newEndOrder = new Date();
                 if (action === "Complete") {
                     newStatusId = 3;
                     newStatusName = "Complete";
@@ -119,7 +133,8 @@ function OrderShipping_ConsolidationPoint() {
                             ...order.order.status,
                             id: newStatusId,
                             nameStatus: newStatusName
-                        }
+                        },
+                        endOrder: newEndOrder
                     }
                 };
             }
@@ -139,6 +154,8 @@ function OrderShipping_ConsolidationPoint() {
             newStatusId = 4;
         }
         updateStatus_Order.status.id = newStatusId;
+        let newEndOrder = new Date();
+        updateStatus_Order.endOrder = newEndOrder.toISOString();
 
         axios.post(`http://localhost:8080/orders/save`, updateStatus_Order)
             .then((res) => {
@@ -204,32 +221,46 @@ function OrderShipping_ConsolidationPoint() {
                 />
 
                 <div>
-                    <Modal className="container" style={{left: "12%", top: "5%"}} show={showModalDetail}
-                           onHide={handleCloseDetail}>
-                        <Modal.Header>
-                            <Modal.Title>Thông tin đơn hàng số <span
-                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></Modal.Title>
-                            <span aria-hidden="true" className="fa fa-remove"
-                                  style={{color: "black", borderRadius: "50%"}}></span>
-                        </Modal.Header>
-                        <Modal.Body style={{ maxHeight: "500px", overflow: 'auto' }}>
+                    <Modal
+                        open={showModalDetail}
+                        onClose={handleCloseDetail}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '60%',
+                                bgcolor: 'background.paper',
+                                boxShadow: 24,
+                                p: 4,
+                                maxHeight: '90vh',
+                                overflowY: 'auto',
+                            }}>
+                            <h2>Thông tin đơn hàng số <span
+                                style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Nơi tạo:</th>
+                                <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Ngày tạo:</th>
+                                <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
                                     <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Trạng thái:</th>
-                                <td><p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
-                                    orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p></td>
+                                <th style={{textDecoration: "underline"}}>Trạng thái:</th>
+                                <td>
+                                    <p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
+                                        orderDetail.order?.status.id === 5 ? "Đang giải quyết" : orderDetail.order?.status.id === 6 ? "Đang giao hàng" : ""}</p>
+                                </td>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Hàng hoá</th>
+                                    <th style={{textDecoration: "underline"}}>Hàng hoá</th>
                                     <td>
                                         <tr>
                                             <th>Ảnh:</th>
@@ -268,7 +299,7 @@ function OrderShipping_ConsolidationPoint() {
                                 </div>
 
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Người gửi</th>
+                                    <th style={{textDecoration: "underline"}}>Người gửi</th>
                                     <td>
                                         <tr>
                                             <th>Tên:</th>
@@ -295,7 +326,7 @@ function OrderShipping_ConsolidationPoint() {
                                 </div>
 
                                 <div>
-                                    <th style={{ textDecoration: "underline" }}>Người nhận</th>
+                                    <th style={{textDecoration: "underline"}}>Người nhận</th>
                                     <td>
                                         <tr>
                                             <th>Tên:</th>
@@ -322,7 +353,7 @@ function OrderShipping_ConsolidationPoint() {
                                 </div>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Các điểm tập kết đã đi qua:</th>
+                                <th style={{textDecoration: "underline"}}>Các điểm tập kết đã đi qua:</th>
                                 <td>
                                     {orderDetail.order?.consolidationPoints.length === 0 ?
                                         <p className="text-danger">Không</p> :
@@ -333,26 +364,30 @@ function OrderShipping_ConsolidationPoint() {
                                 </td>
                             </div>
                             <div>
-                                <th style={{ textDecoration: "underline" }}>Điểm tập kết đích:</th>
+                                <th style={{textDecoration: "underline"}}>Điểm tập kết đích:</th>
                                 <td>
                                     {(orderDetail.order?.status.id === 6 || orderDetail.order?.status.id === 3 || orderDetail.order?.status.id === 4) && orderDetail.order?.consolidationPoints.length !== 0 ?
-                                        <span>{orderDetail.order?.consolidationPoints[orderDetail.order?.consolidationPoints.length-1].name}</span> :
+                                        <span>{orderDetail.order?.consolidationPoints[orderDetail.order?.consolidationPoints.length - 1].name}</span> :
                                         <p className="text-danger">Chưa tới</p>
                                     }
                                 </td>
                             </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button className="btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
+                            <div>
+                                <th style={{textDecoration: "underline"}}>Thời gian kết thúc đơn:</th>
+                                <td>{orderDetail.order?.endOrder == null ?
+                                    <p className="text-danger">Chưa kết thúc</p> :
+                                    <p>{format(new Date(orderDetail.order?.endOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
+                            </div>
+                            <br/>
+                            <Button className="btn btn-danger buttonShadow" variant="info" onClick={handleCloseDetail}>
                                 Đóng
                             </Button>
-                        </Modal.Footer>
+                        </Box>
                     </Modal>
                 </div>
             </div>
         </>
     )
-
 }
 
 export default OrderShipping_ConsolidationPoint;
