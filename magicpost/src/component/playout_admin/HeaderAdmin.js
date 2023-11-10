@@ -69,7 +69,7 @@ const HeaderAdmin = () => {
                 zIndex: '1000',
                 marginBottom: "0"
             }}>
-                <a href="magicpost/src/page#" className="navbar-brand col-2" style={{marginLeft: '0px',}}>
+                <a href="#" className="navbar-brand col-2" style={{marginLeft: '0px',}}>
                     <img src="https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/108.svg"
                          style={{width: "100px", height: "auto"}} alt="<Magic Post>"
                          className="navbar-brand-full"/>

@@ -28,6 +28,10 @@ import ShowEmployeeTransantionBlock from "./component/leader/Transantion/ShowEmp
 import ShowEmployeeConsolidationtionBlock from "./component/leader/Consolidation/ShowEmployeeConsolidationtionBlock";
 import ShowEmployeeConsolidationtion from "./component/leader/Consolidation/ShowEmployeeConsolidationtion";
 import Welcome from "./component/Welcome";
+import OrderStatistics_ConsolidationPoint_StatusComplete
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusComplete";
+import OrderStatistics_ConsolidationPoint_StatusCancel
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusCancel";
 
 function App() {
     return (
@@ -57,6 +61,8 @@ function App() {
                         <Route path={'showEmployeeConBlock'} element={<ShowEmployeeConsolidationtionBlock></ShowEmployeeConsolidationtionBlock>}></Route>
                         <Route path={'showEmployeeTranBlock'} element={<ShowEmployeeTransantionBlock></ShowEmployeeTransantionBlock>}></Route>
                         <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
+                        <Route path='orderStatisticsConsolidationPoint_complete' element={<OrderStatistics_ConsolidationPoint_StatusComplete/>}></Route>
+                        <Route path='orderStatisticsConsolidationPoint_cancel' element={<OrderStatistics_ConsolidationPoint_StatusCancel/>}></Route>
                     </Route>
                     <Route path={'employee'} element={<LayOutEmployee/>}>
                         <Route path="" element={<Welcome/>}></Route>

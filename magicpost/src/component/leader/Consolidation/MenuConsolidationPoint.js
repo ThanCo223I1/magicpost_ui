@@ -32,6 +32,20 @@ const MenuConsolidationPoint = () => {
                                     <Link to={"/leader/showEmployeeConBlock"}>Tài khoản bị khoá</Link>
                                 </div>
                             </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Link to={"/leader/orderStatisticsConsolidationPoint_complete"}>Thống kê đơn thành công</Link>
+                                </div>
+                            </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Link to={"/leader/orderStatisticsConsolidationPoint_cancel"}>Thống kê đơn bị huỷ</Link>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

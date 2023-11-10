@@ -101,7 +101,7 @@ function OrderPending_TransactionPoint() {
                                 className="btn btn-danger buttonShadow"
                                 onClick={() => handleClick_Status(order.order?.id, "Cancel")}
                         >
-                            Huỷ đơn
+                            Xoá đơn
                         </button>
                     </td>
                 </tr>
@@ -143,23 +143,13 @@ function OrderPending_TransactionPoint() {
 
     const handleClick_Status = (orderId, action) => {
         const updateStatus_Order = orders.find((order) => order.order.id === orderId).order;
-        let newStatusId = updateStatus_Order.status.id;
-        let newNameStatus = updateStatus_Order.status.nameStatus;
 
-        if (action === "Cancel") {
-            newStatusId = 4;
-            newNameStatus = "Cancel";
-        }
-
-        updateStatus_Order.status.id = newStatusId;
-        updateStatus_Order.status.nameStatus = newNameStatus;
-
-        axios.post(`http://localhost:8080/orders/save`, updateStatus_Order)
+        axios.post(`http://localhost:8080/orders/deleteOrder/` + updateStatus_Order.id)
             .then((res) => {
                 if (action === "Cancel") {
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Bạn đã huỷ đơn hàng!',
+                        title: 'Bạn đã xoá đơn hàng!',
                         showConfirmButton: true, // Ẩn nút "OK"
                     }).then((result) => {
                         if (result.isConfirmed) {
