@@ -62,12 +62,12 @@ function OrderPending_TransactionPoint() {
                         <p>{order.order.nameSender}</p>}</td>
                     <td>{order.order.phoneSender == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.phoneSender}</p>}</td>
-                    <td>{order.typeList && order.typeList.map((item) => (
-                        <tr key={item.id}>
-                            <td><p>{item.name}</p></td>
-                        </tr>
-                    ))
-                    }</td>
+                    {/*<td>{order.typeList && order.typeList.map((item) => (*/}
+                    {/*    <tr key={item.id}>*/}
+                    {/*        <td><p>{item.name}</p></td>*/}
+                    {/*    </tr>*/}
+                    {/*))*/}
+                    {/*}</td>*/}
                     <td>{order.order.addressReceiver == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.addressReceiver.slice(0, 16)}{order.order.addressReceiver.length > 16 && "..."}</p>}</td>
                     <td>{order.order.consolidationPoints.length === 0 ? <p className="text-danger">Không</p> :
@@ -185,7 +185,7 @@ function OrderPending_TransactionPoint() {
                         <th>Ngày tạo</th>
                         <th>Người gửi</th>
                         <th>SĐT người gửi</th>
-                        <th>Loại hàng</th>
+                        {/*<th>Loại hàng</th>*/}
                         <th>Địa chỉ nhận</th>
                         <th>Điểm đang giữ đơn</th>
                         <th>Xem chi tiết</th>
@@ -307,15 +307,15 @@ function OrderPending_TransactionPoint() {
                                                 <p className="text-danger">Không</p> :
                                                 <img src={orderDetail.order?.image} height="100px" width="100px"/>}</td>
                                         </tr>
-                                        <tr>
-                                            <th>Loại hàng:</th>
-                                            <td>{orderDetail.typeList && orderDetail.typeList.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td><p>{item.name}</p></td>
-                                                </tr>
-                                            ))
-                                            }</td>
-                                        </tr>
+                                        {/*<tr>*/}
+                                        {/*    <th>Loại hàng:</th>*/}
+                                        {/*    <td>{orderDetail.typeList && orderDetail.typeList.map((item) => (*/}
+                                        {/*        <tr key={item.id}>*/}
+                                        {/*            <td><p>{item.name}</p></td>*/}
+                                        {/*        </tr>*/}
+                                        {/*    ))*/}
+                                        {/*    }</td>*/}
+                                        {/*</tr>*/}
                                         <tr>
                                             <th>Độ dài:</th>
                                             <td>{orderDetail.order?.width == null ?
