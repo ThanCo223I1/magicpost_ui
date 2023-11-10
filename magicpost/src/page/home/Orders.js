@@ -31,7 +31,7 @@ function Orders() {
     const accountLogin = JSON.parse(localStorage.getItem("account"));
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        setOrder({...orders, name: value});
+        setOrder({...orders, [name]: value});
     };
     const submit = () => {
         axios.post('http://localhost:8080/orders/createOrder/' + accountLogin.employeeDTO.id, orders)

@@ -11678,12 +11678,6 @@ li.mm-active {
     box-shadow: 0 0.1px rgba(0,0,0,0.5);
 }
 
-li.mm-active:hover {
-    box-shadow: 0 0 2px #00467f;
-    background: #00467f;
-    color: white;
-}
-
 .indent-td td {
     padding-left: 5px;
 }

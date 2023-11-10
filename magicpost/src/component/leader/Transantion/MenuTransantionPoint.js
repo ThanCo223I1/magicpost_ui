@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {Outlet} from "react-router";
 
 const MenuConsolidationPoint = () => {
     return (
         <>
-            <div style={{position: 'fixed', marginTop: '68px'}} className="warpper">
-                <div style={{width: "250px"}}>
-                    <div style={{padding: 0, color: '#fff', background: 'honeydew', height: '770px'}}>
+            <div style={{display: "flex", maxHeight: "100%", minHeight: "100vh"}} className="warpper">
+                <div className="col-2" style={{width: "240px", padding: 0, boxShadow: "4px 0 10px rgba(0,0,0,0.05)"}}>
+                    <div style={{padding: 0, color: '#fff', background: 'lavender', height: '100%'}}>
                         <ul id="" style={{zIndex: '1020'}}>
                             <li className="">
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
@@ -32,7 +33,9 @@ const MenuConsolidationPoint = () => {
                         </ul>
                     </div>
                 </div>
-
+                <div className="col-10">
+                    <Outlet></Outlet>
+                </div>
             </div>
         </>
     );

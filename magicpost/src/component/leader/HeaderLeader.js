@@ -1,9 +1,24 @@
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-const HeaderAdmin = () => {
+const HeaderLeader = () => {
+    const account = JSON.parse(localStorage.getItem("account"))
+    const [leader, setLeader] = useState({});
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/account/leader/account/` + account.id)
+            .then(function (res) {
+                setLeader(res.data)
+                console.log(res.data)
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+    }, []);
+
     return (
         <>
-
             <title></title>
             <meta name="description"
                   content="Giao Hàng Nhanh phủ sóng 63 tỉnh thành trên toàn quốc, đơn nội thành giao tốc hành chỉ trong 24h. Chuyển phát nhanh, đơn hàng thành công, hài lòng khách hàng."/>
@@ -86,8 +101,9 @@ const HeaderAdmin = () => {
                                     <div className="switch-shop-img-text">
                                         <div className="switch-shop-img">
                                             <img width="10.31" height="18.34"
-                                                 src="https://png.pngtree.com/png-vector/20200615/ourlarge/pngtree-hacker-with-laptop-png-and-vector-element-png-image_2255480.jpg" alt="logo"/></div>
-                                        <div className="switch-shop-text module line-clamp-1"> Tổng Giám Đốc
+                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJLU_lNz_L1oAUyMcPmK62mnTIRUDsUCE-1sw7GU90T6kbDUOjEN6LRAKm1vjUiQj_zM0&usqp=CAU"
+                                                 alt="logo"/></div>
+                                        <div className="switch-shop-text module line-clamp-1"> {leader.id} - {leader.name}
                                         </div>
                                     </div>
                                     <div><i className="fas fa-chevron-down"/></div>
@@ -133,4 +149,4 @@ const HeaderAdmin = () => {
         </>
     )
 }
-export default HeaderAdmin;
+export default HeaderLeader;

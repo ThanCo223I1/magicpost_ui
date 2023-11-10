@@ -104,6 +104,8 @@ const TransantionPointManager = () => {
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10" style={{marginTop: '40px'}}>
+                    <div className="text-center text-bold">
+                        <h2>Điểm giao dịch ngừng hoạt động</h2></div>
                     <TableContainer component={Paper}>
                         <Table sx={{minWidth: 700}} aria-label="customized table">
                             <TableHead>

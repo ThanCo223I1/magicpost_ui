@@ -114,7 +114,7 @@ function HeaderEmployee() {
                                             <img width="10.31" height="18.34"
                                                  src={employee.avatar && employee.avatar} alt="logo"/></div>
                                         <div
-                                            className="switch-shop-text module line-clamp-1"> {employee.idCard} - {employee.name}
+                                            className="switch-shop-text module line-clamp-1"> {employee.id} - {employee.name}
                                         </div>
                                     </div>
                                     <div><i className="fas fa-chevron-down"/></div>
@@ -156,7 +156,7 @@ function HeaderEmployee() {
                     <li className="d-md-down-none nav-item">
                         <Link to={'/login'} onClick={() => {
                             localStorage.setItem("account", null);
-                        }} aria-current="page" className="btn btn-outline-danger" style={{border:"0.5px solid #f86c6b"}}> Đăng xuất</Link>
+                        }} aria-current="page" className="btn btn-outline-danger" style={{border:"0.5px solid #f86c6b"}}>Đăng xuất</Link>
                     </li>
                 </ul>
                 <div/>

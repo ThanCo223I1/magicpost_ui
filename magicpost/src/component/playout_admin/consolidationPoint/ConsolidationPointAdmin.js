@@ -73,7 +73,8 @@ const ConsolidationPointAdmin = () => {
                         },
                         consolidationPoint: {
                             name: values.nameCon,
-                            address: values.address
+                            address: values.address,
+                            status: 1
                         }
                     }
                     axios.post("http://localhost:8080/account/consolidation/create",create ,{
@@ -94,6 +95,7 @@ const ConsolidationPointAdmin = () => {
                                 title: "Tạo điểm tập kết không thành công",
                                 text: "Vui lòng kiểm tra lại!",
                             });
+                            console.log(err);
                         })
 
 
