@@ -126,8 +126,7 @@ function Login() {
                                                                     style={{backgroundColor: '#ff6219'}}>Đăng Nhập
                                                             </button>
                                                         </div>
-                                                        <a className="small text-muted" href="magicpost/src/index#!">Quên
-                                                            mật khẩu</a>
+                                                        <Link to='/'>Quay lại trang chủ</Link>
                                                     </Form>
                                                 )}
                                             </Formik>

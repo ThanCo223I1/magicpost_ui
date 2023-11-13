@@ -40,11 +40,10 @@ function App() {
                 <Route path={'/'} element={<PlayOut/>}>
                     <Route path={''} element={<Home/>}></Route>
                     <Route path={'/login'} element={<Login/>}></Route>
-                    {/*<Route path={"/register"} element={<Register/>}></Route>*/}
                 </Route>
                 <Route>
-                    {/*<Route path={"order"} element={<Order/>}></Route>*/}
                     <Route path={'admin'} element={<LayoutAdmin/>}>
+                        <Route path="" element={<Welcome/>}></Route>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                         <Route path={"managerTran"} element={<TransantionPointManager/>}></Route>
                         <Route path={"managerCon"} element={<ConsolidationPointManager/>}></Route>
@@ -55,6 +54,7 @@ function App() {
                 </Route>
                 <Route>
                     <Route path={'leader'} element={<LayoutLeader/>}>
+                        <Route path="" element={<Welcome/>}></Route>
                         <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
                         <Route path={'showEmployeeTran'} element={<ShowEmployeeTransantion></ShowEmployeeTransantion>}></Route>
                         <Route path={'showEmployeeCon'} element={<ShowEmployeeConsolidationtion></ShowEmployeeConsolidationtion>}></Route>
