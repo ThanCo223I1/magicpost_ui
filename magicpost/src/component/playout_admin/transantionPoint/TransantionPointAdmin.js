@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const TransandsfdftionPointAdmin = () => {
     const account = JSON.parse(localStorage.getItem("account"))
@@ -102,11 +103,18 @@ const TransandsfdftionPointAdmin = () => {
                         },
                     })
                         .then(r=>{
-                            alert("ok")
+                            Swal.fire({
+                                title: "Tạo điểm giao dịch thành công!",
+                                icon: "success"
+                            });
                             resetForm();
                         })
                         .catch(err=>{
-                            console.log(err)
+                            Swal.fire({
+                                icon: "error",
+                                title: "Tạo điểm giao dịch không thành công",
+                                text: "Vui lòng kiểm tra lại!",
+                            });
                         })
 
 

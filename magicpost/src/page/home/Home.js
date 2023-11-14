@@ -1,4 +1,7 @@
 import {Link} from "react-router-dom";
+import axios from "axios";
+import Search from "./SearchForm";
+import SearchForm from "./SearchForm";
 
 function Home() {
     return (
@@ -275,7 +278,8 @@ function Home() {
                                                 </a>
                                             </li>
                                             <li className="menu__item--dropdown ">
-                                                <a href="magicpost/src/index#" title="GIỚI THIỆU" className="menu__link">
+                                                <a href="magicpost/src/index#" title="GIỚI THIỆU"
+                                                   className="menu__link">
                                                     GIỚI THIỆU
                                                     <i className="fa fa-chevron-down" aria-hidden="true"/>
                                                 </a>
@@ -286,177 +290,29 @@ function Home() {
                                                     <i className="fa fa-chevron-down" aria-hidden="true"/>
                                                 </a>
                                             </li>
-                                            <li className="menu__item--dropdown ">
-                                                <a href="https://ghn.vn/blogs/all" title="THÔNG TIN"
-                                                   className="menu__link">
-                                                    THÔNG TIN
-                                                    <i className="fa fa-chevron-down" aria-hidden="true"/>
-                                                </a>
-                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
                                 <div className="header-right">
                                     <div className="box-register">
                                         <Link to={'/login'}
-                                           onclick="registerRedirect('https://sso.ghn.vn/register/');" rel="noopener"
-                                           className="btn-regis button">ĐĂNG KÝ/ ĐĂNG NHẬP</Link>
-                                    </div>
-                                    <div className="box-search wpo-wrapper-search">
-                                        <form action="/search" className="ultimate-search">
-                                            <div className="wpo-search-inner">
-                                                <input required id="inputSearchAuto" name="code" maxLength={40}
-                                                       autoComplete="off"
-                                                       className="searchinput input-search search-input" type="text"
-                                                       size={20} placeholder="Nhập mã đơn hàng bạn cần tra cứu..."/>
-                                            </div>
-                                            <button type="button" className="button-search" title="Search">
-                          <span className="ico ico-search">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                                 version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 52.966 52.966"
-                                 style={{enableBackground: 'new 0 0 52.966 52.966'}} xmlSpace="preserve">
-                              <path
-                                  d="M51.704,51.273L36.845,35.82c3.79-3.801,6.138-9.041,6.138-14.82c0-11.58-9.42-21-21-21s-21,9.42-21,21s9.42,21,21,21  c5.083,0,9.748-1.817,13.384-4.832l14.895,15.491c0.196,0.205,0.458,0.307,0.721,0.307c0.25,0,0.499-0.093,0.693-0.279  C52.074,52.304,52.086,51.671,51.704,51.273z M21.983,40c-10.477,0-19-8.523-19-19s8.523-19,19-19s19,8.523,19,19  S32.459,40,21.983,40z"/>
-                            </svg>
-                          </span>
-                                            </button>
-                                        </form>
+                                              onclick="registerRedirect('https://sso.ghn.vn/register/');" rel="noopener"
+                                              className="btn-regis button"> ĐĂNG NHẬP (dành cho nhân viên)</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <SearchForm></SearchForm>
+                    </div>
+
                 </header>
             </div>
-            <style
-                dangerouslySetInnerHTML={{__html: "\n\t.sticky-header #header .header-row .header-left svg {\n\t\twidth: 130px;\n\t\theight: 50px;\n\t}\n"}}/>
             <div className="main-body">
                 <div className="scroller">
                     <div className="scroller-inner">
                         <main className=" main-index ">
-                            <section className="section section-slide">
-                                <div id="home-slider-slick">
-                                    <div className="slider-for d-flex-slick" data-allin={1}>
-                                        <div className="item-slide fade-box item-owl">
-                                            <a href="https://www.facebook.com/GHNExpress"
-                                               title="Kho Trung Chuyển Lớn Nhất Miền Nam Chính Thức Đi Vào Hoạt Động">
-                                                <picture>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
-                                                            data-srcset="//file.hstatic.net/200000472237/file/767x970_62bbb912688f4c2cb00be5d10142ee0d_grande.png"
-                                                            media="(max-width: 767px)"/>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
-                                                            data-srcset="https://file.hstatic.net/200000472237/file/1920x700_ae8664dce1cf4fbc90e34490898e7a1c.png"
-                                                            media="(min-width: 768px)"/>
-                                                    <img className="dt-width-100" width={767} height={970}
-                                                         alt="Kho Trung Chuyển Lớn Nhất Miền Nam Chính Thức Đi Vào Hoạt Động"/>
-                                                </picture>
-                                            </a>
-                                        </div>
-                                        <div className="item-slide fade-box item-owl">
-                                            <a href="https://ghn.vn/blogs/tin-tuc-ghn/shop-sieu-sao"
-                                               title="Shop Siêu Sao Chính Thức Ra Mắt">
-                                                <picture>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
-                                                            data-srcset="//file.hstatic.net/200000472237/file/767x970_bdb4aebf14f440c3b94957be903c8af4_grande.png"
-                                                            media="(max-width: 767px)"/>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
-                                                            data-srcset="https://file.hstatic.net/200000472237/file/1920x700_a07ed859d3b849f19756bc3a1c2c1165.png"
-                                                            media="(min-width: 768px)"/>
-                                                    <img className="dt-width-100" width={767} height={970}
-                                                         alt="Shop Siêu Sao Chính Thức Ra Mắt"/>
-                                                </picture>
-                                            </a>
-                                        </div>
-                                        <div className="item-slide fade-box item-owl">
-                                            <a href="https://app.chotdonnhanh.vn/auth/login"
-                                               title="Phần mềm chốt đơn Livestream Miễn Phí">
-                                                <picture>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
-                                                            data-srcset="//file.hstatic.net/200000472237/file/banner_mobile_2_202a72f67b964580b7179fc951cae6c7_grande.png"
-                                                            media="(max-width: 767px)"/>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
-                                                            data-srcset="https://file.hstatic.net/200000472237/file/banner_web_final_19d09d9c8832492c9c2b931042a35c2a.png"
-                                                            media="(min-width: 768px)"/>
-                                                    <img className="dt-width-100" width={767} height={970}
-                                                         alt="Phần mềm chốt đơn Livestream Miễn Phí"/>
-                                                </picture>
-                                            </a>
-                                        </div>
-                                        <div className="item-slide fade-box item-owl">
-                                            <a href="https://ghn.vn/pages/dich-vu-giao-hang"
-                                               title="Dịch vụ giao hàng nhanh">
-                                                <picture>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
-                                                            data-srcset="//file.hstatic.net/200000472237/file/resize-01_ebea16d1c24f4e42a026f6__1___1__bcb1eb5bbf2e45ddb5153ea6c1e200cc_grande.jpg"
-                                                            media="(max-width: 767px)"/>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
-                                                            data-srcset="https://file.hstatic.net/200000472237/file/ghn-fullfilment_383eda5c46494f2d_676fe52e6c884663aefa95b484b641f6.jpg"
-                                                            media="(min-width: 768px)"/>
-                                                    <img className="dt-width-100" width={767} height={970}
-                                                         alt="Dịch vụ giao hàng nhanh"/>
-                                                </picture>
-                                            </a>
-                                        </div>
-                                        <div className="item-slide fade-box item-owl">
-                                            <a href="https://ghn.vn/pages/dich-vu-kho-bai-xu-ly-hang-hoa"
-                                               title="Dịch vụ kho bãi và xử lý hàng hoá">
-                                                <picture>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/767x970_da38c3c2c071431bb74fb753af48c0ca.jpg"
-                                                            data-srcset="//file.hstatic.net/200000472237/file/resize-02_bc9013b7d87a415da08d9c__1___1__ef89e104a7944290bec66f91ea02c6d3_grande.jpg"
-                                                            media="(max-width: 767px)"/>
-                                                    <source className="lazyload"
-                                                            srcSet="https://file.hstatic.net/200000472237/file/1920x700_7758febddb294f58a4374ab63c67360c.jpg"
-                                                            data-srcset="https://file.hstatic.net/200000472237/file/ghn-01_a87802ad3cbf418694160e824__1___1__157663d9a01d46b9bd820df8c626fce3.jpg"
-                                                            media="(min-width: 768px)"/>
-                                                    <img className="dt-width-100" width={767} height={970}
-                                                         alt="Dịch vụ kho bãi và xử lý hàng hoá"/>
-                                                </picture>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="slider-thumb hidden-sm hidden-xs">
-                                        <ul className="slider-nav d-flex-slick" data-md={5}>
-                                            <li className="item-owl">
-                                                <a href="javascript:void(0)"
-                                                   title="Kho Trung Chuyển Lớn Nhất Miền Nam Chính Thức Đi Vào Hoạt Động">
-                                                    <p>Kho Trung Chuyển Lớn Nhất Miền Nam <br/> Chính Thức Đi Vào Hoạt
-                                                        Động</p>
-                                                </a>
-                                            </li>
-                                            <li className="item-owl">
-                                                <a href="javascript:void(0)" title="Shop Siêu Sao Chính Thức Ra Mắt">
-                                                    <p>Shop Siêu Sao <br/> Chính Thức Ra Mắt</p>
-                                                </a>
-                                            </li>
-                                            <li className="item-owl">
-                                                <a href="javascript:void(0)"
-                                                   title="Phần mềm chốt đơn Livestream Miễn Phí">
-                                                    <p>GHN Free Hoàn<br/>Khi Sử Dụng CDN</p>
-                                                </a>
-                                            </li>
-                                            <li className="item-owl">
-                                                <a href="javascript:void(0)" title="Dịch vụ giao hàng nhanh">
-                                                    <p>Dịch Vụ <br/> Giao Hàng Nhanh</p>
-                                                </a>
-                                            </li>
-                                            <li className="item-owl">
-                                                <a href="javascript:void(0)" title="Dịch vụ kho bãi và xử lý hàng hoá">
-                                                    <p>Dịch Vụ Kho Bãi Và <br/> Xử Lý Hàng Hoá</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </section>
                             <section className="section section-banner">
                                 <div className="container">
                                     <div className="s-title text-center">
@@ -1556,7 +1412,7 @@ function Home() {
                    alt="user"/>
             </span>
                     <span>
-              Đăng ký / Đăng nhập
+                        Đăng nhập
             </span>
                 </div>
             </div>

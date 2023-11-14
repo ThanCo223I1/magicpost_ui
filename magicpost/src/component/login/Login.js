@@ -1,9 +1,12 @@
 import {Link, useNavigate} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 function Login() {
     const navigate = useNavigate();
+
     return (
         <>
             <div>
@@ -45,16 +48,50 @@ function Login() {
                                                                 navigate('/leader');
                                                             } else if (roleID === 3) {
                                                                 navigate('/employee');
-                                                            }else {
-                                                                alert("Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập")
+                                                            } else {
+                                                                Swal.fire({
+                                                                    title: "Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập",
+                                                                    showClass: {
+                                                                        popup: `
+                                                                                  animate__animated
+                                                                                  animate__fadeInUp
+                                                                                  animate__faster
+                                                                                `
+                                                                    },
+                                                                    hideClass: {
+                                                                        popup: `
+                                                                                  animate__animated
+                                                                                  animate__fadeOutDown
+                                                                                  animate__faster
+                                                                                `
+                                                                    }
+                                                                });
                                                             }
+
                                                         })
                                                         .catch(err => {
-                                                            console.log(err)
+                                                            Swal.fire({
+                                                                title: "Lỗi đăng nhập. Tài khoản của bạn không thể đăng nhập!",
+                                                                showClass: {
+                                                                    popup: `
+                                                                                  animate__animated
+                                                                                  animate__fadeInUp
+                                                                                  animate__faster
+                                                                                `
+                                                                },
+                                                                hideClass: {
+                                                                    popup: `
+                                                                                  animate__animated
+                                                                                  animate__fadeOutDown
+                                                                                  animate__faster
+                                                                                `
+                                                                }
+                                                            });
                                                         })
-
                                                     setSubmitting(false);
                                                     resetForm();
+
+
                                                 }}
                                             >
                                                 {({isSubmitting}) => (

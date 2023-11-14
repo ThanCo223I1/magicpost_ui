@@ -1,5 +1,32 @@
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 function HeaderEmployee(){
+    const account = JSON.parse(localStorage.getItem("account"))
+    const [transactionPoint, setTransactionPoint] = useState({});
+    const [employee, setEmployee] = useState({});
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/transactionPoint/account/` + account.id)
+            .then(function (res) {
+                setTransactionPoint(res.data)
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }, []);
+
+    useEffect(() => {
+        if (account != null)
+            axios.get(`http://localhost:8080/employees/account/` + account.id)
+            .then(function (res) {
+                setEmployee(res.data)
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }, []);
+
     return(
         <>
             <title></title>
@@ -83,9 +110,8 @@ function HeaderEmployee(){
                                     <div className="switch-shop-img-text">
                                         <div className="switch-shop-img">
                                             <img width="10.31" height="18.34"
-                                                 src="/images/icon-ghn/icon-shop.png" alt="logo"/></div>
-                                        <div className="switch-shop-text module line-clamp-1"> 1708041 -
-                                            Vothan
+                                                 src={employee.avatar && employee.avatar} alt="logo"/></div>
+                                        <div className="switch-shop-text module line-clamp-1"> {employee.idCard} - {employee.name}
                                         </div>
                                     </div>
                                     <div><i className="fas fa-chevron-down"/></div>
@@ -124,11 +150,14 @@ function HeaderEmployee(){
                         className="fz-11 color-orange-primary text-i border-bottom-f26522 position-absolute pointer top-30-px left-27-px">Tìm kiếm nâng cao (Có xuất Excel)</span>
                 </div>
                 <ul className="ml-auto navbar-nav">
-                    <div className="m-r-20">
-                        <Link className="btn-primary-page btn btn-header active" style={{marginRight: '0px'}}
-                           to={'/employee/orders'} aria-current="page">
-                            <i className="fas fa-pencil-alt"/> Lên đơn hàng</Link>
-                    </div>
+                    {
+                        transactionPoint &&
+                        <div className="m-r-20">
+                            <Link className="btn-primary-page btn btn-header active" style={{marginRight: '0px'}}
+                                  to={'/employee/orders'} aria-current="page">
+                                <i className="fas fa-pencil-alt"/> Lên đơn hàng</Link>
+                        </div>
+                    }
                     <li className="d-md-down-none nav-item">
                         <Link to={'/login'} onClick={()=>{
                             localStorage.setItem("account",null);

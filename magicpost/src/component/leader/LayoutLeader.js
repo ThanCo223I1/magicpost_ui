@@ -4,8 +4,8 @@ import {Dropdown} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {Outlet} from "react-router";
 import FooterAdmin from "../playout_admin/FooterAdmin";
-import MenuTransantionPoint from "./MenuTransantionPoint";
-import MenuConsolidationPoint from "./MenuConsolidationPoint";
+import MenuTransantionPoint from "./Transantion/MenuTransantionPoint";
+import MenuConsolidationPoint from "./Consolidation/MenuConsolidationPoint";
 import axios from "axios";
 
 const LayoutLeader = () => {

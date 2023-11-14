@@ -62,7 +62,8 @@ const TransantionPointManager = () => {
 
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+    let currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
+
     const button = (id) => {
         Swal.fire({
             title: 'Bạn có muốn đóng lại điểm?',
@@ -149,6 +150,7 @@ const TransantionPointManager = () => {
                                                 </StyledTableCell>
                                             </>
                                         )}
+
                                     </StyledTableRow>
                                 ))}
                             </TableBody>

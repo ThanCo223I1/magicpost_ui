@@ -8,6 +8,7 @@ import axios from "axios";
 import {v4} from "uuid";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "./firebase";
+import Swal from "sweetalert2";
 
 function Orders() {
     const initialData = {
@@ -26,17 +27,20 @@ function Orders() {
             id: 5
         }
     };
-    const [orders, setOrder] = useState(initialData);
+    const [orders, setOrders] = useState(initialData);
     const [successMessage, setSuccessMessage] = useState('');
     const accountLogin = JSON.parse(localStorage.getItem("account"));
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        setOrder({...orders, name: value});
+        setOrders({...orders, [name]: value});
     };
     const submit = () => {
         axios.post('http://localhost:8080/orders/createOrder/' + accountLogin.employeeDTO.id, orders)
             .then((response) => {
-                setSuccessMessage('Đơn hàng đã được tạo thành công.');
+                Swal.fire({
+                    icon: "success",
+                    title: "Tạo đơn hàng thành công"
+                });
                 console.log('API Response:', response.data);
             })
             .catch((error) => {
@@ -52,7 +56,7 @@ function Orders() {
                 getDownloadURL(snapshot.ref)
                     .then((url) => {
                         const updatedOrders = {...orders, image: url};
-                        setOrder(updatedOrders);
+                        setOrders(updatedOrders);
                         setTempImage(url);
                     })
                     .catch((error) => {
@@ -67,17 +71,19 @@ function Orders() {
         <>
 
             {/*Thanh chủ - đơn nháp*/}
-            <div className="create-form-left mt-15 step-rel" style={{marginLeft:'40px', marginTop:'10px'}}>
-                <div className="step-static row" >
+            <div className="create-form-left mt-15 step-rel" style={{marginLeft: '40px', marginTop: '10px'}}>
+                <div className="step-static row" style={{marginLeft:'100px'}}>
                     <div className="row col-10" style={{width: '100%', marginLeft: '0px'}}>
-                        <div className="col-md-4 offset-md-2" >
+                        <div className="col-md-4 offset-md-2">
                             <div className="deliver-info left">
                                 <div className="info-titile"> | Bên Gửi</div>
                                 <label className>Họ tên</label>
+                                <div className="autocompleted-component">
                                 <input
                                     name="nameSender"
                                     placeholder="Nhập họ tên"
                                     type="text"
+                                    autoComplete="off"
                                     className="form-control"
                                     value={orders.nameSender}
                                     onChange={handleInputChange}/>
@@ -88,12 +94,14 @@ function Orders() {
                                     fontWeight: 500,
                                     lineHeight: '15px'
                                 }}/>
+                                </div>
                                 <label className>Địa chỉ</label>
                                 <div className="autocompleted-component">
                                     <input name="addressSender"
                                            className="form-control"
                                            placeholder="Nhập địa chỉ"
                                            type="text"
+                                           autoComplete="off"
                                            value={orders.addressSender}
                                            onChange={handleInputChange}
                                            style={{width: '700px'}}
@@ -123,6 +131,7 @@ function Orders() {
                                     <input name="phoneSender"
                                            placeholder="Nhập số điện thoại"
                                            type="text"
+                                           autoComplete="off"
                                            className="form-control"
                                            value={orders.phoneSender}
                                            onChange={handleInputChange}
@@ -153,6 +162,7 @@ function Orders() {
                                     name="nameReceiver"
                                     placeholder="Nhập họ tên"
                                     type="text"
+                                    autoComplete="off"
                                     className="form-control"
                                     value={orders.nameReceiver}
                                     onChange={handleInputChange}/>
@@ -199,6 +209,7 @@ function Orders() {
                                     <input name="phoneReceiver"
                                            placeholder="Nhập số điện thoại"
                                            type="text"
+                                           autoComplete="off"
                                            className="form-control"
                                            value={orders.phoneReceiver}
                                            onChange={handleInputChange}
@@ -243,7 +254,7 @@ function Orders() {
                                         position: 'relative',
                                         overflow: 'hidden',
                                     }}>
-                                        <label htmlFor="fileInput" style={{padding: '19px', color: 'white'}}>
+                                        <label htmlFor="fileInput" style={{padding: '17px', color: 'white'}}>
                                             Up ảnh
                                         </label>
                                         {tempImage && <img src={tempImage} alt="Selected Image" style={{
@@ -283,6 +294,7 @@ function Orders() {
                                         <div className="package-title">Dài</div>
                                         <input name="width" type="text"
                                                placeholder='Chiều dài'
+                                               autoComplete="off"
                                                className="custom-input mx-1 form-control"
                                                value={orders.width}
                                                onChange={handleInputChange}
@@ -298,100 +310,103 @@ function Orders() {
                                         />
                                     </div>
                                 </div>
-                                <div
-                                    className="width_80_percent text-right color-orange-primary text-13 m-t-5">Khối
-                                    lượng quy đổi: 200g
-                                </div>
                             </div>
 
+                            <div className="block-rate" style={{marginTop:'10px',marginLeft:'200px'}}>
+                                <button type='submit'
+                                        className="btn-primary-page rate-submit"
+                                        onClick={submit}
+                                        style={{color: 'rgb(228, 19, 44)',width:'100%'}}>Tạo đơn
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/*Thanh ben phai*/}
-            <div className="create-form-right">
-                <div className="c-header"/>
-                <div className="position-relative">
-                    <input name="Promotion" placeholder="Mã khuyến mãi"
-                           type="text"
-                           className="input-voucher form-control form-control"/>
-                    <button
-                        className="btn btn-secondary-page btn-apply-voucher">Áp
-                        dụng
-                    </button>
-                </div>
-                <p className="m-t-4" style={{
-                    color: 'rgb(228, 19, 44)',
-                    fontSize: '12px',
-                    marginTop: '0px',
-                    marginBottom: '0px',
-                    fontWeight: 500,
-                    lineHeight: '15px'
-                }}/>
+            {/*<div className="create-form-right">*/}
+            {/*    <div className="c-header"/>*/}
+            {/*    <div className="position-relative">*/}
+            {/*        <input name="Promotion" placeholder="Mã khuyến mãi"*/}
+            {/*               type="text"*/}
+            {/*               className="input-voucher form-control form-control"/>*/}
+            {/*        <button*/}
+            {/*            className="btn btn-secondary-page btn-apply-voucher">Áp*/}
+            {/*            dụng*/}
+            {/*        </button>*/}
+            {/*    </div>*/}
+            {/*    <p className="m-t-4" style={{*/}
+            {/*        color: 'rgb(228, 19, 44)',*/}
+            {/*        fontSize: '12px',*/}
+            {/*        marginTop: '0px',*/}
+            {/*        marginBottom: '0px',*/}
+            {/*        fontWeight: 500,*/}
+            {/*        lineHeight: '15px'*/}
+            {/*    }}/>*/}
 
-                <div className="c-footer c-footer-bottom">
-                    <p style={{
-                        fontSize: '15px',
-                        color: 'rgb(75, 75, 75)',
-                        marginBottom: '6px'
-                    }}>Tuỳ chọn thanh toán: </p>
-                    <div role="combobox" id="rw_3_input" aria-owns="rw_3_listbox"
-                         aria-expanded="false" aria-haspopup="true" aria-busy="true"
-                         aria-live="polite" aria-disabled="false"
-                         aria-readonly="false"
-                         className="rw-dropdown-list rw-widget">
-                        <div
-                            className="rw-widget-input rw-widget-picker rw-widget-container">
-                            <div className="rw-input rw-dropdown-list-input">
-                                <select>
-                                    <option value={1}>Bên Gửi Trả Phí</option>
-                                    <option value={2}>Bên Nhận Trả Phí</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <p className style={{
-                        color: 'rgb(228, 19, 44)',
-                        fontSize: '12px',
-                        marginTop: '0px',
-                        marginBottom: '0px',
-                        fontWeight: 500,
-                        lineHeight: '15px'
-                    }}/>
-                    <div className="info-cost">
-                        <p className="color-bule-primary" style={{
-                            fontSize: '12px',
-                            marginBottom: '4px',
-                            marginTop: '8px',
-                            lineHeight: '13px'
-                        }}>Tổng phí</p>
-                        <p
-                            className="color-bule-primary" style={{
-                            fontSize: '22px',
-                            marginBottom: '3px',
-                            marginTop: '12px',
-                            fontWeight: 600,
-                            lineHeight: '13px'
-                        }}>0 vnđ</p>
-                        <span className="color-orange-primary"
-                              style={{fontSize: '12px'}}> Chưa tính tiền thu hộ</span>
-                    </div>
-                    <div style={{
-                        margin: '12px 0px',
-                        position: 'relative',
-                        height: '40px'
-                    }}>
-                        <div className="block-rate ">
-                            <button type='submit'
-                                    className="btn-primary-page rate-submit"
-                                    onClick={submit}
-                                    style={{color: 'rgb(228, 19, 44)'}}>Tạo đơn
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/*    <div className="c-footer c-footer-bottom">*/}
+            {/*        <p style={{*/}
+            {/*            fontSize: '15px',*/}
+            {/*            color: 'rgb(75, 75, 75)',*/}
+            {/*            marginBottom: '6px'*/}
+            {/*        }}>Tuỳ chọn thanh toán: </p>*/}
+            {/*        <div role="combobox" id="rw_3_input" aria-owns="rw_3_listbox"*/}
+            {/*             aria-expanded="false" aria-haspopup="true" aria-busy="true"*/}
+            {/*             aria-live="polite" aria-disabled="false"*/}
+            {/*             aria-readonly="false"*/}
+            {/*             className="rw-dropdown-list rw-widget">*/}
+            {/*            <div*/}
+            {/*                className="rw-widget-input rw-widget-picker rw-widget-container">*/}
+            {/*                <div className="rw-input rw-dropdown-list-input">*/}
+            {/*                    <select>*/}
+            {/*                        <option value={1}>Bên Gửi Trả Phí</option>*/}
+            {/*                        <option value={2}>Bên Nhận Trả Phí</option>*/}
+            {/*                    </select>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*        <p className style={{*/}
+            {/*            color: 'rgb(228, 19, 44)',*/}
+            {/*            fontSize: '12px',*/}
+            {/*            marginTop: '0px',*/}
+            {/*            marginBottom: '0px',*/}
+            {/*            fontWeight: 500,*/}
+            {/*            lineHeight: '15px'*/}
+            {/*        }}/>*/}
+            {/*        <div className="info-cost">*/}
+            {/*            <p className="color-bule-primary" style={{*/}
+            {/*                fontSize: '12px',*/}
+            {/*                marginBottom: '4px',*/}
+            {/*                marginTop: '8px',*/}
+            {/*                lineHeight: '13px'*/}
+            {/*            }}>Tổng phí</p>*/}
+            {/*            <p*/}
+            {/*                className="color-bule-primary" style={{*/}
+            {/*                fontSize: '22px',*/}
+            {/*                marginBottom: '3px',*/}
+            {/*                marginTop: '12px',*/}
+            {/*                fontWeight: 600,*/}
+            {/*                lineHeight: '13px'*/}
+            {/*            }}>0 vnđ</p>*/}
+            {/*            <span className="color-orange-primary"*/}
+            {/*                  style={{fontSize: '12px'}}> Chưa tính tiền thu hộ</span>*/}
+            {/*        </div>*/}
+            {/*        <div style={{*/}
+            {/*            margin: '12px 0px',*/}
+            {/*            position: 'relative',*/}
+            {/*            height: '40px'*/}
+            {/*        }}>*/}
+            {/*            <div className="block-rate ">*/}
+            {/*                <button type='submit'*/}
+            {/*                        className="btn-primary-page rate-submit"*/}
+            {/*                        onClick={submit}*/}
+            {/*                        style={{color: 'rgb(228, 19, 44)'}}>Tạo đơn*/}
+            {/*                </button>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </>
     )
 }
