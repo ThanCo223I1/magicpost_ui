@@ -134,7 +134,7 @@ const TransantionPointManager = () => {
 
                                                     <Dropdown.Toggle className="btn-primary-page active"
                                                                      id="dropdown-basic" onClick={()=>button(row.id)}>
-                                                        <p> Đang đóng</p>
+                                                        <p className="white-text"> Đang đóng</p>
                                                     </Dropdown.Toggle>
 
                                                 </StyledTableCell>

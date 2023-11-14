@@ -25,9 +25,8 @@ export default function EditLeaderTran(props) {
     const [open, setOpen] = React.useState(false);
     const {data} = props;
     const [password, setPassword] = useState('');
-    const [leader, setLeader] = useState({name: "", phoneNumber: ""});
-    const [accountNew, setAccountNew] = useState({username: "", passwordAccount: ""});
-
+    const [leader, setLeader] = useState({});
+    const [accountNew, setAccountNew] = useState({});
     const handleOpen = () => {
         setOpen(true);
     };
@@ -50,6 +49,7 @@ export default function EditLeaderTran(props) {
             id: data.id,
             idAccount: account.id,
             account: {
+                id: data.leader.account.id,
                 username: accountNew.username,
                 password: accountNew.passwordAccount,
                 role:{
@@ -60,6 +60,7 @@ export default function EditLeaderTran(props) {
                 }
             },
             leader: {
+                id: data.leader.id,
                 name: leader.name,
                 phoneNumber: leader.phoneNumber,
                 role: {

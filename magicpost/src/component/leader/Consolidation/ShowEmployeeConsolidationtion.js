@@ -66,7 +66,6 @@ const ShowEmployeeConsolidationtion = () => {
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
     const button = (id) => {
-        console.log(id)
         Swal.fire({
             title: 'Bạn có muốn khoá tài khoản?',
             text: "",
@@ -121,6 +120,7 @@ const ShowEmployeeConsolidationtion = () => {
                             <TableBody>
                                 {currentRows.map((row) => (
                                     <StyledTableRow key={row.id}>
+
                                         {row.idStatusAccount === 1 && (<>
                                                 <StyledTableCell></StyledTableCell>
                                                 <StyledTableCell>{row.name}</StyledTableCell>

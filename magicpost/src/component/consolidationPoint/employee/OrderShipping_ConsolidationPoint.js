@@ -68,8 +68,8 @@ function OrderShipping_ConsolidationPoint() {
                     {/*}</td>*/}
                     <td>{order.order.addressReceiver == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.addressReceiver.slice(0, 16)}{order.order.addressReceiver.length > 16 && "..."}</p>}</td>
-                    <td>{order.order.consolidationPoints.length === 0 ? <p className="text-danger">Không</p> :
-                        <p>{order.order.consolidationPoints[order.order.consolidationPoints.length - 1].name}</p>}</td>
+                    <td>{order.order.transactionPoint === null ? <p className="text-danger">Không</p> :
+                        <p>{order.order.transactionPoint.name}</p>}</td>
                     <td>
                         <button className="btn btn-default buttonShadow"
                                 onClick={() => {
@@ -195,7 +195,7 @@ function OrderShipping_ConsolidationPoint() {
                         <th>SĐT người gửi</th>
                         {/*<th>Loại hàng</th>*/}
                         <th>Địa chỉ nhận</th>
-                        <th>Điểm đang giữ đơn</th>
+                        <th>Điểm tạo đơn</th>
                         <th>Xem chi tiết</th>
                         <th>Trạng thái</th>
                         <th>Hoạt động</th>
@@ -249,7 +249,7 @@ function OrderShipping_ConsolidationPoint() {
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
-                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
+                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
                             </div>
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>

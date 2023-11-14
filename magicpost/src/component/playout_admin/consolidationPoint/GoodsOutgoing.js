@@ -31,8 +31,8 @@ function GoodsOutgoing() {
     };
     return (
         <>
-            <div>
-                <h2 style={{textAlign: 'center'}}>Thống Kê Hàng Gửi Đến Điểm Tập Kết</h2>
+            <div className="distanceBody">
+                <h2 style={{textAlign: 'center'}}>Thống kê đơn hàng chuyển đến điểm tập kết</h2>
 
                 <label>Chọn Năm: </label>
                 <select value={selectedYear} onChange={handleYearChange}>
@@ -51,23 +51,29 @@ function GoodsOutgoing() {
                         </option>
                     ))}
                 </select>
-                <table border="1">
+                <table className="table m-auto" style={{width: "50%"}}>
+                    <colgroup>
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                        <col style={{ width: "25%" }} />
+                    </colgroup>
                     <thead>
                     <tr>
-                        <th>Stt</th>
-                        <th>Tháng</th>
-                        <th>Năm</th>
-                        <th>Đơn hàng </th>
+                        <th className="text-center">Stt</th>
+                        <th className="text-center">Tháng</th>
+                        <th className="text-center">Năm</th>
+                        <th className="text-center">Đơn hàng(SL)</th>
                     </tr>
                     </thead>
                     <tbody>
                     {receivedOrdersData &&
                         receivedOrdersData.map((data, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{data[0]}</td>
-                                <td>{data[1]}</td>
-                                <td>{data[2]}</td>
+                                <td className="text-center">{index + 1}</td>
+                                <td className="text-center">{data[0]}</td>
+                                <td className="text-center">{data[1]}</td>
+                                <td className="text-center">{data[2]}</td>
                             </tr>
                         ))
                     }

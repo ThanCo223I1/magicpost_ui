@@ -11,11 +11,13 @@ function OrderReceived_ConsolidationPoint() {
     const [orderDetail, setOrderDetail] = useState({});
     const [consolidationPointNotInAccount, setConsolidationPointNotInAccount] = useState([]);
     const [consolidationPointInAccount, setConsolidationPointInAccount] = useState({});
+    const [consolidationPointNotSend, setconsolidationPointNotSend] = useState([]);
     let {id} = useParams();
 
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
+    const [selectedConsolidationPoint, setSelectedConsolidationPoint] = useState(null);
 
     const [showModalDetail, setShowModalDetail] = useState(false);
     const handleCloseDetail = () => setShowModalDetail(false);
@@ -35,7 +37,7 @@ function OrderReceived_ConsolidationPoint() {
             .catch(function (err) {
                 console.log(err)
             })
-    }, [id]);
+    }, []);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/consolidationPoint/notAccount/` + id)
@@ -45,18 +47,17 @@ function OrderReceived_ConsolidationPoint() {
             .catch(function (err) {
                 console.log(err)
             })
-    }, [id]);
+    }, []);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/consolidationPoint/account/` + id)
             .then(function (res) {
                 setConsolidationPointInAccount(res.data)
-                console.log(res.data)
             })
             .catch(function (err) {
                 console.log(err)
             })
-    }, [id]);
+    }, []);
 
     const displayOrders = orders
         .slice(pagesVisited, pagesVisited + ordersPerPage)
@@ -67,7 +68,7 @@ function OrderReceived_ConsolidationPoint() {
             return (
                 (order.order.status.id === 5 && order.order.consolidationPoints[order.order.consolidationPoints.length - 1].id === consolidationPointInAccount.id) &&
                 <tr key={order.order.id}>
-                    <td style={{textAlign:"center"}}>{order.order.id}</td>
+                    <td style={{textAlign: "center"}}>{order.order.id}</td>
                     <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
                     <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
@@ -82,8 +83,8 @@ function OrderReceived_ConsolidationPoint() {
                     {/*}</td>*/}
                     <td>{order.order.addressReceiver == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.addressReceiver.slice(0, 16)}{order.order.addressReceiver.length > 16 && "..."}</p>}</td>
-                    <td>{order.order.consolidationPoints.length === 0 ? <p className="text-danger">Không</p> :
-                        <p>{order.order.consolidationPoints[order.order.consolidationPoints.length - 1].name}</p>}</td>
+                    <td>{order.order.transactionPoint === null ? <p className="text-danger">Không</p> :
+                        <p>{order.order.transactionPoint.name}</p>}</td>
                     <td>
                         <button className="btn btn-default buttonShadow"
                                 onClick={() => {
@@ -109,6 +110,14 @@ function OrderReceived_ConsolidationPoint() {
                                 onClick={() => {
                                     handleShow();
                                     setOrderDetail(order);
+                                    axios.get(`http://localhost:8080/orders/${order.order?.id}/findAllByNotInAccountId_AndNotConsolExistOrder/${id}`)
+                                        .then(function (res) {
+                                            setconsolidationPointNotSend(res.data);
+                                            console.log(res.data);
+                                        })
+                                        .catch(function (err) {
+                                            console.log(err);
+                                        })
                                 }}
                         >
                             Chuyển đơn..
@@ -178,15 +187,15 @@ function OrderReceived_ConsolidationPoint() {
             });
     };
 
-    const [selectedConsolidationPoint, setSelectedConsolidationPoint] = useState(null);
-    const sendTo_OtherConsolidationPoint = () => {
+    const sendTo_OtherConsolidationPoint = (idOrder) => {
         if (selectedConsolidationPoint) {
+            console.log(idOrder)
             const selectedConsolidationPointLong = +selectedConsolidationPoint;
             const consolidationPoint = consolidationPointNotInAccount.find((cp) => cp.id === selectedConsolidationPointLong)
-            consolidationPoint.id = selectedConsolidationPointLong;
-            orderDetail.order.consolidationPoints.push(consolidationPoint);
+            // consolidationPoint.id = selectedConsolidationPointLong;
+            // orderDetail.order.consolidationPoints.push(consolidationPoint);
 
-            axios.post(`http://localhost:8080/orders/save`, orderDetail.order)
+            axios.post(`http://localhost:8080/orders/${idOrder}/sendTo_ConsolidationPoint`, consolidationPoint)
                 .then(function (res) {
                     setSelectedConsolidationPoint(null);
                     Swal.fire({
@@ -219,7 +228,7 @@ function OrderReceived_ConsolidationPoint() {
                         <th>SĐT người gửi</th>
                         {/*<th>Loại hàng</th>*/}
                         <th>Địa chỉ nhận</th>
-                        <th>Điểm đang giữ đơn</th>
+                        <th>Điểm tạo đơn</th>
                         <th>Xem chi tiết</th>
                         <th>Trạng thái</th>
                         <th>Hoạt động</th>
@@ -269,7 +278,7 @@ function OrderReceived_ConsolidationPoint() {
                                         disabled={selectedConsolidationPoint === "select"}>Choose
                                     consolidation point
                                 </option>
-                                {consolidationPointNotInAccount.map((cp) => (
+                                {consolidationPointNotSend.map((cp) => (
                                     <option key={cp.id} value={cp.id}>
                                         {cp.id} - {cp.name}
                                     </option>
@@ -279,7 +288,7 @@ function OrderReceived_ConsolidationPoint() {
                                 className="btn btn-info buttonShadow"
                                 style={{color: "white"}}
                                 onClick={() => {
-                                    sendTo_OtherConsolidationPoint();
+                                    sendTo_OtherConsolidationPoint(orderDetail.order?.id);
                                     handleClose();
                                 }}
                                 disabled={!selectedConsolidationPoint || selectedConsolidationPoint === "select"}  // Disable nút khi không có giá trị được chọn
@@ -325,7 +334,7 @@ function OrderReceived_ConsolidationPoint() {
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
-                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
+                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
                             </div>
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>

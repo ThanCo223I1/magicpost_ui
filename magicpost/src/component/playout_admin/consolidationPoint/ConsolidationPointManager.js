@@ -11,9 +11,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Pagination} from "@mui/material";
 import {Dropdown} from "react-bootstrap";
-import {Link} from "react-router-dom";
-import EditNameTran from "../modal/TransantionModal/EditNameTran";
-import EditLeaderTran from "../modal/TransantionModal/EditLeaderTran";
 import Swal from "sweetalert2";
 import EditNameCon from "../modal/ConsolidationModal/EditNameCon";
 import EditLeaderCon from "../modal/ConsolidationModal/EditLeaderCon";
@@ -74,7 +71,7 @@ const ConsolidationPointManager = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText:"Không",
+            cancelButtonText: "Không",
             confirmButtonText: 'Đồng ý'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -109,7 +106,7 @@ const ConsolidationPointManager = () => {
                 <div className="col-10" style={{marginTop: '40px'}}>
                     <div className="text-center text-bold">
                         <h2>Điểm tập kết đang hoạt động</h2></div>
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} sx={{overflow: 'visible'}}>
                         <Table sx={{minWidth: 700}} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
@@ -135,19 +132,20 @@ const ConsolidationPointManager = () => {
                                                 <StyledTableCell align="left">{row.employee.length}</StyledTableCell>
                                                 <StyledTableCell align="left">
                                                     <Dropdown>
-                                                        <Dropdown.Toggle className="btn-primary-page active" id="dropdown-basic">
-                                                            <p> Sửa Đổi</p>
+                                                        <Dropdown.Toggle className="btn-primary-page active"
+                                                                         id="dropdown-basic">
+                                                            <p className="white-text"> Sửa Đổi</p>
                                                         </Dropdown.Toggle>
 
-                                                        <Dropdown.Menu>
+                                                        <Dropdown.Menu style={{position:"absolute", top:"0", left:"100%", width:"200px"}}>
                                                             <Dropdown.Item>
                                                                 <EditNameCon data={row}></EditNameCon>
                                                             </Dropdown.Item>
                                                             <Dropdown.Item>
                                                                 <EditLeaderCon data={row}></EditLeaderCon>
                                                             </Dropdown.Item>
-                                                            <Dropdown.Item onClick={()=>button(row.id)}>
-                                                                Đóng Điểm Giao Dịch
+                                                            <Dropdown.Item onClick={() => button(row.id)}>
+                                                                <span style={{color: 'rgba(255, 0, 0, 0.7)'}}>Đóng Điểm Giao Dịch</span>
                                                             </Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>

@@ -10,7 +10,7 @@ const MenuConsolidationPoint = () => {
                 <div className="col-2" style={{width: "240px", padding: 0, boxShadow: "4px 0 10px rgba(0,0,0,0.05)"}}>
                     <div style={{padding: 0, color: '#fff', background: 'lavender', height: '100%'}}>
                         <ul id="" style={{zIndex: '1020'}}>
-                            <li className="">
+                            <li className="mm-active">
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
                                     </div>
@@ -42,10 +42,10 @@ const MenuConsolidationPoint = () => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item>
-                                                <Link to={"/leader/incoming"}>Thống kê hàng nhận từ khách gửi </Link>
+                                                <Link to={"/leader/incoming"}>Lịch sử các đơn hàng</Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/leader/outgoing"}>Thống kê hàng gửi đi điểm tập kết</Link>
+                                                <Link to={"/leader/outgoing"}>Đơn hàng chuyển đến điểm tập kết</Link>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

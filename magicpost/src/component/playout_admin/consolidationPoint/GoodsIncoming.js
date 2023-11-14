@@ -31,8 +31,8 @@ function GoodsIncoming() {
     };
     return (
         <>
-            <div style={{padding:'10px'}}>
-                <h2 style={{ textAlign: 'center' }}>Thống Kê Hàng gửi</h2>
+            <div className="distanceBody">
+                <h2 style={{ textAlign: 'center' }}>Lịch sử đơn hàng</h2>
 
                 <label>Chọn Năm: </label>
                 <select value={selectedYear} onChange={handleYearChange}>
@@ -51,7 +51,7 @@ function GoodsIncoming() {
                         </option>
                     ))}
                 </select>
-                <table border="1" style={{borderRadius:'2px'}}>
+                <table className="table" style={{borderRadius:'2px'}}>
                     <thead border='1'>
                     <tr>
                         <th style={{ textAlign: 'center' }}>ID</th>
