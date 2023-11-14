@@ -27,7 +27,10 @@ import CreateEmployeeCon from "./component/leader/Transantion/CreateEmployeeTran
 import CreateEmployeeTran from "./component/leader/Transantion/CreateEmployeeTran";
 import GoodsIncoming from "./component/playout_admin/consolidationPoint/GoodsIncoming";
 import GoodsOutgoing from "./component/playout_admin/consolidationPoint/GoodsOutgoing";
-
+import OrderStatistics_ConsolidationPoint_StatusComplete
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusComplete";
+import OrderStatistics_ConsolidationPoint_StatusCancel
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusCancel";
 
 function App() {
     return (
@@ -39,6 +42,7 @@ function App() {
                 </Route>
                 <Route>
                     <Route path={'admin'} element={<LayoutAdmin/>}>
+                        <Route path="" element={<Welcome/>}></Route>
                         <Route path={"tran"} element={<TransantionPointAdmin/>}></Route>
                         <Route path={"managerTran"} element={<TransantionPointManager/>}></Route>
                         <Route path={"managerCon"} element={<ConsolidationPointManager/>}></Route>
@@ -51,14 +55,23 @@ function App() {
                 </Route>
                 <Route>
                     <Route path={'leader'} element={<LayoutLeader/>}>
+                        <Route path="" element={<Welcome/>}></Route>
                         <Route path={'employeeCon'} element={<CreateEmployeeCon></CreateEmployeeCon>}></Route>
-                        <Route path={'showEmployeeTran'} element={<ShowEmployeeTransantion></ShowEmployeeTransantion>}></Route>
-                        <Route path={'showEmployeeCon'} element={<ShowEmployeeConsolidationtion></ShowEmployeeConsolidationtion>}></Route>
-                        <Route path={'showEmployeeConBlock'} element={<ShowEmployeeConsolidationtionBlock></ShowEmployeeConsolidationtionBlock>}></Route>
-                        <Route path={'showEmployeeTranBlock'} element={<ShowEmployeeTransantionBlock></ShowEmployeeTransantionBlock>}></Route>
+                        <Route path={'showEmployeeTran'}
+                               element={<ShowEmployeeTransantion></ShowEmployeeTransantion>}></Route>
+                        <Route path={'showEmployeeCon'}
+                               element={<ShowEmployeeConsolidationtion></ShowEmployeeConsolidationtion>}></Route>
+                        <Route path={'showEmployeeConBlock'}
+                               element={<ShowEmployeeConsolidationtionBlock></ShowEmployeeConsolidationtionBlock>}></Route>
+                        <Route path={'showEmployeeTranBlock'}
+                               element={<ShowEmployeeTransantionBlock></ShowEmployeeTransantionBlock>}></Route>
                         <Route path={'employeeTran'} element={<CreateEmployeeTran></CreateEmployeeTran>}></Route>
                         <Route path={'incoming'} element={<GoodsIncoming/>}></Route>
                         <Route path={'outgoing'} element={<GoodsOutgoing/>}></Route>
+                        <Route path='orderStatisticsConsolidationPoint_complete'
+                               element={<OrderStatistics_ConsolidationPoint_StatusComplete/>}></Route>
+                        <Route path='orderStatisticsConsolidationPoint_cancel'
+                               element={<OrderStatistics_ConsolidationPoint_StatusCancel/>}></Route>
                     </Route>
                     <Route path={'employee'} element={<LayOutEmployee/>}>
                         <Route path="" element={<Welcome/>}></Route>

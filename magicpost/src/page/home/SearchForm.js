@@ -1,16 +1,8 @@
 import React, {useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from "axios";
-import TableContainer from "@mui/material/TableContainer";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableBody from "@mui/material/TableBody";
-import {styled} from "@mui/material/styles";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import Swal from "sweetalert2";
-import {map} from "react-bootstrap/ElementChildren";
+import {format} from "date-fns";
 
 const SearchForm = () => {
     const [order, setOrder] = useState(null);
@@ -23,7 +15,7 @@ const SearchForm = () => {
         const errors = {};
         if (!values.code.trim()) {
             errors.code = "Mã đơn hàng không được để trống!";
-        }else if(isNaN(values.code)){
+        } else if (isNaN(values.code)) {
             errors.code = "Mã đơn hàng không phải một số!";
         }
         return errors;
@@ -32,7 +24,6 @@ const SearchForm = () => {
     const handleSubmit = (values, {setSubmitting}) => {
         axios.get("http://localhost:8080/orders/" + values.code)
             .then(r => {
-                console.log(r.data)
                 if (r.data == "not found") {
                     Swal.fire({
                         icon: 'error',
@@ -48,7 +39,7 @@ const SearchForm = () => {
                     icon: 'error',
                     title: 'Có lỗi',
                     text: 'Vui lòng liên hệ admin để sử lý',
-                    confirmButtonText:'Đồng ý'
+                    confirmButtonText: 'Đồng ý'
                 })
 
             })
@@ -107,29 +98,41 @@ const SearchForm = () => {
             {order && (<div className="row" style={{marginTop: "20px"}}>
                 <div className="col-2"></div>
                 <div className="col-8 row">
-                    <div className="col-6">
+                    <div className="col-4">
+                        <p> Ảnh đơn hàng : <img src={order.image} alt="Ảnh đơn hàng" width="100" height="100"></img>
+                        </p>
                         <p> Mã đơn hàng : {order.id}</p>
-                        <p> Trạng thái đơn hàng : {order.status.nameStatus}</p>
-                        <p> Ngày gửi hàng : {order.createOrder}</p>
-                        <p> Điểm gửi hàng : {order.transactionPoint.address}</p>
+                        <p> Trạng thái đơn hàng
+                            : {order?.status.id === 3 ? "Thành công" : order?.status.id === 4 ? "Huỷ" :
+                                order?.status.id === 5 ? "Đang giải quyết" : order?.status.id === 6 ? "Đang giao hàng" : ""}</p>
+                        <p> Ngày gửi hàng : {format(new Date(order?.createOrder), "dd-MM-yyyy HH:mm:ss")}</p>
+                        <p> Điểm gửi hàng : {order.transactionPoint.name}</p>
+                    </div>
+                    <div className="col-4">
                         <p> Người gửi : {order.nameSender}</p>
                         <p> SĐT người gửi : {order.phoneSender}</p>
+                        <p> Địa chỉ gửi : {order.addressSender}</p>
+                    </div>
+                    <div className="col-4">
                         <p> Người nhận : {order.nameReceiver}</p>
                         <p> SĐT người nhận : {order.phoneReceiver}</p>
+                        <p> Địa chỉ nhận : {order.addressReceiver}</p>
                     </div>
-                    <div className="col-6">
-                        {order.status.id !== 3&&(<>
-                            <p> Các kho đã đi qua : {order.consolidationPoints.map((c)=>(
-                                <span>  {order.consolidationPoints[order.consolidationPoints.length-1].address==c.address?<span> {c.address} </span> : <span>{c.address} ;</span> }  </span>
-                            ))}</p>
-                        <p> Đơn của bạn đang ở kho : {order.consolidationPoints[order.consolidationPoints.length-1].address} </p>
-                        </>)}
-                        <p> Ảnh đơn hàng : <img src={order.image} alt="Ảnh đơn hàng"></img></p>
-                    </div>
-
-
                 </div>
                 <div className="col-2"></div>
+                <div style={{marginLeft:"17.7%", marginTop:"2%"}}>
+                    <p> Các kho đã đi qua : {order.consolidationPoints.length === 0 ?
+                        <span style={{color: "red"}}>Chưa đi</span> : order.consolidationPoints.map((c) => (
+                            order.consolidationPoints[order.consolidationPoints.length - 1].id === c.id ?
+                                <span> {c.name} </span> : <span>{c.name} -> </span>
+                        ))}</p>
+                    <p> Đơn của bạn đang ở tập kết : {order.consolidationPoints.length === 0 ?
+                        <span style={{color: "red"}}>Chưa đi</span> :
+                        <span>{order.consolidationPoints[order.consolidationPoints.length - 1].name} - {order.consolidationPoints[order.consolidationPoints.length - 1].address}</span>}</p>
+                    <p> Thời gian đơn kết thúc : {order?.endOrder === null ?
+                        <span className="text-danger">Chưa kết thúc</span> :
+                        <span>{format(new Date(order?.endOrder), "dd-MM-yyyy HH:mm:ss")}</span>}</p>
+                </div>
             </div>)}
         </>
     );

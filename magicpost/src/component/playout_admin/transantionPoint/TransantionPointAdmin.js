@@ -94,7 +94,8 @@ const TransandsfdftionPointAdmin = () => {
                         },
                         transactionPoint: {
                             name: values.nameTran,
-                            address: values.address
+                            address: values.address,
+                            status: 1
                         }
                     }
                     axios.post("http://localhost:8080/account/transaction/create",create ,{

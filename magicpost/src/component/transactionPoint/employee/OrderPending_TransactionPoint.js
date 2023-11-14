@@ -62,12 +62,12 @@ function OrderPending_TransactionPoint() {
                         <p>{order.order.nameSender}</p>}</td>
                     <td>{order.order.phoneSender == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.phoneSender}</p>}</td>
-                    <td>{order.typeList && order.typeList.map((item) => (
-                        <tr key={item.id}>
-                            <td><p>{item.name}</p></td>
-                        </tr>
-                    ))
-                    }</td>
+                    {/*<td>{order.typeList && order.typeList.map((item) => (*/}
+                    {/*    <tr key={item.id}>*/}
+                    {/*        <td><p>{item.name}</p></td>*/}
+                    {/*    </tr>*/}
+                    {/*))*/}
+                    {/*}</td>*/}
                     <td>{order.order.addressReceiver == null ? <p className="text-danger">Không</p> :
                         <p>{order.order.addressReceiver.slice(0, 16)}{order.order.addressReceiver.length > 16 && "..."}</p>}</td>
                     <td>{order.order.consolidationPoints.length === 0 ? <p className="text-danger">Không</p> :
@@ -97,11 +97,11 @@ function OrderPending_TransactionPoint() {
                                 Chuyển đơn..
                             </button>
                         }
-                        <button style={{marginTop: "4px"}}
+                        <button style={{marginLeft: "4px"}}
                                 className="btn btn-danger buttonShadow"
                                 onClick={() => handleClick_Status(order.order?.id, "Cancel")}
                         >
-                            Huỷ đơn
+                            Xoá đơn
                         </button>
                     </td>
                 </tr>
@@ -143,25 +143,13 @@ function OrderPending_TransactionPoint() {
 
     const handleClick_Status = (orderId, action) => {
         const updateStatus_Order = orders.find((order) => order.order.id === orderId).order;
-        let newStatusId = updateStatus_Order.status.id;
-        let newNameStatus = updateStatus_Order.status.nameStatus;
 
-        if (action === "Cancel") {
-            newStatusId = 4;
-            newNameStatus = "Cancel";
-        }
-
-        updateStatus_Order.status.id = newStatusId;
-        updateStatus_Order.status.nameStatus = newNameStatus;
-        let newEndOrder = new Date();
-        updateStatus_Order.endOrder = newEndOrder.toISOString();
-
-        axios.post(`http://localhost:8080/orders/save`, updateStatus_Order)
+        axios.post(`http://localhost:8080/orders/deleteOrder/` + updateStatus_Order.id)
             .then((res) => {
                 if (action === "Cancel") {
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Bạn đã huỷ đơn hàng!',
+                        title: 'Bạn đã xoá đơn hàng!',
                         showConfirmButton: true, // Ẩn nút "OK"
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -177,7 +165,7 @@ function OrderPending_TransactionPoint() {
 
     return (
         <>
-            <div className="container distanceBody">
+            <div className=" distanceBody">
                 <h4 className='text-center pb-20 mt-20 headerInBody'>Đơn hàng đang xử lý</h4>
 
                 <table className="table">
@@ -187,7 +175,7 @@ function OrderPending_TransactionPoint() {
                         <th>Ngày tạo</th>
                         <th>Người gửi</th>
                         <th>SĐT người gửi</th>
-                        <th>Loại hàng</th>
+                        {/*<th>Loại hàng</th>*/}
                         <th>Địa chỉ nhận</th>
                         <th>Điểm đang giữ đơn</th>
                         <th>Xem chi tiết</th>
@@ -274,7 +262,7 @@ function OrderPending_TransactionPoint() {
                                 top: '50%',
                                 left: '50%',
                                 transform: 'translate(-50%, -50%)',
-                                width: '60%',
+                                width: '50%',
                                 bgcolor: 'background.paper',
                                 boxShadow: 24,
                                 p: 4,
@@ -283,16 +271,16 @@ function OrderPending_TransactionPoint() {
                             }}>
                             <h2 id="modal-title" style={{textAlign:'center'}}>Thông tin đơn hàng số <span
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
-                            <div id="modal-description">
-                                <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
+                            <div id="modal-description" class="indent-td">
+                                <th style={{textDecoration: "underline"}}>Nơi tạo:  </th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
                                     <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>
                                 <td>
                                     <p>{orderDetail.order?.status.id === 3 ? "Thành công" : orderDetail.order?.status.id === 4 ? "Huỷ" :
@@ -300,7 +288,7 @@ function OrderPending_TransactionPoint() {
                                 </td>
                             </div>
                             <div style={{display: "flex", justifyContent: "space-between"}}>
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Hàng hoá</th>
                                     <td>
                                         <tr>
@@ -309,15 +297,15 @@ function OrderPending_TransactionPoint() {
                                                 <p className="text-danger">Không</p> :
                                                 <img src={orderDetail.order?.image} height="100px" width="100px"/>}</td>
                                         </tr>
-                                        <tr>
-                                            <th>Loại hàng:</th>
-                                            <td>{orderDetail.typeList && orderDetail.typeList.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td><p>{item.name}</p></td>
-                                                </tr>
-                                            ))
-                                            }</td>
-                                        </tr>
+                                        {/*<tr>*/}
+                                        {/*    <th>Loại hàng:</th>*/}
+                                        {/*    <td>{orderDetail.typeList && orderDetail.typeList.map((item) => (*/}
+                                        {/*        <tr key={item.id}>*/}
+                                        {/*            <td><p>{item.name}</p></td>*/}
+                                        {/*        </tr>*/}
+                                        {/*    ))*/}
+                                        {/*    }</td>*/}
+                                        {/*</tr>*/}
                                         <tr>
                                             <th>Độ dài:</th>
                                             <td>{orderDetail.order?.width == null ?
@@ -339,7 +327,7 @@ function OrderPending_TransactionPoint() {
                                     </td>
                                 </div>
 
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Người gửi</th>
                                     <td>
                                         <tr>
@@ -366,7 +354,7 @@ function OrderPending_TransactionPoint() {
                                     </td>
                                 </div>
 
-                                <div>
+                                <div class="indent-td">
                                     <th style={{textDecoration: "underline"}}>Người nhận</th>
                                     <td>
                                         <tr>
@@ -393,7 +381,7 @@ function OrderPending_TransactionPoint() {
                                     </td>
                                 </div>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Các điểm tập kết đã đi qua:</th>
                                 <td>
                                     {orderDetail.order?.consolidationPoints.length === 0 ?
@@ -404,7 +392,7 @@ function OrderPending_TransactionPoint() {
                                     }
                                 </td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Điểm tập kết đích:</th>
                                 <td>
                                     {(orderDetail.order?.status.id === 6 || orderDetail.order?.status.id === 3) && orderDetail.order?.consolidationPoints.length !== 0 ?
@@ -413,7 +401,7 @@ function OrderPending_TransactionPoint() {
                                     }
                                 </td>
                             </div>
-                            <div>
+                            <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Thời gian kết thúc đơn:</th>
                                 <td>{orderDetail.order?.endOrder == null ?
                                     <p className="text-danger">Chưa kết thúc</p> :

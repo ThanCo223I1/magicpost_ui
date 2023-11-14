@@ -107,12 +107,14 @@ const ConsolidationPointManager = () => {
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10" style={{marginTop: '40px'}}>
+                    <div className="text-center text-bold">
+                        <h2>Điểm tập kết đang hoạt động</h2></div>
                     <TableContainer component={Paper}>
                         <Table sx={{minWidth: 700}} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell></StyledTableCell>
-                                    <StyledTableCell>Tên Điểm Giao Dịch</StyledTableCell>
+                                    <StyledTableCell>Tên Điểm Tập Kết</StyledTableCell>
                                     <StyledTableCell align="left">Địa Chỉ</StyledTableCell>
                                     <StyledTableCell align="left">Tên Trưởng Điểm</StyledTableCell>
                                     <StyledTableCell align="left">Số Điện Thoại</StyledTableCell>

@@ -38,6 +38,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const ShowEmployeeTransantion = () => {
     const account = JSON.parse(localStorage.getItem('account'));
     const [rows, setRows] = useState([]);
+    console.log(rows)
     const leader = account.leaderDTO;
     useEffect(() => {
         axios.get("http://localhost:8080/account/transaction/leader/" + leader.id, {
@@ -121,7 +122,8 @@ const ShowEmployeeTransantion = () => {
                             <TableBody>
                                 {currentRows.map((row) => (
                                     <StyledTableRow key={row.id}>
-                                        {row.idStatusAccount === 1 && (<>
+                                        {
+                                            row.idStatusAccount === 1 && (<>
                                                 <StyledTableCell></StyledTableCell>
                                                 <StyledTableCell>{row.name}</StyledTableCell>
                                                 <StyledTableCell align="left">{row.address}</StyledTableCell>

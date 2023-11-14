@@ -33,6 +33,7 @@ function Orders() {
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setOrders({...orders, [name]: value});
+        setOrders({...orders, [name]: value});
     };
     const submit = () => {
         axios.post('http://localhost:8080/orders/createOrder/' + accountLogin.employeeDTO.id, orders)
