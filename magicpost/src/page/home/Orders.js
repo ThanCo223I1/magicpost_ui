@@ -42,6 +42,7 @@ function Orders() {
                     icon: "success",
                     title: "Tạo đơn hàng thành công"
                 });
+                setOrders(initialData);
                 console.log('API Response:', response.data);
             })
             .catch((error) => {
