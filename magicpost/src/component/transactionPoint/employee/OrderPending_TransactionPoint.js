@@ -121,7 +121,7 @@ function OrderPending_TransactionPoint() {
             const selectedConsolidationPointLong = +selectedConsolidationPoint;
             consolidationPoint_transactionPoint_IdAccount.id = selectedConsolidationPointLong;
             orderDetail.order.consolidationPoints.push(consolidationPoint_transactionPoint_IdAccount);
-
+            console.log(orderDetail.order)
             axios.post(`http://localhost:8080/orders/save`, orderDetail.order)
                 .then(function (res) {
                     setSelectedConsolidationPoint(null);
@@ -269,7 +269,7 @@ function OrderPending_TransactionPoint() {
                                 maxHeight: '90vh',
                                 overflowY: 'auto',
                             }}>
-                            <h2 id="modal-title">Thông tin đơn hàng số <span
+                            <h2 id="modal-title" style={{textAlign:'center'}}>Thông tin đơn hàng số <span
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
                             <div id="modal-description" class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Nơi tạo:  </th>

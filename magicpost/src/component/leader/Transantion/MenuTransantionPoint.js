@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {Dropdown} from "react-bootstrap";
 import {Outlet} from "react-router";
 
 const MenuConsolidationPoint = () => {
@@ -28,6 +29,26 @@ const MenuConsolidationPoint = () => {
                                     <div className="nav_icon_small">
                                     </div>
                                     <Link to={"/leader/showEmployeeTranBlock"}>Tài khoản bị khoá</Link>
+                                </div>
+                            </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Dropdown>
+                                        <Dropdown.Toggle className="btn-primary-page btn btn-header active"
+                                                         id="dropdown-basic">
+                                            <span style={{color : "white"}}> Thống Kê </span>
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/incoming"}>Thống kê hàng nhận từ khách gửi </Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/outgoing"}>Thống kê hàng gửi đi điểm tập kết</Link>
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </div>
                             </li>
                         </ul>

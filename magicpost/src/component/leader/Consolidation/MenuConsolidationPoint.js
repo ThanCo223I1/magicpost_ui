@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import React, {useEffect, useState} from 'react';
+import {Dropdown} from "react-bootstrap";
 import {Outlet} from "react-router";
 
-const MenuConsolidationPoint = () => {
 
+const MenuConsolidationPoint = () => {
     return (
         <>
             <div style={{display: "flex", maxHeight: "100%", minHeight: "100vh"}} className="warpper">
@@ -18,19 +19,8 @@ const MenuConsolidationPoint = () => {
                                     <Link to={"/leader/employeeCon"}>Tạo tài khoản nhân viên</Link>
                                 </div>
                             </li>
-                            <li className="mm-active">
-                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                    <div className="nav_icon_small">
-                                    </div>
-                                    <Link to={"/leader/showEmployeeCon"}>Tài khoản nhân viên</Link>
-                                </div>
-                            </li>
-                            <li className="mm-active">
-                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                    <div className="nav_icon_small">
-                                    </div>
-                                    <Link to={"/leader/showEmployeeConBlock"}>Tài khoản bị khoá</Link>
-                                </div>
+                            <li>
+                                <div>dsfdf</div>
                             </li>
                             <li className="mm-active">
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">

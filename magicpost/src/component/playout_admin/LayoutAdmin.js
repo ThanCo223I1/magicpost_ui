@@ -73,13 +73,10 @@ const LayoutAdmin = () => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/con"}>Tạo Điểm Tập Kết</Link>
+                                                <Link to={"/leader/incoming"}>Thống kê hàng đến </Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/managerCon"}>Điểm Tập Kết Đang Hoạt Động</Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item>
-                                                <Link to={"/admin/managerCon/block"}>Điểm Tập Kết Ngừng Hoạt Động</Link>
+                                                <Link to={"/leader/outgoing"}>Thống kê hàng đi</Link>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                   </Dropdown>
