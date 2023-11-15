@@ -31,6 +31,12 @@ import OrderStatistics_ConsolidationPoint_StatusComplete
 import OrderStatistics_ConsolidationPoint_StatusCancel
     from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusCancel";
 import CreateEmployeeCon from "./component/leader/Consolidation/CreateEmployeeCon";
+import OrderStatistics_Transaction_Admin
+    from "./component/playout_admin/transantionPoint/OrderStatisticsTransactionAdmin";
+import OrderStatisticsConsolidationAdmin
+    from "./component/playout_admin/consolidationPoint/OrderStatisticsConsolidationAdmin";
+import OrderStatisticsTransactionAdmin
+    from "./component/playout_admin/transantionPoint/OrderStatisticsTransactionAdmin";
 
 function App() {
     return (
@@ -49,8 +55,8 @@ function App() {
                         <Route path={"managerTran/block"} element={<TransantionPointManagerBlock/>}></Route>
                         <Route path={"managerCon/block"} element={<ConsolidationPointManagerBlock/>}></Route>
                         <Route path={"con"} element={<ConsolidationPointAdmin/>}></Route>
-                        {/*<Route path={"incoming"} element={<GoodsIncoming/>}></Route>*/}
-                        {/*<Route path={"outgoing"} element={<GoodsOutgoing/>}></Route>*/}
+                        <Route path={'orderStatistics_TransactionPoint_admin'} element={<OrderStatisticsTransactionAdmin/>}></Route>
+                        <Route path={'orderStatistics_Consolidation_admin'} element={<OrderStatisticsConsolidationAdmin/>}></Route>
                     </Route>
                 </Route>
                 <Route>
