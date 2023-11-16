@@ -42,7 +42,7 @@ const MenuConsolidationPoint = () => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item>
-                                                <Link to={"/leader/orderStatisticsTransactionPoint_shipped"}>Đơn đã chuyển hàng</Link>
+                                                <Link to={"/leader/orderStatisticsTransactionPoint_shipped"}>Đơn đã giao</Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
                                                 <Link to={"/leader/orderStatisticsTransactionPoint_received"}>Đơn chưa giao tới khách</Link>
