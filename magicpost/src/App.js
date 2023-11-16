@@ -37,6 +37,10 @@ import OrderStatisticsConsolidationAdmin
     from "./component/playout_admin/consolidationPoint/OrderStatisticsConsolidationAdmin";
 import OrderStatisticsTransactionAdmin
     from "./component/playout_admin/transantionPoint/OrderStatisticsTransactionAdmin";
+import OrderStatisticsShipped from "./component/playout_admin/statistics-all-points/OrderStatisticsShipped";
+import OrderStatisticsInventory from "./component/playout_admin/statistics-all-points/OrderStatisticsInventory";
+import OrderStatistics_ConsolidationPoint_StatusShipping
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusShipping";
 
 function App() {
     return (
@@ -57,6 +61,8 @@ function App() {
                         <Route path={"con"} element={<ConsolidationPointAdmin/>}></Route>
                         <Route path={'orderStatistics_TransactionPoint_admin'} element={<OrderStatisticsTransactionAdmin/>}></Route>
                         <Route path={'orderStatistics_Consolidation_admin'} element={<OrderStatisticsConsolidationAdmin/>}></Route>
+                        <Route path={'orderStatistics_shipped'} element={<OrderStatisticsShipped/>}></Route>
+                        <Route path={'orderStatistics_inventory'} element={<OrderStatisticsInventory/>}></Route>
                     </Route>
                 </Route>
                 <Route>
@@ -78,6 +84,7 @@ function App() {
                                element={<OrderStatistics_ConsolidationPoint_StatusComplete/>}></Route>
                         <Route path='orderStatisticsConsolidationPoint_cancel'
                                element={<OrderStatistics_ConsolidationPoint_StatusCancel/>}></Route>
+                        <Route path={'orderStatisticsConsolidationPoint_shipping'} element={<OrderStatistics_ConsolidationPoint_StatusShipping/>}></Route>
                     </Route>
                     <Route path={'employee'} element={<LayOutEmployee/>}>
                         <Route path="" element={<Welcome/>}></Route>

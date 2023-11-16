@@ -72,10 +72,16 @@ const LayoutAdmin = () => {
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/orderStatistics_TransactionPoint_admin"}>Các Điểm Giao Dịch</Link>
+                                                <Link to={"/admin/orderStatistics_TransactionPoint_admin"}>Đơn hàng các điểm giao dịch</Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/admin/orderStatistics_Consolidation_admin"}>Các Điểm Tập Kết</Link>
+                                                <Link to={"/admin/orderStatistics_Consolidation_admin"}>Đơn hàng các điểm tập kết</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_shipped"}>Đơn hàng đã giao(toàn quốc)</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_inventory"}>Đơn hàng còn tồn(toàn quốc)</Link>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
