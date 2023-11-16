@@ -41,6 +41,16 @@ import OrderStatisticsShipped from "./component/playout_admin/statistics-all-poi
 import OrderStatisticsInventory from "./component/playout_admin/statistics-all-points/OrderStatisticsInventory";
 import OrderStatistics_ConsolidationPoint_StatusShipping
     from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusShipping";
+import OrderStatistics_TransactionPoint_Shipped
+    from "./component/leader/Transantion/OrderStatistics_TransactionPoint_Shipped";
+import OrderStatistics_TransactionPoint_Unsent
+    from "./component/leader/Transantion/OrderStatistics_TransactionPoint_Unsent";
+import OrderStatistics_TransactionPoint_Received
+    from "./component/leader/Transantion/OrderStatistics_TransactionPoint_Received";
+import OrderStatistics_TransactionPoint_Sent
+    from "./component/leader/Transantion/OrderStatistics_TransactionPoint_Sent";
+import OrderStatistics_ConsolidationPoint_Received
+    from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_Received";
 
 function App() {
     return (
@@ -85,6 +95,11 @@ function App() {
                         <Route path='orderStatisticsConsolidationPoint_cancel'
                                element={<OrderStatistics_ConsolidationPoint_StatusCancel/>}></Route>
                         <Route path={'orderStatisticsConsolidationPoint_shipping'} element={<OrderStatistics_ConsolidationPoint_StatusShipping/>}></Route>
+                        <Route path={'orderStatisticsConsolidationPoint_received'} element={<OrderStatistics_ConsolidationPoint_Received/>}></Route>
+                        <Route path={'orderStatisticsTransactionPoint_shipped'} element={<OrderStatistics_TransactionPoint_Shipped/>}></Route>
+                        <Route path={'orderStatisticsTransactionPoint_unsent'} element={<OrderStatistics_TransactionPoint_Unsent/>}></Route>
+                        <Route path={'orderStatisticsTransactionPoint_received'} element={<OrderStatistics_TransactionPoint_Received/>}></Route>
+                        <Route path={'orderStatisticsTransactionPoint_sent'} element={<OrderStatistics_TransactionPoint_Sent/>}></Route>
                     </Route>
                     <Route path={'employee'} element={<LayOutEmployee/>}>
                         <Route path="" element={<Welcome/>}></Route>

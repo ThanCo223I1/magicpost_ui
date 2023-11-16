@@ -53,6 +53,9 @@ const MenuConsolidationPoint = () => {
                                             <Dropdown.Item>
                                                 <Link to={"/leader/orderStatisticsConsolidationPoint_shipping"}>Đơn hàng chưa giao</Link>
                                             </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsConsolidationPoint_received"}>Đơn hàng đã nhận</Link>
+                                            </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
