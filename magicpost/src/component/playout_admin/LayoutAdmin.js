@@ -59,8 +59,33 @@ const LayoutAdmin = () => {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
+                            </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Dropdown>
+                                        <Dropdown.Toggle className="btn-primary-page btn btn-header active"
+                                                         id="dropdown-basic">
+                                            <span>&nbsp; Thống kê &nbsp;</span>
+                                        </Dropdown.Toggle>
 
-
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_TransactionPoint_admin"}>Đơn hàng các điểm giao dịch</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_Consolidation_admin"}>Đơn hàng các điểm tập kết</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_shipped"}>Đơn hàng đã giao(toàn quốc)</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/admin/orderStatistics_inventory"}>Đơn hàng còn tồn(toàn quốc)</Link>
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
                             </li>
                         </ul>
                     </div>

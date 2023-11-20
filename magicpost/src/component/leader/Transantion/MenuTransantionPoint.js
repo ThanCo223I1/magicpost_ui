@@ -42,10 +42,16 @@ const MenuConsolidationPoint = () => {
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item>
-                                                <Link to={"/leader/incoming"}>Lịch sử các đơn hàng</Link>
+                                                <Link to={"/leader/orderStatisticsTransactionPoint_shipped"}>Đơn đã giao</Link>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                <Link to={"/leader/outgoing"}>Đơn hàng chuyển đến điểm tập kết</Link>
+                                                <Link to={"/leader/orderStatisticsTransactionPoint_received"}>Đơn chưa giao tới khách</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsTransactionPoint_sent"}>Đơn đã gửi đi</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsTransactionPoint_unsent"}>Đơn đã tạo nhưng chưa gửi</Link>
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>

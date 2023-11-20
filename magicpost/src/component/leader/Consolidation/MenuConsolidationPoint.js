@@ -37,14 +37,27 @@ const MenuConsolidationPoint = () => {
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
                                     </div>
-                                    <Link to={"/leader/orderStatisticsConsolidationPoint_complete"}>Thống kê đơn thành công</Link>
-                                </div>
-                            </li>
-                            <li className="mm-active">
-                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                    <div className="nav_icon_small">
-                                    </div>
-                                    <Link to={"/leader/orderStatisticsConsolidationPoint_cancel"}>Thống kê đơn bị huỷ</Link>
+                                    <Dropdown>
+                                        <Dropdown.Toggle className="btn-primary-page btn btn-header active"
+                                                         id="dropdown-basic">
+                                            <span>&nbsp; Thống kê &nbsp;</span>
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsConsolidationPoint_complete"}>Đơn thành công</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsConsolidationPoint_cancel"}>Đơn bị huỷ</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsConsolidationPoint_shipping"}>Đơn hàng chưa giao</Link>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                <Link to={"/leader/orderStatisticsConsolidationPoint_received"}>Đơn hàng đã nhận</Link>
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </div>
                             </li>
                         </ul>

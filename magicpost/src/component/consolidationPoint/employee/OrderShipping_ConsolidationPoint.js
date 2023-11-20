@@ -44,7 +44,6 @@ function OrderShipping_ConsolidationPoint() {
     }, [id]);
 
     const displayOrders = orders
-        .slice(pagesVisited, pagesVisited + ordersPerPage)
         .map((order) => {
             const statusColor = order.order.status.id === 6 ? "backgroundColorStatusShipping" : order.order.status.id === 3 ? "backgroundColorStatusComplete" : order.order.status.id === 4 ? "backgroundColorStatusCanceled" : "";
             const statusName = order.order.status.id === 3 ? "Thành công" : order.order.status.id === 4 ? "Huỷ" :
@@ -205,20 +204,6 @@ function OrderShipping_ConsolidationPoint() {
                     {displayOrders}
                     </tbody>
                 </table>
-                {/* Phân trang */}
-                <ReactPaginate
-                    previousLabel={"Previous"}
-                    nextLabel={"Next"}
-                    pageCount={pageCount}
-                    onPageChange={changePage}
-                    containerClassName={"pagination"}
-                    previousLinkClassName={"pagination__link"}
-                    nextLinkClassName={"pagination__link"}
-                    disabledClassName={"pagination__link--disabled"}
-                    activeClassName={"pagination__link--active"}
-                    pageLinkClassName={"pagination__link--number"}
-                    pageClassName={"pagination__item"}
-                />
 
                 <div>
                     <Modal
