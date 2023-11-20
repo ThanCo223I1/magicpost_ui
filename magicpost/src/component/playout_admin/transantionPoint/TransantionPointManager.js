@@ -107,7 +107,7 @@ const TransantionPointManager = () => {
                 <div className="col-10" style={{marginTop: '40px'}}>
                     <div className="text-center text-bold">
                     <h2>Điểm giao dịch đang hoạt động</h2></div>
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} sx={{overflow: 'visible'}}>
                         <Table sx={{minWidth: 700}} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
@@ -134,10 +134,10 @@ const TransantionPointManager = () => {
                                                 <StyledTableCell align="left">
                                                     <Dropdown>
                                                         <Dropdown.Toggle className="btn-primary-page active" id="dropdown-basic">
-                                                            <p> Sửa Đổi</p>
+                                                            <p className="white-text"> Sửa Đổi</p>
                                                         </Dropdown.Toggle>
 
-                                                        <Dropdown.Menu>
+                                                        <Dropdown.Menu style={{position:"absolute", top:"0", left:"100%", width:"200px"}}>
                                                             <Dropdown.Item>
                                                                 <EditNameTran data={row}></EditNameTran>
                                                             </Dropdown.Item>
@@ -145,7 +145,7 @@ const TransantionPointManager = () => {
                                                                 <EditLeaderTran data={row}></EditLeaderTran>
                                                             </Dropdown.Item>
                                                             <Dropdown.Item onClick={()=>button(row.id)}>
-                                                                Đóng Điểm Giao Dịch
+                                                                <span style={{color: 'rgba(255, 0, 0, 0.7)'}}>Đóng Điểm Giao Dịch</span>
                                                             </Dropdown.Item>
                                                         </Dropdown.Menu>
                                                     </Dropdown>

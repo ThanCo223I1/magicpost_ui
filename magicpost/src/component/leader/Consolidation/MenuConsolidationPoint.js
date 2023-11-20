@@ -12,15 +12,26 @@ const MenuConsolidationPoint = () => {
                 <div className="col-2" style={{width: "240px", padding: 0, boxShadow: "4px 0 10px rgba(0,0,0,0.05)"}}>
                     <div style={{padding: 0, color: '#fff', background: 'lavender', height: '100%'}}>
                         <ul id="" style={{zIndex: '1020'}}>
-                            <li className="">
+                            <li className="mm-active">
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
                                     <div className="nav_icon_small">
                                     </div>
                                     <Link to={"/leader/employeeCon"}>Tạo tài khoản nhân viên</Link>
                                 </div>
                             </li>
-                            <li>
-                                <div>dsfdf</div>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Link to={"/leader/showEmployeeCon"}>Tài khoản nhân viên</Link>
+                                </div>
+                            </li>
+                            <li className="mm-active">
+                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
+                                    <div className="nav_icon_small">
+                                    </div>
+                                    <Link to={"/leader/showEmployeeConBlock"}>Tài khoản bị khoá</Link>
+                                </div>
                             </li>
                             <li className="mm-active">
                                 <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">

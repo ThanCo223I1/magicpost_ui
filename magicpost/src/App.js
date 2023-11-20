@@ -23,7 +23,6 @@ import ShowEmployeeConsolidationtionBlock from "./component/leader/Consolidation
 import ShowEmployeeConsolidationtion from "./component/leader/Consolidation/ShowEmployeeConsolidationtion";
 import ShowEmployeeTransantion from "./component/leader/Transantion/ShowEmployeeTransantion";
 import ConsolidationPointAdmin from "./component/playout_admin/consolidationPoint/ConsolidationPointAdmin";
-import CreateEmployeeCon from "./component/leader/Transantion/CreateEmployeeTran";
 import CreateEmployeeTran from "./component/leader/Transantion/CreateEmployeeTran";
 import GoodsIncoming from "./component/playout_admin/consolidationPoint/GoodsIncoming";
 import GoodsOutgoing from "./component/playout_admin/consolidationPoint/GoodsOutgoing";
@@ -31,6 +30,7 @@ import OrderStatistics_ConsolidationPoint_StatusComplete
     from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusComplete";
 import OrderStatistics_ConsolidationPoint_StatusCancel
     from "./component/leader/Consolidation/OrderStatistics_ConsolidationPoint_StatusCancel";
+import CreateEmployeeCon from "./component/leader/Consolidation/CreateEmployeeCon";
 
 function App() {
     return (

@@ -55,7 +55,7 @@ function OrderPending_TransactionPoint() {
             return (
                 order.order.status.id === 5 &&
                 <tr key={order.order.id}>
-                    <td style={{textAlign:"center"}}>{order.order.id}</td>
+                    <td style={{textAlign: "center"}}>{order.order.id}</td>
                     <td>{order.order.createOrder == null ? <p className="text-danger">Không</p> :
                         <p>{format(new Date(order.order.createOrder), "dd-MM-yyyy")}</p>}</td>
                     <td>{order.order.nameSender == null ? <p className="text-danger">Không</p> :
@@ -129,10 +129,6 @@ function OrderPending_TransactionPoint() {
                         icon: 'Thành công',
                         title: 'Bạn đã gửi hoá đơn - ' + orderDetail.order.id + ' đến ' + consolidationPoint_transactionPoint_IdAccount.name + '!',
                         showConfirmButton: true,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.reload();
-                        }
                     });
                 })
                 .catch(function (err) {
@@ -269,16 +265,16 @@ function OrderPending_TransactionPoint() {
                                 maxHeight: '90vh',
                                 overflowY: 'auto',
                             }}>
-                            <h2 id="modal-title" style={{textAlign:'center'}}>Thông tin đơn hàng số <span
+                            <h2 id="modal-title" style={{textAlign: 'center'}}>Thông tin đơn hàng số <span
                                 style={{fontWeight: "bold"}}>{orderDetail.order?.id}</span></h2>
                             <div id="modal-description" class="indent-td">
-                                <th style={{textDecoration: "underline"}}>Nơi tạo:  </th>
+                                <th style={{textDecoration: "underline"}}>Nơi tạo:</th>
                                 <td><p>{orderDetail.order?.transactionPoint.name}</p></td>
                             </div>
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                                 <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
-                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
+                                    <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
                             </div>
                             <div class="indent-td">
                                 <th style={{textDecoration: "underline"}}>Trạng thái:</th>

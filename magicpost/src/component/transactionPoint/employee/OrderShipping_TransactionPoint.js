@@ -238,7 +238,7 @@ function OrderShipping_TransactionPoint() {
                         <div class="indent-td">
                             <th style={{textDecoration: "underline"}}>Ngày tạo:</th>
                             <td>{orderDetail.order?.createOrder == null ? <p className="text-danger">Không</p> :
-                                <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy")}</p>}</td>
+                                <p>{format(new Date(orderDetail.order?.createOrder), "dd-MM-yyyy HH:mm:ss")}</p>}</td>
                         </div>
                         <div class="indent-td">
                             <th style={{textDecoration: "underline"}}>Trạng thái:</th>

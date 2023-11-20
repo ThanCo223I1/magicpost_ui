@@ -112,7 +112,7 @@ function HeaderEmployee() {
                                     <div className="switch-shop-img-text">
                                         <div className="switch-shop-img">
                                             <img width="10.31" height="18.34"
-                                                 src={employee.avatar && employee.avatar} alt="logo"/></div>
+                                                 src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMap3CDxAHx-mtGJ4O23WjBred7Y6qGuOoOgjzzO7GcMr-68NOc7oQ1XjWRLcnCnF_5bQ&usqp=CAU' alt="logo"/></div>
                                         <div
                                             className="switch-shop-text module line-clamp-1"> {employee.id} - {employee.name}
                                         </div>

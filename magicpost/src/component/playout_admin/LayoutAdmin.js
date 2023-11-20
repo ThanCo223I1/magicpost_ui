@@ -62,26 +62,6 @@ const LayoutAdmin = () => {
 
 
                             </li>
-                            <li className="mm-active">
-                                <div style={{padding: "30px"}} className="has-arrow" aria-expanded="false">
-                                    <div className="nav_icon_small">
-                                    </div>
-                                    <Dropdown>
-                                        <Dropdown.Toggle className="btn-primary-page btn btn-header active"
-                                                         id="dropdown-basic">
-                                            <span style={{color : "white"}}> Thống Kê </span>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item>
-                                                <Link to={"/leader/incoming"}>Thống kê hàng đến </Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item>
-                                                <Link to={"/leader/outgoing"}>Thống kê hàng đi</Link>
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                  </Dropdown>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>

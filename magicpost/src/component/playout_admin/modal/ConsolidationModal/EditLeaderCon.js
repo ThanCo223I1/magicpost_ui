@@ -26,8 +26,8 @@ export default function EditLeaderCon(props) {
     const {data} = props;
     const [password, setPassword] = useState('');
     const [leader, setLeader] = useState({name: "", phoneNumber: ""});
-    const [accountNew, setAccountNew] = useState({username: "", passwordAccount: ""});
-
+    const [accountNew, setAccountNew] = useState({});
+    console.log(data)
     const handleOpen = () => {
         setOpen(true);
     };
@@ -50,26 +50,28 @@ export default function EditLeaderCon(props) {
             id: data.id,
             idAccount: account.id,
             account: {
+                id: data.leader.account.id,
                 username: accountNew.username,
                 password: accountNew.passwordAccount,
-                role:{
-                    id:2
+                role: {
+                    id: 2
                 },
-                status:{
-                    id:1
+                status: {
+                    id: 1
                 }
             },
             leader: {
+                id: data.leader.id,
                 name: leader.name,
                 phoneNumber: leader.phoneNumber,
                 role: {
-                    id: 4
+                    id: 5
                 }
             },
             password: password
 
         }
-        console.log(res)
+
         axios.post("http://localhost:8080/account/consolidation/saveLeader", res, {
             headers: {
                 'Authorization': 'Bearer ' + account.token,
@@ -79,11 +81,10 @@ export default function EditLeaderCon(props) {
                 if (r.data == "wrong password") {
                     handleClose();
                     Swal.fire('Sai mật khẩu!')
-                }else if (r.data == "account already exists"){
+                } else if (r.data == "account already exists") {
                     handleClose();
                     Swal.fire('Tài khoản đã tồn tại!')
-                }
-                else {
+                } else {
                     handleClose();
                     Swal.fire(
                         'Thanh công!',

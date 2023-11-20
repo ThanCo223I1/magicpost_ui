@@ -5,7 +5,8 @@ function GoodsIncoming() {
     const [receivedOrdersData, setReceivedOrdersData] = useState(null);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-
+    const account = JSON.parse(localStorage.getItem("account"));
+    const leaderid = account.leaderDTO.id;
     useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);
@@ -15,6 +16,7 @@ function GoodsIncoming() {
         try {
             const response = await axios.get(`http://localhost:8080/orders/getAllOrder?year=${selectedYear}&month=${selectedMonth}`);
             setReceivedOrdersData(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -71,6 +73,7 @@ function GoodsIncoming() {
                     </thead>
                     <tbody>
                     {receivedOrdersData && receivedOrdersData.map((data) => (
+                        data.transactionPoint.leader.id == leaderid && (
                         <tr>
                             <td style={{ textAlign: 'center' }}>{data.id}</td>
                             <td style={{ textAlign: 'center' }}><img src={data.image} alt="Order Image" style={{ width: '100px' }} /></td>
@@ -86,7 +89,9 @@ function GoodsIncoming() {
                             <td style={{ textAlign: 'center' }}>{data.weight}</td>
                             <td style={{ textAlign: 'center' }}>{data.status.nameStatus}</td>
                         </tr>
+                            )
                     ))}
+
                     </tbody>
                 </table>
             </div>
