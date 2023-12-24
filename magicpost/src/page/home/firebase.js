@@ -1,14 +1,24 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+// const firebaseConfig = {
+//     apiKey: "AIzaSyDxULALldqixi4Ov5zx0pC9EQKZZmK-S5s",
+//     authDomain: "magicpost-9167d.firebaseapp.com",
+//     databaseURL: "https://magicpost-9167d-default-rtdb.firebaseio.com",
+//     projectId: "magicpost-9167d",
+//     storageBucket: "magicpost-9167d.appspot.com",
+//     messagingSenderId: "231790561755",
+//     appId: "1:231790561755:web:4e10f278c132d10775fffe",
+//     measurementId: "G-PLXD1VGJ51"
+// };
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDxULALldqixi4Ov5zx0pC9EQKZZmK-S5s",
-    authDomain: "magicpost-9167d.firebaseapp.com",
-    databaseURL: "https://magicpost-9167d-default-rtdb.firebaseio.com",
-    projectId: "magicpost-9167d",
-    storageBucket: "magicpost-9167d.appspot.com",
-    messagingSenderId: "231790561755",
-    appId: "1:231790561755:web:4e10f278c132d10775fffe",
-    measurementId: "G-PLXD1VGJ51"
+    apiKey: "AIzaSyD9Ro8URinuXgpMY7Autaao8YUFnJ-0dZg",
+    authDomain: "magicpost-4529f.firebaseapp.com",
+    projectId: "magicpost-4529f",
+    storageBucket: "magicpost-4529f.appspot.com",
+    messagingSenderId: "868908216874",
+    appId: "1:868908216874:web:b7d65810dd6aef71070953",
+    measurementId: "G-GVB2WRBJQP"
 };
 
 // Initialize Firebase
