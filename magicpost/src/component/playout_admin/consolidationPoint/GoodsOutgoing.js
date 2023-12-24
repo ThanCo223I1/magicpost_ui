@@ -5,17 +5,19 @@ function GoodsOutgoing() {
     const [receivedOrdersData, setReceivedOrdersData] = useState(null);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-
+    const account = JSON.parse(localStorage.getItem("account"));
+    const leaderid = account.leaderDTO.id;
     useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);
 
     const fetchData = async () => {
-
         try {
-            const response = await axios.get(`http://localhost:8080/orders/getReceivedOrdersByConsolidationPoint?year=${selectedYear}&month=${selectedMonth}`);
-            console.log(response)
-            setReceivedOrdersData(response.data);
+            const response = await axios.get(`http://localhost:8080/orders/getReceivedOrdersByConsolidationPoint?year=${selectedYear}&month=${selectedMonth}&id=${leaderid}`);
+           if (response.data != "abc"){
+               setReceivedOrdersData(response.data);
+           }
+            console.log(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -77,6 +79,9 @@ function GoodsOutgoing() {
                             </tr>
                         ))
                     }
+                    {receivedOrdersData == null&&(
+                        <p></p>
+                    )}
                     </tbody>
                 </table>
             </div>

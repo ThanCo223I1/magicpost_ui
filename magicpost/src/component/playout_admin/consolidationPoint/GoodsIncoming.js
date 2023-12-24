@@ -5,7 +5,8 @@ function GoodsIncoming() {
     const [receivedOrdersData, setReceivedOrdersData] = useState(null);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-
+    const account = JSON.parse(localStorage.getItem("account"));
+    const leaderid = account.leaderDTO.id;
     useEffect(() => {
         fetchData();
     }, [selectedYear, selectedMonth]);
@@ -15,6 +16,7 @@ function GoodsIncoming() {
         try {
             const response = await axios.get(`http://localhost:8080/orders/getAllOrder?year=${selectedYear}&month=${selectedMonth}`);
             setReceivedOrdersData(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -31,8 +33,8 @@ function GoodsIncoming() {
     };
     return (
         <>
-            <div className="distanceBody">
-                <h2 style={{ textAlign: 'center' }}>Lịch sử đơn hàng</h2>
+            <div style={{padding:'10px'}}>
+                <h2 style={{ textAlign: 'center' }}>Thống Kê Hàng gửi</h2>
 
                 <label>Chọn Năm: </label>
                 <select value={selectedYear} onChange={handleYearChange}>
@@ -51,7 +53,7 @@ function GoodsIncoming() {
                         </option>
                     ))}
                 </select>
-                <table className="table" style={{borderRadius:'2px'}}>
+                <table border="1" style={{borderRadius:'2px'}}>
                     <thead border='1'>
                     <tr>
                         <th style={{ textAlign: 'center' }}>ID</th>
@@ -71,6 +73,7 @@ function GoodsIncoming() {
                     </thead>
                     <tbody>
                     {receivedOrdersData && receivedOrdersData.map((data) => (
+                        data.transactionPoint.leader.id == leaderid && (
                         <tr>
                             <td style={{ textAlign: 'center' }}>{data.id}</td>
                             <td style={{ textAlign: 'center' }}><img src={data.image} alt="Order Image" style={{ width: '100px' }} /></td>
@@ -86,7 +89,9 @@ function GoodsIncoming() {
                             <td style={{ textAlign: 'center' }}>{data.weight}</td>
                             <td style={{ textAlign: 'center' }}>{data.status.nameStatus}</td>
                         </tr>
+                            )
                     ))}
+
                     </tbody>
                 </table>
             </div>
